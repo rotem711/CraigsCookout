@@ -1,3 +1,3 @@
 class CookoutSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name, :start_time, :end_time
 end
