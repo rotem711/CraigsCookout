@@ -588,3 +588,8 @@ I have had to install the React V6 style routing dom components with this comman
 #+begin_src bash
 npm install react-router-dom@6
 #+end_src
+
+<2022-11-10 Thu 16:54>: I also had to install 'styled-components' for the login page (https://styled-components.com/) with this command:
+#+begin_src bash
+npm install styled-components
+#+end_src
