@@ -1,0 +1,102 @@
+* Setup Notes
+<2022-11-09 Wed 18:42>: I set this lab up initially with these commands:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects$ git clone git@github.com:learn-co-curriculum/project-template-react-rails-api.git CraigsCookout
+Cloning into 'CraigsCookout'...
+remote: Enumerating objects: 165, done.
+remote: Counting objects: 100% (12/12), done.
+remote: Compressing objects: 100% (8/8), done.
+remote: Total 165 (delta 6), reused 10 (delta 4), pack-reused 153
+Receiving objects: 100% (165/165), 406.07 KiB | 3.17 MiB/s, done.
+Resolving deltas: 100% (41/41), done.
+
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects$ cd CraigsCookout/
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ git remote rm origin
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ git remote add origin git@github.com:SamuelBanya/CraigsCookout.git
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ git push -u origin main
+Enumerating objects: 165, done.
+Counting objects: 100% (165/165), done.
+Delta compression using up to 8 threads
+Compressing objects: 100% (110/110), done.
+Writing objects: 100% (165/165), 406.06 KiB | 25.38 MiB/s, done.
+Total 165 (delta 41), reused 165 (delta 41), pack-reused 0
+remote: Resolving deltas: 100% (41/41), done.
+To github.com:SamuelBanya/CraigsCookout.git
+ * [new branch]      main -> main
+Branch 'main' set up to track remote branch 'main' from 'origin'.
+#+end_src
+
+I then ran these commands to install the dependencies:
+#+begin_src bash
+bundle install
+rails db:create
+npm install --prefix client
+#+end_src
+
+<2022-11-09 Wed 18:46>: I tried 'bundle install' but received this specific error in '/usr/share/rvm/gems/ruby-2.7.4/extensions/x86_64-linux/2.7.0/pg-1.2.3/mkmf.log':
+#+begin_src bash
+conftest.c:3:10: fatal error: libpq-fe.h: No such file or directory
+#+end_src
+
+I then found this StackOverflow post:
+- https://stackoverflow.com/questions/50272096/pg-1-0-0-fatal-error-libpq-fe-h-file-not-found
+
+I then installed 'libpq-dev' with this command:
+#+begin_src bash
+sudo apt install libpq-dev
+#+end_src
+
+<2022-11-09 Wed 18:56>: I then installed the 'PostgresSQL' dependencies via these commands:
+#+begin_src bash
+sudo apt update
+sudo apt install postgresql postgresql-contrib libpq-dev
+#+end_src
+
+I then verified the installation via the 'psql --version' command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ psql --version
+psql (PostgreSQL) 14.5 (Ubuntu 14.5-0ubuntu0.22.04.1)
+#+end_src
+
+I then started the 'psql' service with the 'sudo service postgresql start' command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ sudo service postgresql start
+ * Starting PostgreSQL 14 database server
+#+end_src
+
+I checked what the operating system name was under WSL2 with the 'whoami' command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ whoami
+sam
+#+end_src
+
+I then created a 'postgres' user with the following command:
+#+begin_src bash
+sudo -u postgres -i
+
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ sudo -u postgres -i
+Welcome to Ubuntu 22.04.1 LTS (GNU/Linux 5.10.102.1-microsoft-standard-WSL2 x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/advantage
+
+This message is shown once a day. To disable it please create the
+/var/lib/postgresql/.hushlogin file.
+postgres@HTCSamuelB:~$ createuser -sr sam
+postgres@HTCSamuelB:~$
+logout
+#+end_src
+
+I then went to my Render.com account, and created a new 'PostgresSQL' instance and named it 'craigscookoutpsql'.
+
+<2022-11-09 Wed 19:04>: I then proceeded to follow the 'Deploying' steps.
+
+I then deleted the 'Master Key File', 'config/credentials.yml.enc'.
+
+I then ran the following command in terminal:
+#+begin_src bash
+EDITOR="code --wait" bin/rails credentials:edit
+#+end_src
+
+I then copied the credentials that popped up in a new VS Code buffer into a scratch buffer in Emacs so that I can later use them on Render.com
