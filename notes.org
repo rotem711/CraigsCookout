@@ -349,3 +349,55 @@ class UsersController < ApplicationController
     end
 end
 #+end_src
+
+I then modified the 'config/routes.rb' routes file to accommodate the 'users#create' method for the 'Sign Up' portion, and also the 'users#show' method to accommodate the automatic sign-in portion for the 'get /me' route:
+#+begin_src ruby
+Rails.application.routes.draw do
+
+  # Routing logic: fallback requests for React Router.
+  # Leave this here to help deploy your app later!
+  resources :cookouts, only: [:index, :create]
+  resources :foods, only: [:index, :create]
+  post "/signup", to: "users#create"
+  get "/me", to: "users#show"
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+end
+#+end_src
+
+I then modified the overarching parent 'ApplicationController' within the 'app\controllers\application_controller.rb' file with the following contents:
+#+begin_src ruby
+class ApplicationController < ActionController::API
+  include ActionController::Cookies
+
+rescue_from ActiveRecord::RecordInvalid, with: :render_unprocessable_entity_response
+
+before_action :authorize
+
+private
+
+def authorize
+  @current_user = User.find_by(id: session[:user_id])
+
+  render json: { errors: ["Not authorized"] }, status: :unauthorized unless @current_user
+end
+
+def render_unprocessable_entity_response(exception)
+  render json: { errors: exception.record.errors.full_messages }, status: :unprocessable_entity
+end
+
+end
+#+end_src
+
+I then created a corresponding 'User' serializer with the 'rails g serializer user --no-test-framework' command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ rails g serializer user --no-test-framework
+Running via Spring preloader in process 15524
+      create  app/serializers/user_serializer.rb
+#+end_src
+
+I then modified the contents of the 'app/serializers/user_serializer.rb' serializer with the following:
+#+begin_src ruby
+class UserSerializer < ActiveModel::Serializer
+  attributes :id, :username
+end
+#+end_src
