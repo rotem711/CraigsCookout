@@ -401,3 +401,80 @@ class UserSerializer < ActiveModel::Serializer
   attributes :id, :username
 end
 #+end_src
+
+I then created the 'Login' feature by creating a 'SessionsController' with the 'rails g controller sessions_controller --no-test-framework' command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ rails g controller sessions_controller --no-test-framework
+Running via Spring preloader in process 15551
+      create  app/controllers/sessions_controller.rb
+#+end_src
+
+I then modified the 'config/routes.rb' routes file with the following revisions:
+#+begin_src ruby
+Rails.application.routes.draw do
+
+  # Routing logic: fallback requests for React Router.
+  # Leave this here to help deploy your app later!
+  resources :cookouts, only: [:index, :create]
+  resources :foods, only: [:index, :create]
+  post "/signup", to: "users#create"
+  get "/me", to: "users#show"
+  post "/login", to: "sessions#create"
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+end
+#+end_src
+
+I then modified the contents of the 'app/controllers/sessions_controller.rb' Sessions Controller file with the following revisions for the 'create' method to log the user in:
+#+begin_src ruby
+class SessionsController < ApplicationController
+    skip_before_action :authorize, only: :create
+
+    def create
+        user = User.find_by(username: params[:username])
+        if user&.authenticate(params[:password])
+            session[:user_id] = user.id
+            render json: user
+        else
+            render json: { errors: ["Invalid username or password"] }, status: :unauthorized
+        end
+    end
+end
+#+end_src
+
+I then added the 'Logout' feature by adding the 'DELETE /logout' route to the 'config/routes.rb' routes file:
+#+begin_src ruby
+Rails.application.routes.draw do
+
+  # Routing logic: fallback requests for React Router.
+  # Leave this here to help deploy your app later!
+  resources :cookouts, only: [:index, :create]
+  resources :foods, only: [:index, :create]
+  post "/signup", to: "users#create"
+  get "/me", to: "users#show"
+  post "/login", to: "sessions#create"
+  delete "/logout", to: "sessions#destroy"
+  get "*path", to: "fallback#index", constraints: ->(req) { !req.xhr? && req.format.html? }
+end
+#+end_src
+
+I then modified the 'app/controllers/sessions_controller.rb' Sessions controller to also handle a 'destroy' route to log the user out:
+#+begin_src ruby
+class SessionsController < ApplicationController
+    skip_before_action :authorize, only: :create
+
+    def create
+        user = User.find_by(username: params[:username])
+        if user&.authenticate(params[:password])
+            session[:user_id] = user.id
+            render json: user
+        else
+            render json: { errors: ["Invalid username or password"] }, status: :unauthorized
+        end
+    end
+
+    def destroy
+        session.delete :user_id
+        head :no_content
+    end
+end
+#+end_src
