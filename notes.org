@@ -570,3 +570,13 @@ class FoodSerializer < ActiveModel::Serializer
   attributes :id, :name
 end
 #+end_src
+
+<2022-11-09 Wed 21:26>: NOTE:
+- My next goal is to carry over the entire login page process as well as its corresponding styling into this project successfully:
+- https://github.com/SamuelBanya/phase-4-rails-putting-it-all-together-auth/tree/main/client/src/components
+- https://github.com/SamuelBanya/phase-4-rails-putting-it-all-together-auth/blob/main/client/src/components/App.js
+- https://github.com/SamuelBanya/phase-4-rails-putting-it-all-together-auth/blob/main/client/src/components/LoginForm.js
+- https://github.com/SamuelBanya/phase-4-rails-putting-it-all-together-auth/blob/main/client/src/components/NavBar.js
+- https://github.com/SamuelBanya/phase-4-rails-putting-it-all-together-auth/blob/main/client/src/components/SignUpForm.js
+- After I am done doing so, I will follow the related guide on how to incorporate Tailwind CSS into my project:
+- https://tailwindcss.com/
