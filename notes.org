@@ -528,3 +528,45 @@ class CookoutSerializer < ActiveModel::Serializer
   attributes :id, :name, :start_time, :end_time
 end
 #+end_src
+
+
+I then created the "Food" controller with the "rails g controller foods_controller --no-test-framework" command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ rails g controller foods_controller --no-test-framework
+Running via Spring preloader in process 15650
+      create  app/controllers/foods_controller.rb
+#+end_src
+
+I then revised the 'app/controllers/foods_controller.rb' Foods Controller file with the following revisions to include the 'index' and 'create' methods:
+#+begin_src ruby
+class FoodsController < ApplicationController
+    def index
+        render json: Food.all
+    end
+
+    def create
+        food = @current_user.foods.create!(food_params)
+        render json: food, status: :created
+    end
+
+    private
+
+    def food_params
+        params.permit(:name)
+    end
+end
+#+end_src
+
+I then created a related serializer with the 'rails g serializer food --no-test-framework' command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ rails g serializer food --no-test-framework~
+Running via Spring preloader in process 15669
+      create  app/serializers/food_serializer.rb
+#+end_src
+
+I then modified the contents of the 'app/serializers/food_serializer.rb' Food Serializer with the following:
+#+begin_src ruby
+class FoodSerializer < ActiveModel::Serializer
+  attributes :id, :name
+end
+#+end_src
