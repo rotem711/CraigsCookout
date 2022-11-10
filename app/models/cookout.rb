@@ -1,0 +1,2 @@
+class Cookout < ApplicationRecord
+end

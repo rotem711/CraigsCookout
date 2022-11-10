@@ -1,4 +1,4 @@
-* Setup Notes
+* Setup Notes / Attempt To Deploy On Render.com
 <2022-11-09 Wed 18:42>: I set this lab up initially with these commands:
 #+begin_src bash
 sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects$ git clone git@github.com:learn-co-curriculum/project-template-react-rails-api.git CraigsCookout
@@ -88,7 +88,7 @@ postgres@HTCSamuelB:~$
 logout
 #+end_src
 
-I then went to my Render.com account, and created a new 'PostgresSQL' instance and named it 'craigscookoutpsql'.
+I then went to my Render.com account, and created a new 'PostgresSQL' instance and named it 'psql'.
 
 <2022-11-09 Wed 19:04>: I then proceeded to follow the 'Deploying' steps.
 
@@ -100,3 +100,143 @@ EDITOR="code --wait" bin/rails credentials:edit
 #+end_src
 
 I then copied the credentials that popped up in a new VS Code buffer into a scratch buffer in Emacs so that I can later use them on Render.com
+
+I then went to the 'craigscookoutpsql' instance on Render.com, and clicked 'Connect' > External Connection, and utilized the related 'PSQL' terminal command present so that I can connect to the database.
+
+I then used the following SQL command while connected to the 'PSQL' instance:
+#+begin_src bash
+CREATE DATABASE craigscookout_db
+#+end_src
+
+I then verified my work by using the '\l' command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ PGPASSWORD=UwAqth4KzvZI83dlq5FNJm7w4AXqHHng psql -h dpg-cdm54o2rrk0d9h01tv6g-a.ohio-postgres.render.com -U psql_pbn2_user psql_pbn2
+psql (14.5 (Ubuntu 14.5-0ubuntu0.22.04.1), server 15.0)
+WARNING: psql major version 14, server major version 15.
+         Some psql features might not work.
+SSL connection (protocol: TLSv1.3, cipher: TLS_AES_128_GCM_SHA256, bits: 128, compression: off)
+Type "help" for help.
+
+psql_pbn2=> CREATE DATABASE craigscookout_db;
+CREATE DATABASE
+
+psql_pbn2=> \l
+                                       List of databases
+       Name       |     Owner      | Encoding |  Collate   |   Ctype    |   Access privileges
+------------------+----------------+----------+------------+------------+-----------------------
+ craigscookout_db | psql_pbn2_user | UTF8     | en_US.UTF8 | en_US.UTF8 |
+ postgres         | postgres       | UTF8     | en_US.UTF8 | en_US.UTF8 |
+ psql_pbn2        | psql_pbn2_user | UTF8     | en_US.UTF8 | en_US.UTF8 |
+ template0        | postgres       | UTF8     | en_US.UTF8 | en_US.UTF8 | =c/postgres          +
+                  |                |          |            |            | postgres=CTc/postgres
+ template1        | postgres       | UTF8     | en_US.UTF8 | en_US.UTF8 | =c/postgres          +
+                  |                |          |            |            | postgres=CTc/postgres
+#+end_src
+
+I then used the '\q' command to exit PSQL.
+
+I then created a new Render Web Service by clicking the "New +" button > Web Service, and found the 'CraigsCookout' GitHub repo.
+
+I then set the 'Build' command to:
+./bin/render-build.sh
+
+I then set the 'Start' command to 'bundle exec puma -C config/puma.rb'
+
+I then opened up a separate tab and navigated to the 'psql' PostgreSQL instance and went to Connection > Internal Database URL, and copied the URL.
+
+I then returned to the 'CraigsCookout' tab in Render.com, and went to Advanced > Add Environment Variable, and used:
+#+begin_src bash
+DATABASE_URL (pasted the Internal Database URL I copied --> I replaced the very last section with 'craigscookout_db')
+#+end_src
+
+I then clicked the 'Add Environment Variable' button again, and added:
+#+begin_src bash
+RAILS_MASTER_KEY (inserted 'secret_key_base' value from earlier from the secrets file generated in VS Code)
+#+end_src
+
+<2022-11-09 Wed 20:10>: The Render.com deployment is not going well, and I blame the main GitHub repo for probably not having tested this whole process themselves recently since it doesn't even work.
+
+With this in mind, I had to adjust the React 'scripts' in 'client/package.json' with the following revisions to add the '--openssl-legacy-provider' parameter due to the '' error I received:
+Related 'ERR_OSSL_EVP_UNSUPPORTED' error I received
+#+begin_src bash
+ opensslErrorStack: [ 'error:03000086:digital envelope routines::initialization error' ],
+  library: 'digital envelope routines',
+  reason: 'unsupported',
+  code: 'ERR_OSSL_EVP_UNSUPPORTED'
+}
+#+end_src
+
+Related revision to include '--openssl-legacy-provider' parameter in 'client/package.json' manifest file:
+#+begin_src js
+  "scripts": {
+    "start": "PORT=4000 react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+#+end_src
+
+* Relationships For Phase 4 Project Requirements
+<2022-11-09 Wed 20:21>: These are the table relationships I currently have:
+
+- User:
+#+begin_src ruby
+has_many :cookouts
+has_many :foods
+through: cookouts
+#+end_src
+- Cookout:
+#+begin_src ruby
+belongs_to :food
+belongs_to :user
+#+end_src
+- Food:
+#+begin_src ruby
+has_many :cookouts
+has_many :users
+through: cookouts
+#+end_src
+
+I then started by creating the associated user model accordingly with the 'rails g model user --no-test-framework' command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ rails g model user --no-test-framework
+Running via Spring preloader in process 15357
+      invoke  active_record
+      create    db/migrate/20221110022549_create_users.rb
+      create    app/models/user.rb
+#+end_src
+
+I then modified the corresponding migration file, 'db/migrate/20221110022549_create_users.rb' with the following contents:
+#+begin_src ruby
+class CreateUsers < ActiveRecord::Migration[6.1]
+  def change
+    create_table :users do |t|
+      t.string :username
+      t.string :password_digest
+
+      t.timestamps
+    end
+  end
+end
+#+end_src
+
+I then modified the associated 'app/models/user.rb' model file with the following contents to include the related Active Record associations:
+#+begin_src ruby
+class User < ApplicationRecord
+    has_many :cookouts
+    has_many :foods, through: :cookouts
+
+    has_secure_password
+
+    validates :username, presence: true, uniqueness: true
+end
+#+end_src
+
+I then created a related model for the 'Cookout' model with the 'rails g model cookout --no-test-framework' command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ rails g model user --no-test-frameworkCookout$ rails g model cookout --no-test-framework
+Running via Spring preloader in process 15383
+      invoke  active_record
+      create    db/migrate/20221110023307_create_cookouts.rb
+      create    app/models/cookout.rb
+#+end_src
