@@ -478,3 +478,53 @@ class SessionsController < ApplicationController
     end
 end
 #+end_src
+
+I then created the 'Cookouts' controller with the 'rails g controller cookouts_controller --no-test-framework' command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ rails g controller cookouts_controller --no-test-framework
+Running via Spring preloader in process 15600
+      create  app/controllers/cookouts_controller.rb
+#+end_src
+
+I then revised the contents of the 'app/controllers/cookouts_controller.rb' Cookouts Controller with the following contents to include the 'index' method:
+#+begin_src ruby
+class CookoutsController < ApplicationController
+    def index
+        render json: Cookout.all
+    end
+end
+#+end_src
+
+I then further revised the 'Cookouts Controller' to include the 'create' method as well:
+#+begin_src ruby
+class CookoutsController < ApplicationController
+    def index
+        render json: Cookout.all
+    end
+
+    def create
+        cookout = @current_user.cookouts.create!(cookout_params)
+        render json: cookout, status: :created
+    end
+
+    private
+
+    def cookout_params
+        params.permit(:name, :start_time, :end_time)
+    end
+end
+#+end_src
+
+I then created a related serializer with the 'rails g serializer cookout --no-test-framework' command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ rails g serializer cookout --no-test-framework
+Running via Spring preloader in process 15621
+      create  app/serializers/cookout_serializer.rb
+#+end_src
+
+I then modified the contents of the 'app/serializers/cookout_serializer.rb' Serializer with the following:
+#+begin_src ruby
+class CookoutSerializer < ActiveModel::Serializer
+  attributes :id, :name, :start_time, :end_time
+end
+#+end_src
