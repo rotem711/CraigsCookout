@@ -4,6 +4,8 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "../pages/Login";
 import About from "./About";
+import Cookout from "./Cookout";
+import Food from "./Food";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -23,7 +25,9 @@ function App() {
     <>
       <NavBar user={user} setUser={setUser} />
       <Routes>
-        <Route path="/" element={<About/>} />
+        <Route path="/about" element={<About/>} />
+        <Route path="/cookout" element={<Cookout/>}/>
+        <Route path="/food" element={<Food/>}/>
       </Routes>
     </>
   );

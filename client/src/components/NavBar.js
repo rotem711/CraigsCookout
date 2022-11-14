@@ -12,14 +12,22 @@ function NavBar({ user, setUser }) {
     });
   }
 
+  // <Link to="/">Craig's Cookout</Link>
+
   return (
     <Wrapper>
       <Logo>
-        <Link to="/">Craig's Cookout</Link>
+        <h1>Craig's Cookout</h1>
       </Logo>
       <Nav>
-        <Button as={Link} to="/new">
-          New Cookout
+        <Button as={Link} to="/about">
+          About
+        </Button> 
+        <Button as={Link} to="/cookout">
+          Add Cookout
+        </Button>
+        <Button as={Link} to="/food">
+          Add Food
         </Button>
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
