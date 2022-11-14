@@ -593,3 +593,152 @@ npm install react-router-dom@6
 #+begin_src bash
 npm install styled-components
 #+end_src
+
+<2022-11-11 Fri 08:53>: When I tried running the app this morning, I received this error:
+#+begin_src bash
+×
+TypeError: Cannot read properties of null (reading 'useRef')
+useRef
+node_modules/react/cjs/react.development.js:1630
+  1627 | }
+  1628 | function useRef(initialValue) {
+  1629 |   var dispatcher = resolveDispatcher();
+> 1630 |   return dispatcher.useRef(initialValue);
+  1631 | }
+  1632 | function useEffect(create, deps) {
+  1633 |   var dispatcher = resolveDispatcher();
+#+end_src
+
+I looked into this and found this random GitHub Errors page on this same issue in which the affected user had a higher version of React being pulled in than the main version of React for his project:
+- https://github.com/nandorojo/moti/issues/189
+
+That same user was instructed to run 'npm why react', which I did, and this revealed that I had the same issue of React having a higher version as a result of the V6 style routing dependencies I pulled in:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ npm why react
+react@18.2.0 peer
+node_modules/react
+  peer react@"^18.2.0" from react-dom@18.2.0
+  node_modules/react-dom
+    peer react-dom@">=16.8" from react-router-dom@6.4.3
+    node_modules/react-router-dom
+      react-router-dom@"^6.4.3" from the root project
+    peer react-dom@">= 16.8.0" from styled-components@5.3.6
+    node_modules/styled-components
+      styled-components@"^5.3.6" from the root project
+      peer styled-components@">= 2" from babel-plugin-styled-components@2.0.7
+      node_modules/babel-plugin-styled-components
+        babel-plugin-styled-components@">= 1.12.0" from styled-components@5.3.6
+  peer react@">=16.8" from react-router@6.4.3
+  node_modules/react-router
+    react-router@"6.4.3" from react-router-dom@6.4.3
+    node_modules/react-router-dom
+      react-router-dom@"^6.4.3" from the root project
+  peer react@">=16.8" from react-router-dom@6.4.3
+  node_modules/react-router-dom
+    react-router-dom@"^6.4.3" from the root project
+  peer react@">= 16.8.0" from styled-components@5.3.6
+  node_modules/styled-components
+    styled-components@"^5.3.6" from the root project
+    peer styled-components@">= 2" from babel-plugin-styled-components@2.0.7
+    node_modules/babel-plugin-styled-components
+      babel-plugin-styled-components@">= 1.12.0" from styled-components@5.3.6
+#+end_src
+
+I then added the '"resolutions": { "react": "17.0.2" }' to my existing React project's 'client/package.json' manifest file:
+#+begin_src json
+{
+  "name": "phase-4-rails-putting-it-all-together-auth-client",
+  "version": "0.1.0",
+  "private": true,
+  "proxy": "http://localhost:3000",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-markdown": "^6.0.2",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "4.0.3",
+    "styled-components": "^5.3.0",
+    "web-vitals": "^1.1.2"
+  },
+  "scripts": {
+    "start": "PORT=4000 react-scripts --openssl-legacy-provider start",
+    "build": "react-scripts --openssl-legacy-provider build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "resolutions": {
+    "react": "17.0.2"
+  }
+}
+#+end_src
+
+<2022-11-11 Fri 09:32>: I then found this GitHub issues page:
+- https://github.com/facebook/react/issues/18866
+
+This made me think that the issue is with the routing declared in the 'client/src/index.js' file, so I revised it with the following changes:
+#+begin_src js
+import React from "react";
+// import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
+import App from "./components/App";
+// import { BrowserRouter } from "react-router-dom";
+import {  BrowserRouter, Routes, Route } from "react-router-dom";
+import { createGlobalStyle } from "styled-components";
+
+const GlobalStyle = createGlobalStyle`
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html, body {
+    margin: 0;
+  }
+
+  body {
+    font-family: BlinkMacSystemFont,-apple-system,"Segoe UI",Roboto,Oxygen,Ubuntu,Cantarell,"Fira Sans","Droid Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+  }
+`;
+
+// ReactDOM.render(
+//   <BrowserRouter>
+//     <GlobalStyle />
+//     <App />
+//   </BrowserRouter>,
+//   document.getElementById("root")
+// );
+
+const root = ReactDOM.createRoot(document.getElementById('root'));
+root.render(
+  <BrowserRouter>
+    <Routes>
+      <Route path="/*" element={<App />} />
+    </Routes>
+</BrowserRouter>
+);
+
+#+end_src
+
+<2022-11-11 Fri 09:37>: Unfortunately, this didn't help solve my issue.
