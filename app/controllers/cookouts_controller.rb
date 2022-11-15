@@ -13,4 +13,6 @@ class CookoutsController < ApplicationController
     def cookout_params
         params.permit(:name, :start_time, :end_time)
     end
+
+    # Add full CRUD capability for this model
 end
