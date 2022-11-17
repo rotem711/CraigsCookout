@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import DateTimePicker from "react-datetime-picker";
 
 function CreateCookoutForm() {
     const [createCookoutFormData, setCreateCookoutFormData] = useState({
@@ -10,7 +11,6 @@ function CreateCookoutForm() {
     const handleCreateCookoutChange = (e) => {
         setCreateCookoutFormData({...createCookoutFormData, [e.target.name]: e.target.value})
     };
-
 
     const handleCreateCookoutFormSubmit = (e) => {
         e.preventDefault();
@@ -29,15 +29,15 @@ function CreateCookoutForm() {
         <div>
             <h2>Create New Cookout</h2>
             <form onSubmit={handleCreateCookoutFormSubmit}>
-                <label for="name">Name of Cookout:</label>
+                <label htmlFor="name">Name of Cookout:</label>
                 <br />
                 <input type="text" id="name" name="name"/>
                 <br />
-                <label for="start_time">Start Time of Cookout:</label>
+                <label htmlFor="start_time">Start Time of Cookout:</label>
                 <br />
                 <input type="text" id="start_time" name="start_time"/>
                 <br />
-                <label for="end_time">End Time of Cookout:</label>
+                <label htmlFor="end_time">End Time of Cookout:</label>
                 <br />
                 <input type="text" id="end_time" name="end_time"/>
                 <br />

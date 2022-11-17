@@ -2,12 +2,12 @@ import React from "react";
 import CreateCookoutForm from "./CreateCookoutForm";
 import EditCookoutForm from "./EditCookoutForm";
 
-function Cookout() {
+function Cookout({cookouts, setCookouts}) {
     return (
         <div>
             <h1>Cookout</h1>
             <CreateCookoutForm />
-            <EditCookoutForm />
+            <EditCookoutForm cookouts={cookouts} setCookouts={setCookouts}/>
         </div>
     )
 }

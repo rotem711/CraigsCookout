@@ -23,10 +23,10 @@ function NavBar({ user, setUser }) {
         <Button as={Link} to="/about">
           About
         </Button> 
-        <Button as={Link} to="/cookout">
+        <Button as={Link} to="/cookouts">
           Add Cookout
         </Button>
-        <Button as={Link} to="/food">
+        <Button as={Link} to="/foods">
           Add Food
         </Button>
         <Button variant="outline" onClick={handleLogoutClick}>
@@ -47,7 +47,7 @@ const Wrapper = styled.header`
 const Logo = styled.h1`
   font-family: "Permanent Marker", cursive;
   font-size: 3rem;
-  color: deeppink;
+  color: green;
   margin: 0;
   line-height: 1;
 

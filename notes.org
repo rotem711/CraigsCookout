@@ -742,3 +742,20 @@ root.render(
 #+end_src
 
 <2022-11-11 Fri 09:37>: Unfortunately, this didn't help solve my issue.
+
+<2022-11-17 Thu 16:11>: I was able to resolve my issue the other day by using 'rails db:migrate' as there were pending migrations. This solved the issue that prevented me from utilizing the Login page successfully.
+
+Another note to make is that I made HEAVY use of my Phase 3 project since I didn't want to have to re-create the wheel with React controlled forms in action as that would be dumb to do, aka just use what was done previously.
+* Inclusion Of react-
+<2022-11-17 Thu 16:15>: I tried to utilize this particular library into my project to allow a user to pick a specific date timestamp, aka 'react-datetime-picker'.
+
+Related links:
+- https://www.npmjs.com/package/react-datetime-picker
+- https://projects.wojtekmaj.pl/react-datetime-picker/
+
+I had to install the package via this command:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ npm install react-datetime-picker
+#+end_src
+
+<2022-11-17 Thu 16:58>: I got some errors while using this library so I decided to can the idea.
