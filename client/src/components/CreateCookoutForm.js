@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import DateTimePicker from "react-datetime-picker";
 
 function CreateCookoutForm() {
     const [createCookoutFormData, setCreateCookoutFormData] = useState({
