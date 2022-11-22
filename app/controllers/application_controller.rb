@@ -8,6 +8,8 @@ before_action :authorize
 private
 
 def authorize
+  # NOTE: This is exactly how the /cookouts route knows what user has logged in since when the user logs in, 
+  # This information is passed in via the params
   @current_user = User.find_by(id: session[:user_id])
 
   render json: { errors: ["Not authorized"] }, status: :unauthorized unless @current_user

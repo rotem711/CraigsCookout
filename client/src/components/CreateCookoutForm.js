@@ -13,7 +13,9 @@ function CreateCookoutForm() {
 
     const handleCreateCookoutFormSubmit = (e) => {
         e.preventDefault();
-        fetch("http://localhost:3000/moves", {
+        console.log("Testing");
+        // NOTE: The Application Controller
+        fetch("/cookouts", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

@@ -4,6 +4,7 @@ class CookoutsController < ApplicationController
     end
 
     def create 
+        # byebug
         cookout = @current_user.cookouts.create!(cookout_params)
         render json: cookout, status: :created
     end
