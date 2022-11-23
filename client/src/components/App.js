@@ -9,6 +9,7 @@ import Food from "./Food";
 
 function App() {
   const [user, setUser] = useState(null);
+  const [foods, setFoods] = useState([]);
   const [cookouts, setCookouts] = useState([]);
 
   // TODO:
@@ -46,12 +47,19 @@ function App() {
   //   setPlants(updatedPlantsArray);
   // }
 
+  function handleAddFood(newFood) {
+    console.log("newFood in parent App.js component: ", newFood);
+    // const updatedFoodsArray = [...foods, newFood];
+    // setFoods(updatedFoodsArray);
+  }
+
   function handleAddCookout(newCookout) {
     console.log("newCookout in parent App.js component: ", newCookout);
     // const updatedCookoutsArray = [...cookouts, newCookout];
     // setCookouts(updatedCookoutsArray);
   }
 
+  console.log("foods from App parent component: ", foods);
   console.log("cookouts from App parent component: ", cookouts);
 
   useEffect(() => {
@@ -74,12 +82,12 @@ function App() {
           element={<About/>} 
         />
         <Route 
-          path="/cookouts" 
-          element={<Cookout cookouts={cookouts} onAddCookout={handleAddCookout}/>}
+          path="/foods" 
+          element={<Food foods={foods} onAddFood={handleAddFood}/>}
         />
         <Route 
-          path="/foods" 
-          element={<Food/>}
+          path="/cookouts" 
+          element={<Cookout cookouts={cookouts} onAddCookout={handleAddCookout}/>}
         />
       </Routes>
     </>

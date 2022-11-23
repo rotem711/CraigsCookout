@@ -1,8 +1,14 @@
 import React from "react";
+import CreateFoodForm from "./CreateFoodForm";
+import EditFoodForm from "./EditFoodForm";
 
-function Food() {
+function Food({foods, setFoods, onAddFood}) {
     return (
-        <h1>Food</h1>
+        <div>
+            <h1>Food</h1>
+            <CreateFoodForm onAddFood={onAddFood} />
+            <EditFoodForm foods={foods} setFoods={setFoods}/>
+        </div>
     )
 }
 

@@ -33,6 +33,15 @@ ReactDOM.render(
   document.getElementById("root")
 );
 
+// Another Attempt To Avoid Nested Browser Routes Which Did Not Work:
+// ReactDOM.render(
+//   <React.StrictMode>
+//     <GlobalStyle />
+//     <App />
+//   </React.StrictMode>
+//   document.getElementById("root")
+// );
+
 // This is the routing that worked for me for the Phase 3 project:
 // const root = ReactDOM.createRoot(document.getElementById('root'));
 // root.render(

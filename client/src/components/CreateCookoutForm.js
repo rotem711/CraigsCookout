@@ -23,7 +23,7 @@ function CreateCookoutForm( {onAddCookout} ) {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             },
-            body: JSON.stringify({ "name": createCookoutFormData["name"], "start_time": createCookoutFormData["start_time"], "end_time": createCookoutFormData["end_time"] }),
+            body: JSON.stringify({ "name": createCookoutFormData["cookout_name"], "start_time": createCookoutFormData["start_time"], "end_time": createCookoutFormData["end_time"] }),
         })
         .then((response) => response.json())
         // NOTE: This is done to send up the new cookout up to the parent component, 'App.js', accordingly:
@@ -36,15 +36,15 @@ function CreateCookoutForm( {onAddCookout} ) {
             <form onSubmit={handleCreateCookoutFormSubmit}>
                 <label htmlFor="name">Name of Cookout:</label>
                 <br />
-                <input type="text" id="name" name="name"/>
+                <input onChange={handleCreateCookoutChange} type="text" id="name" name="cookout_name"/>
                 <br />
                 <label htmlFor="start_time">Start Time of Cookout:</label>
                 <br />
-                <input type="text" id="start_time" name="start_time"/>
+                <input onChange={handleCreateCookoutChange}  type="text" id="start_time" name="start_time"/>
                 <br />
                 <label htmlFor="end_time">End Time of Cookout:</label>
                 <br />
-                <input type="text" id="end_time" name="end_time"/>
+                <input onChange={handleCreateCookoutChange} type="text" id="end_time" name="end_time"/>
                 <br />
                 <input type="submit"/>
             </form>

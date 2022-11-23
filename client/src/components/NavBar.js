@@ -23,11 +23,11 @@ function NavBar({ user, setUser }) {
         <Button as={Link} to="/about">
           About
         </Button> 
-        <Button as={Link} to="/cookouts">
-          Add Cookout
-        </Button>
         <Button as={Link} to="/foods">
           Add Food
+        </Button>
+        <Button as={Link} to="/cookouts">
+          Add Cookout
         </Button>
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout

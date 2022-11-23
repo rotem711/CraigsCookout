@@ -1,5 +1,6 @@
 class Cookout < ApplicationRecord
-    belongs_to :user
+    has_many :foods
+    has_many :users, through: :foods
 
     validates :name, presence: true
     validates :start_time, presence: true

@@ -10,7 +10,6 @@ Cookout.delete_all()
 Food.delete_all()
 User.delete_all()
 
-sam = User.create(username: "sam", password: "test")
-cookout1 = sam.cookouts.create!(name: "cookout1", start_time: "Monday, November 11, 2022, 4:00 PM Central", end_time: "Monday, November 11, 2022, 6:00 PM Central")
-
-hotdog = Food.create(name: "Hotdog")
+sam = User.create(username: "test", password: "test")
+# burger = sam.foods.create!(name: "burgers")
+# testCookout = burger.cookouts.create!(name: "Test Cookout", start_time: "5 PM", end_time: "8 PM")
