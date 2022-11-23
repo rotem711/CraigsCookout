@@ -30,6 +30,28 @@ function App() {
   //   })
   // }, [cookouts]);
 
+  // Example to use as a reference for how to make a fetch() request to collect the 'cookouts' we created in the context of this project:
+  // https://github.com/SamuelBanya/phase-4-rails-create-read-lab/blob/main/client/src/components/PlantPage.js
+  // useEffect(() => {
+  //     // no need to use http://localhost:3000 here
+  //     fetch("/plants")
+  //       .then((r) => r.json())
+  //       .then((plantsArray) => {
+  //         setPlants(plantsArray);
+  //       });
+  // }, []);
+
+  // function handleAddPlant(newPlant) {
+  //   const updatedPlantsArray = [...plants, newPlant];
+  //   setPlants(updatedPlantsArray);
+  // }
+
+  function handleAddCookout(newCookout) {
+    console.log("newCookout in parent App.js component: ", newCookout);
+    // const updatedCookoutsArray = [...cookouts, newCookout];
+    // setCookouts(updatedCookoutsArray);
+  }
+
   console.log("cookouts from App parent component: ", cookouts);
 
   useEffect(() => {
@@ -53,7 +75,7 @@ function App() {
         />
         <Route 
           path="/cookouts" 
-          element={<Cookout cookouts={cookouts}/>}
+          element={<Cookout cookouts={cookouts} onAddCookout={handleAddCookout}/>}
         />
         <Route 
           path="/foods" 

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function CreateCookoutForm() {
+function CreateCookoutForm( {onAddCookout} ) {
     const [createCookoutFormData, setCreateCookoutFormData] = useState({
         name: "",
         start_time: "",
@@ -14,7 +14,9 @@ function CreateCookoutForm() {
     const handleCreateCookoutFormSubmit = (e) => {
         e.preventDefault();
         console.log("Testing");
-        // NOTE: The Application Controller
+        console.log("Testing 2");
+        // NOTE: The 'Application Controller' will handle the '@current_user' so that it already knows the session["user_id"] to use in this scenario
+        // Therefore, all you need to do is pass in a fetch request to the '/cookouts' route:
         fetch("/cookouts", {
             method: "POST",
             headers: {
@@ -24,6 +26,8 @@ function CreateCookoutForm() {
             body: JSON.stringify({ "name": createCookoutFormData["name"], "start_time": createCookoutFormData["start_time"], "end_time": createCookoutFormData["end_time"] }),
         })
         .then((response) => response.json())
+        // NOTE: This is done to send up the new cookout up to the parent component, 'App.js', accordingly:
+        .then((newCookout) => onAddCookout(newCookout));
     }
 
     return (

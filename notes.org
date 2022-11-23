@@ -746,7 +746,7 @@ root.render(
 <2022-11-17 Thu 16:11>: I was able to resolve my issue the other day by using 'rails db:migrate' as there were pending migrations. This solved the issue that prevented me from utilizing the Login page successfully.
 
 Another note to make is that I made HEAVY use of my Phase 3 project since I didn't want to have to re-create the wheel with React controlled forms in action as that would be dumb to do, aka just use what was done previously.
-* Inclusion Of react-
+* Inclusion Of react-datetime-picker
 <2022-11-17 Thu 16:15>: I tried to utilize this particular library into my project to allow a user to pick a specific date timestamp, aka 'react-datetime-picker'.
 
 Related links:
@@ -759,3 +759,32 @@ sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/Craigs
 #+end_src
 
 <2022-11-17 Thu 16:58>: I got some errors while using this library so I decided to can the idea.
+
+* Addition Of Environment Variable To Accomomdate WSL2 On Windows 10 For Hot Reloading Project Automatically
+<2022-11-22 Tue 19:04>: I noticed that while running and deploying my project on Windows 10, React took forever to load, and also didn't do one major thing that I noticed while on MacOS:
+- The ability to hot reload a project while you save a component
+
+I looked into this and found this GitHub Issues page on this same topic:
+- https://github.com/facebook/create-react-app/issues/10253
+
+I then noticed that there exists TWO solutions to note for the future which depend upon React Scripts Version 4 OR React Scripts Version 5:
+- The React Scripts Version 4 fix is to use the following:
+#+begin_src json
+"scripts": {
+    "start": "CHOKIDAR_USEPOLLING=true react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  }
+#+end_src
+- The React Scripts Version 5 fix is to use the following:
+#+begin_src json
+"scripts": {
+    "start": "WATCHPACK_POLLING=true react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
+  }
+#+end_src
+
+I did the React Scripts Version 4 fix above in my scenario.
