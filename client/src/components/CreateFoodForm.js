@@ -30,7 +30,7 @@ function CreateFoodForm( {onAddFood} ) {
 
     return (
         <div>
-            <h2>Create New Food</h2>
+            <h2>Add New Food</h2>
             <form onSubmit={handleCreateFoodFormSubmit}>
                 <label htmlFor="name">Name of Food:</label>
                 <br />

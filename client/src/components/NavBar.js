@@ -29,6 +29,9 @@ function NavBar({ user, setUser }) {
         <Button as={Link} to="/cookouts">
           Add Cookout
         </Button>
+        <Button as={Link} to="/locations">
+          Add Location
+        </Button>
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
         </Button>
@@ -47,7 +50,7 @@ const Wrapper = styled.header`
 const Logo = styled.h1`
   font-family: "Permanent Marker", cursive;
   font-size: 3rem;
-  color: green;
+  color: red;
   margin: 0;
   line-height: 1;
 

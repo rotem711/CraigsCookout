@@ -5,7 +5,7 @@ function About() {
         <div>
             <h2>About Page</h2>
             <p>
-                This app is a Full Stack web application made with React, Ruby On Rails, Tailwind CSS, and PostgreSQL that allows a user to plan and schedule a cookout with friends!
+                This app is a Full Stack web application made with React and Ruby On Rails that allows a user to plan and schedule a cookout with friends!
             </p>
             <h2>Current Functions</h2>
             <ul>

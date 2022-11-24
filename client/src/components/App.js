@@ -6,11 +6,13 @@ import Login from "../pages/Login";
 import About from "./About";
 import Cookout from "./Cookout";
 import Food from "./Food";
+import Location from "./Location";
 
 function App() {
   const [user, setUser] = useState(null);
   const [foods, setFoods] = useState([]);
   const [cookouts, setCookouts] = useState([]);
+  const [locations, setLocations] = useState([]);
 
   // TODO:
   // 1. Figure out how to get to the user's specific cookouts
@@ -59,6 +61,11 @@ function App() {
     // setCookouts(updatedCookoutsArray);
   }
 
+  function handleAddLocation(newLocation) {
+    console.log("newLocation in parent App.js component: ", newLocation);
+    // const updatedLocationsArray = [...locations, newLocation];
+    // setLocations(updatedLocationsArray);
+  }
   console.log("foods from App parent component: ", foods);
   console.log("cookouts from App parent component: ", cookouts);
 
@@ -88,6 +95,10 @@ function App() {
         <Route 
           path="/cookouts" 
           element={<Cookout cookouts={cookouts} onAddCookout={handleAddCookout}/>}
+        />
+        <Route 
+          path="/locations" 
+          element={<Location locations={locations} onAddLocation={handleAddLocation}/>}
         />
       </Routes>
     </>

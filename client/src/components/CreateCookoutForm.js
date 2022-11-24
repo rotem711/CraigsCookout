@@ -32,7 +32,7 @@ function CreateCookoutForm( {onAddCookout} ) {
 
     return (
         <div>
-            <h2>Create New Cookout</h2>
+            <h2>Add New Cookout</h2>
             <form onSubmit={handleCreateCookoutFormSubmit}>
                 <label htmlFor="name">Name of Cookout:</label>
                 <br />
