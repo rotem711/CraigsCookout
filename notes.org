@@ -788,3 +788,61 @@ I then noticed that there exists TWO solutions to note for the future which depe
 #+end_src
 
 I did the React Scripts Version 4 fix above in my scenario.
+* How I Added A '/locations' Route To The Project, And Re-Thought My 'Entity Relationship Diagram' (ERD)
+<2022-11-25 Fri 14:24>: In order to make it more align to my final goals, I went ahead and created another route for '/locations' by first creating a related migration accordingly:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ rails g migration create_locations --no-test-framework
+Running via Spring preloader in process 1174
+      invoke  active_record
+      create    db/migrate/20221125201828_create_locations.rb
+#+end_src
+
+I then proceeded to drop the database table, and then re-migrate and re-seed the project:
+#+begin_src bash
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ rails db:drop
+Dropped database 'react_rails_api_project_template_development'
+Dropped database 'react_rails_api_project_template_test'
+
+sam@HTCSamuelB:/mnt/c/Users/Samuel.Banya/Documents/FlatironSchoolProjects/CraigsCookout$ rails db:migrate db:seed
+#+end_src
+
+I then created a related model in 'app/models/location.rb' accordingly:
+#+begin_src ruby
+class Location < ApplicationRecord
+    belongs_to :cookout
+
+    validates :name, presence: true
+end
+#+end_src
+
+I then modified the 'app/models/cookout.rb' Cookout model to include the related 'has_one' relationship since each individual cookout will only have one location:
+#+begin_src ruby
+class Cookout < ApplicationRecord
+    has_many :foods
+    has_many :users, through: :foods
+    has_one :location
+
+    validates :name, presence: true
+    validates :start_time, presence: true
+    validates :end_time, presence: true
+end
+#+end_src
+
+<2022-11-25 Fri 14:30>: With this in mind, here is my modified 'Entity Relationship Diagram':
+- User:
++ has_many :foods
++ has_many :cookouts
++ through: :foods
+- Cookout:
++ has_many :foods
++ has_many :users, through: :foods
++ has_one :location
+- Food:
++ belongs_to :user
++ belongs_to :cookout
+- Location:
++ belongs_to: :cookout
+
+<2022-11-25 Fri 15:50>: My current issue with this relationship is that if I currently try to create a 'cookout', I get a 'Name can't be blank' error from the related cookout serializer after the Cookout Controller's create method caused it to fire.
+
+The form itself has the correct 'name' attribute so this is weird. Also, the corresponding Rails console output shows that a proper 'name' was provided as well.

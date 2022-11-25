@@ -1,8 +1,4 @@
 class CookoutsController < ApplicationController
-    # def index 
-    #     render json: Cookout.all
-    # end
-
     def create 
         # byebug
         cookout = @current_user.cookouts.create!(cookout_params)

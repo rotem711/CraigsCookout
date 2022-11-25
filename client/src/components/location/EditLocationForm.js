@@ -9,7 +9,7 @@ function EditLocationForm({ locations, setLocations }) {
         <div>
             <h1>Edit Location</h1>
             <form>
-                <label for="location_select">Choose a Location:</label>
+                <label htmlFor="location_select">Choose a Location:</label>
                 <br />
                 <select name="location_select" id="location_select">
                     <option value="test">Test 1</option>

@@ -18,7 +18,12 @@ Rails.application.routes.draw do
   # To create cookouts: On the frontend, I need to make a frontend 'post' request for '/cookouts'
   # To get cookouts: On the frontend, I need to make a frontend 'get' request for '/cookouts':
 
-  resources :foods, only: [:index, :create]
+  # What I had previously before I decided everything should be CRUD compatible:
+  # resources :foods, only: [:index, :create]
+
+  resources :foods
+
+  resources :locations
 
   # Login related routes:
   post "/signup", to: "users#create"

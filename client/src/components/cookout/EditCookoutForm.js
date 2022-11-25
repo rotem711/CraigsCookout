@@ -8,7 +8,7 @@ function EditCookoutForm({ cookouts, setCookouts }) {
         <div>
             <h1>Edit Cookout</h1>
             <form>
-                <label for="cookout_select">Choose a Cookout:</label>
+                <label htmlFor="cookout_select">Choose a Cookout:</label>
                 <br />
                 <select name="cookout_select" id="cookout_select">
                     <option value="test">Test 1</option>
@@ -17,9 +17,9 @@ function EditCookoutForm({ cookouts, setCookouts }) {
                 </select>
                 <br />
                 <br />
-                <label htmlFor="name">Name of Cookout:</label>
+                <label htmlFor="cookout_name">Name of Cookout:</label>
                 <br />
-                <input onChange={handleEditCookoutChange} type="text" id="name" name="cookout_name"/>
+                <input onChange={handleEditCookoutChange} type="text" id="cookout_name" name="cookout_name"/>
                 <br />
                 <label htmlFor="start_time">Start Time of Cookout:</label>
                 <br />

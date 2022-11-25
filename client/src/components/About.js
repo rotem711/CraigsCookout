@@ -16,7 +16,10 @@ function About() {
             <h2>Roadmap Items</h2>
             <ul>
                 <li>
-                    Map portion with map marker where a user can add a location on a map where cookouts are occurring.
+                    Map with related pins where a user can add a location on a map where cookouts are occurring, which results in the text of the location appearing on the form
+                </li>
+                <li>
+                    Timestamp selection to easily pick timestamp     
                 </li>
             </ul>
         </div>

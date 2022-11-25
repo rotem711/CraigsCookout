@@ -34,9 +34,9 @@ function CreateCookoutForm( {onAddCookout} ) {
         <div>
             <h2>Add New Cookout</h2>
             <form onSubmit={handleCreateCookoutFormSubmit}>
-                <label htmlFor="name">Name of Cookout:</label>
+                <label htmlFor="cookout_name">Name of Cookout:</label>
                 <br />
-                <input onChange={handleCreateCookoutChange} type="text" id="name" name="cookout_name"/>
+                <input onChange={handleCreateCookoutChange} type="text" id="cookout_name" name="cookout_name"/>
                 <br />
                 <label htmlFor="start_time">Start Time of Cookout:</label>
                 <br />

@@ -9,7 +9,7 @@ function EditFoodForm({ foods, setFoods }) {
         <div>
             <h1>Edit Food</h1>
             <form>
-                <label for="food_select">Choose a Food:</label>
+                <label htmlFor="food_select">Choose a Food:</label>
                 <br />
                 <select name="food_select" id="food_select">
                     <option value="test">Test 1</option>

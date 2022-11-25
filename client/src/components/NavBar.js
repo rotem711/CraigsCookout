@@ -23,14 +23,17 @@ function NavBar({ user, setUser }) {
         <Button as={Link} to="/about">
           About
         </Button> 
-        <Button as={Link} to="/foods">
-          Add Food
-        </Button>
         <Button as={Link} to="/cookouts">
-          Add Cookout
+          Cookout
+        </Button>
+        <Button as={Link} to="/foods">
+          Food
         </Button>
         <Button as={Link} to="/locations">
-          Add Location
+          Location
+        </Button>
+        <Button as={Link} to="/viewcookouts">
+          View Cookouts
         </Button>
         <Button variant="outline" onClick={handleLogoutClick}>
           Logout
@@ -49,7 +52,7 @@ const Wrapper = styled.header`
 
 const Logo = styled.h1`
   font-family: "Permanent Marker", cursive;
-  font-size: 3rem;
+  font-size: 2rem;
   color: red;
   margin: 0;
   line-height: 1;
@@ -64,7 +67,7 @@ const Nav = styled.nav`
   display: flex;
   gap: 4px;
   position: absolute;
-  right: 8px;
+  left: 20px;
 `;
 
 export default NavBar;

@@ -4,9 +4,11 @@ import { Routes, Route } from "react-router-dom";
 import NavBar from "./NavBar";
 import Login from "../pages/Login";
 import About from "./About";
-import Cookout from "./Cookout";
-import Food from "./Food";
-import Location from "./Location";
+import Cookout from "./cookout/Cookout";
+import Food from "./food/Food";
+import Location from "./location/Location";
+import ViewCookouts from "./cookout/ViewCookouts";
+import ChooseCookoutDropdown from "./cookout/ChooseCookoutDropdown";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -99,6 +101,14 @@ function App() {
         <Route 
           path="/locations" 
           element={<Location locations={locations} onAddLocation={handleAddLocation}/>}
+        />
+        <Route 
+          path="/viewcookouts" 
+          element={<ViewCookouts cookouts={cookouts}/>}
+        />
+        <Route 
+          path="/choosecookoutdropdown" 
+          element={<ChooseCookoutDropdown cookouts={cookouts}/>}
         />
       </Routes>
     </>
