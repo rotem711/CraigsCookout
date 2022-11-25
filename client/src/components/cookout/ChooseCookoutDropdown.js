@@ -1,6 +1,6 @@
 import React from "react";
 
-function ChooseCookoutForm({cookouts}) {
+function ChooseCookoutForm({ cookouts }) {
     return (
         <>
             <h2>Choose Cookout: </h2>
@@ -12,7 +12,6 @@ function ChooseCookoutForm({cookouts}) {
                     <option value="test2">Test 2</option>
                     <option value="test3">Test 3</option>
                 </select>
-                <br />
                 <br />
             </form>
         </>

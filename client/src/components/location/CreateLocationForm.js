@@ -1,7 +1,6 @@
 import React, { useState } from "react";
-import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function CreateLocationForm( {onAddLocation} ) {
+function CreateLocationForm({ onAddLocation }) {
     const [createLocationFormData, setCreateLocationFormData] = useState({
         location_name: ""
     });
@@ -26,7 +25,6 @@ function CreateLocationForm( {onAddLocation} ) {
 
     return (
         <div>
-            <ChooseCookoutDropdown />
             <h2>Add New Location</h2>
             <form onSubmit={handleCreateLocationFormSubmit}>
                 <label htmlFor="name">Name of Location:</label>

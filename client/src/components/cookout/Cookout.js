@@ -1,13 +1,15 @@
 import React from "react";
 import CreateCookoutForm from "./CreateCookoutForm";
 import EditCookoutForm from "./EditCookoutForm";
+import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function Cookout({cookouts, setCookouts, onAddCookout}) {
+function Cookout({ cookouts, onAddCookout, onEditCookout, onDeleteCookout }) {
     return (
         <div>
             <h1>Cookout</h1>
             <CreateCookoutForm onAddCookout={onAddCookout} />
-            <EditCookoutForm cookouts={cookouts} setCookouts={setCookouts}/>
+            <ChooseCookoutDropdown />
+            <EditCookoutForm cookouts={cookouts} onEditCookout={onEditCookout} onDeleteCookout={onDeleteCookout} />
         </div>
     )
 }

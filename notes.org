@@ -846,3 +846,18 @@ end
 <2022-11-25 Fri 15:50>: My current issue with this relationship is that if I currently try to create a 'cookout', I get a 'Name can't be blank' error from the related cookout serializer after the Cookout Controller's create method caused it to fire.
 
 The form itself has the correct 'name' attribute so this is weird. Also, the corresponding Rails console output shows that a proper 'name' was provided as well.
+
+<2022-11-25 Fri 16:39>: What still needs to be done:
+- [ ] I should create a corresponding seeds file once I figure out the related models present
+- [ ] I need to be able to create a new cookout
+- [ ] The 'ChooseCookoutDropdown' React component needs to actually work to pull down the latest cookouts, and should be able to be used in any subsequent form with values passed by props somehow
+- [ ] I need to be able to edit an existing cookout
+- [ ] I need to be able to delete an existing cookout
+- [ ] I need to be able to add a new food to a cookout
+- [ ] The 'Choose a Food' dropdown list within the 'EditForm' React component needs to be pre-populated with values from that specific cookout's foods since each cookout has a specific list of foods from the given user
+- [ ] I should be able to edit a given food
+- [ ] I should be able to delete a given food
+- [ ] I should be able to add a single new location to a cookout
+- [ ] I should be able to edit that given location for the cookout
+- [ ] I should be able to delete that given location for the cookout
+- [ ] I should be able to view a prepopulated ul and li item based list on the 'View Cookouts' tab for the application to see all cookouts from all users so far

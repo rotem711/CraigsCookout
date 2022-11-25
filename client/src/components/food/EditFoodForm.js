@@ -1,13 +1,13 @@
 import React from "react";
 
-function EditFoodForm({ foods, setFoods }) {
+function EditFoodForm({ foods, onEditFood, onDeleteFood }) {
     const handleEditFoodChange = (e) => {
         console.log("e.target.value: ", e.target.value);
     }
 
     return (
         <div>
-            <h1>Edit Food</h1>
+            <h2>Edit Food</h2>
             <form>
                 <label htmlFor="food_select">Choose a Food:</label>
                 <br />
@@ -21,7 +21,6 @@ function EditFoodForm({ foods, setFoods }) {
                 <label htmlFor="name">Name of Food:</label>
                 <br />
                 <input onChange={handleEditFoodChange} type="text" id="name" name="food_name"/>
-                <br />
                 <br />
                 <br />
                 <input type="submit" value="Edit" />

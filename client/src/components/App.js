@@ -57,10 +57,26 @@ function App() {
     // setFoods(updatedFoodsArray);
   }
 
+  function handleEditFood(food) {
+    console.log("handleEditFood() function called in parent App.js component");
+  }
+
+  function handleDeleteFood(food) {
+    console.log("handleDeleteFood() function called in parent App.js component");
+  }
+
   function handleAddCookout(newCookout) {
     console.log("newCookout in parent App.js component: ", newCookout);
     // const updatedCookoutsArray = [...cookouts, newCookout];
     // setCookouts(updatedCookoutsArray);
+  }
+
+  function handleEditCookout(cookout) {
+    console.log("handleEditCookout() function called in parent App.js component");
+  }
+
+  function handleDeleteCookout(cookout) {
+    console.log("handleDeleteCookout() function called in parent App.js component");
   }
 
   function handleAddLocation(newLocation) {
@@ -68,6 +84,15 @@ function App() {
     // const updatedLocationsArray = [...locations, newLocation];
     // setLocations(updatedLocationsArray);
   }
+
+  function handleEditLocation(location) {
+    console.log("handleEditFood() function called in parent App.js component");
+  }
+
+  function handleDeleteLocation(location) {
+    console.log("handleDeleteLocation() function called in parent App.js component");
+  }
+
   console.log("foods from App parent component: ", foods);
   console.log("cookouts from App parent component: ", cookouts);
 
@@ -92,23 +117,19 @@ function App() {
         />
         <Route 
           path="/foods" 
-          element={<Food foods={foods} onAddFood={handleAddFood}/>}
+          element={<Food foods={foods} onAddFood={handleAddFood} onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} />}
         />
         <Route 
           path="/cookouts" 
-          element={<Cookout cookouts={cookouts} onAddCookout={handleAddCookout}/>}
+          element={<Cookout cookouts={cookouts} onAddCookout={handleAddCookout} onEditCookout={handleEditCookout} onDeleteCookout={handleDeleteCookout} />}
         />
         <Route 
           path="/locations" 
-          element={<Location locations={locations} onAddLocation={handleAddLocation}/>}
+          element={<Location locations={locations} onAddLocation={handleAddLocation} onEditLocation={handleEditLocation} onDeleteLocation={handleDeleteLocation} />}
         />
         <Route 
           path="/viewcookouts" 
           element={<ViewCookouts cookouts={cookouts}/>}
-        />
-        <Route 
-          path="/choosecookoutdropdown" 
-          element={<ChooseCookoutDropdown cookouts={cookouts}/>}
         />
       </Routes>
     </>
