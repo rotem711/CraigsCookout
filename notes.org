@@ -861,3 +861,27 @@ The form itself has the correct 'name' attribute so this is weird. Also, the cor
 - [ ] I should be able to edit that given location for the cookout
 - [ ] I should be able to delete that given location for the cookout
 - [ ] I should be able to view a prepopulated ul and li item based list on the 'View Cookouts' tab for the application to see all cookouts from all users so far
+* How I Added The 'UsernameTag' Component In The "NavBar" Component To Address The User With A Welcome Message
+<2022-11-28 Mon 19:34>: I decided that it would make sense to greet the user
+* How I Used The 'useContext' React Hook In My Project
+<2022-11-28 Mon 19:34>: I also decided that it would make sense to use the 'useContext' React hook depending on the hour of the day within a 24-hour clock. Any hour past 17 o'clock or less than 6 o'clock on a 24 hour military clock would be considered to be dark mode. If it's not, then it would be light mode.
+
+I utilized these links as guides for how to possibly implement this into my project:
+
+References For 'useContext' React Hook:
+- StackOverflow post on how to use 'useContext' for swapping colors:
+- https://stackoverflow.com/questions/66429868/dynamically-change-config-colors-js-in-react-native-using-state-context
+- A blog post on using the separate 'theme-context' NPM package along with the 'useContext' hook to create a few separate React components to allow for context switching:
+- https://www.warambil.com/how-to-switch-themes-with-usecontext
+- A Medium article in which the developer created a separate 'props' component in a separate file that did the context switching, and brought it into his main app with a
+- https://medium.com/swlh/creating-a-dark-mode-for-your-react-app-with-usecontext-65c408a3b8e8
+- Example from W3 Schools on how to use 'useContext' for just the 'user' themselves within a greeting similar to what I already implemented in the application:
+- https://www.w3schools.com/react/react_usecontext.asp
+- React Docs' own awful, and super simplified but in the worst way possible type of example on how to use the 'useContext' hook:
+- https://reactjs.org/docs/hooks-reference.html#usecontext
+
+References For 'Date()' Object In Vanilla JS:
+- Blog post on the 'Date()' object, how to get the current date timestamp, and how to convert it into a string:
+- https://daily-dev-tips.com/posts/vanilla-javascript-get-current-timestamp/
+- A blog post on how to use the 'Date()' object as well as it's built-in functions:
+- https://livecodestream.dev/post/date-manipulation-in-javascript-a-complete-guide/

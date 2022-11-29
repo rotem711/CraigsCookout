@@ -8,7 +8,6 @@ import Cookout from "./cookout/Cookout";
 import Food from "./food/Food";
 import Location from "./location/Location";
 import ViewCookouts from "./cookout/ViewCookouts";
-import ChooseCookoutDropdown from "./cookout/ChooseCookoutDropdown";
 
 function App() {
   const [user, setUser] = useState(null);
@@ -100,12 +99,17 @@ function App() {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
-        r.json().then((user) => setUser(user));
+        r.json().then((user) => {
+          setUser(user);
+        })
       }
     });
   }, []);
 
   if (!user) return <Login onLogin={setUser} />;
+
+  // console.log("user variable outside of '/me route call in parent App.js that is available at all times: ", user);
+  console.log("user.username available within parent App.js component: ", user.username);
 
   return (
     <>
@@ -113,7 +117,7 @@ function App() {
       <Routes>
         <Route 
           path="/about" 
-          element={<About/>} 
+          element={<About user={user}/>} 
         />
         <Route 
           path="/foods" 

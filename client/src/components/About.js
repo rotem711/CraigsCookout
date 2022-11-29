@@ -1,6 +1,7 @@
 import React from "react";
 
-function About() {
+function About({ user }) {
+    // TODO: Use 'user' with 'useContext' hook to provide a nice message to the user in the 'About' page:
     return (
         <div>
             <h2>About Page</h2>
