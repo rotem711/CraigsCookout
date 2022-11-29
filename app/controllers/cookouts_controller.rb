@@ -1,11 +1,14 @@
 class CookoutsController < ApplicationController
     def create 
         # byebug
-        # Issues to figure out:
-        # is @current_user and #.cookouts working 
-        # is cookout_params working
-        # The problem was that you should not make it user specific, since you want EVERYONE to access a given cookout
+        # Previously UNWORKING code to show the problem I fixed
         # cookout = @current_user.cookouts.create!(cookout_params)
+
+        # NOTE: To step through the 'byebug' for this issue
+        # 1. I put a byebug at the very top
+        # 2. I then printed out '@current_user' and "@current_user.cookouts"
+        # 3. I then realized the 'Cookout' model isn't tied to a user anymore since everyone needs to access a given cookout
+
         # TODO: Change all mentions of '#@current_user' to 'Cookout.(method)'
         cookout = Cookout.create!(cookout_params)
         render json: cookout, status: :created
