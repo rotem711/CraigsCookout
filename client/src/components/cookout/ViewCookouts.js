@@ -13,6 +13,14 @@ function ViewCookouts({ cookouts }) {
                 <ul>
                     <li>Minneapolis, MN</li>
                 </ul>
+                <li>Start Time: </li>
+                <ul>
+                    <li>5 PM</li>
+                </ul>
+                <li>End Time: </li>
+                <ul>
+                    <li>7 PM</li>
+                </ul>
                 <li>User: </li>
                 <ul>
                     <li>Sam</li>
@@ -30,6 +38,14 @@ function ViewCookouts({ cookouts }) {
                 <li>Location: </li>
                 <ul>
                     <li>Milwaukee, WI</li>
+                </ul>
+                <li>Start Time: </li>
+                <ul>
+                    <li>1 PM</li>
+                </ul>
+                <li>End Time: </li>
+                <ul>
+                    <li>3 PM</li>
                 </ul>
                 <li>User: </li>
                 <ul>
