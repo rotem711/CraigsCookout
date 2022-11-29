@@ -9,7 +9,14 @@ class CookoutsController < ApplicationController
         # 2. I then printed out '@current_user' and "@current_user.cookouts"
         # 3. I then realized the 'Cookout' model isn't tied to a user anymore since everyone needs to access a given cookout
 
-        # TODO: Change all mentions of '#@current_user' to 'Cookout.(method)'
+        # TODOs: 
+        # 1. Change all mentions of '#@current_user' to 'Cookout.(method)'
+        # 2. Basically use all of the '@current_user' sections that currently exist within the 'cookouts_controller' 
+        # and place that into the 'foods_controller'
+
+        # Reason being: 
+        # A cookout doesn't belong to a person
+        # However, foods belong to a person
         cookout = Cookout.create!(cookout_params)
         render json: cookout, status: :created
     end
