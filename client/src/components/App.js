@@ -19,6 +19,8 @@ function App() {
   // Fix CORS issue from this useEffect call:
   // NOTE: Fixed this issue by uncommenting the following line in the 'gemfile', and then running 'bundle install' afterwards:
   // gem 'rack-cors'
+
+  // TODO: Fix the issue that these fetch requests are not authenticated --> Maybe place inside the fetch('/me')" block below but I'm not sure
   useEffect(() => {
     fetch("http://localhost:3000/cookouts", {
       method: "GET",
