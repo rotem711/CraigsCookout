@@ -8,7 +8,7 @@ function Cookout({ cookouts, onAddCookout, onEditCookout, onDeleteCookout }) {
         <div>
             <h1>Cookout</h1>
             <CreateCookoutForm onAddCookout={onAddCookout} />
-            <ChooseCookoutDropdown />
+            <ChooseCookoutDropdown cookouts={cookouts} />
             <EditCookoutForm cookouts={cookouts} onEditCookout={onEditCookout} onDeleteCookout={onDeleteCookout} />
         </div>
     )

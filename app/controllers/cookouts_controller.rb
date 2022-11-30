@@ -35,8 +35,8 @@ class CookoutsController < ApplicationController
 
     # Add full CRUD capability for this model
     def index 
-        byebug
-        cookouts = Cookout.cookouts.all
+        # byebug
+        cookouts = Cookout.all
 
         if session[:user_id]
         # if @current_user

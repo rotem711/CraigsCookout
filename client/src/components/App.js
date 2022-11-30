@@ -26,14 +26,10 @@ function App() {
     });
   }, []);
 
-  // TODO:
-  // Fix CORS issue from this useEffect call:
-  // NOTE: Fixed this issue by uncommenting the following line in the 'gemfile', and then running 'bundle install' afterwards:
-  // gem 'rack-cors'
-
-  // TODO: Fix the issue that these fetch requests are not authenticated --> Maybe place inside the fetch('/me')" block below but I'm not sure
   useEffect(() => {
-    fetch("http://localhost:3000/cookouts", {
+    // NOTE: This line is what was causing authorization issues, since we only need the '/cookouts' route:
+    // fetch("http://localhost:3000/cookouts", {
+    fetch("/cookouts", {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -42,29 +38,35 @@ function App() {
     })
     .then((response) => response.json())
     .then((data) => {
+      console.log("'data' variable value from useEffect call to /cookouts: ", data);
+      console.log("cookouts within useEffect call to /cookouts: ", cookouts);
       setCookouts(data);
     })
-    }, [cookouts]);
+    }, []);
 
   if (!user) return <Login onLogin={setUser} />;
 
   function handleAddFood(newFood) {
-    console.log("newFood in parent App.js component: ", newFood);
+    // console.log("newFood in parent App.js component: ", newFood);
     // const updatedFoodsArray = [...foods, newFood];
     // setFoods(updatedFoodsArray);
   }
 
   function handleEditFood(food) {
-    console.log("handleEditFood() function called in parent App.js component");
+    // console.log("handleEditFood() function called in parent App.js component");
   }
 
   function handleDeleteFood(food) {
-    console.log("handleDeleteFood() function called in parent App.js component");
+    // console.log("handleDeleteFood() function called in parent App.js component");
   }
 
+  // TODO: Figure out why the '/cookouts' aren't pulling in the latest cookouts:
+  // This needs usage of 'rails c' with 'Cookout.all' to determine what cookouts are currently present in the backend:
   function handleAddCookout(newCookout) {
     console.log("newCookout in parent App.js component: ", newCookout);
+    console.log("cookouts before array gets updated: ", cookouts);
     const updatedCookoutsArray = [...cookouts, newCookout];
+    console.log("cookouts after array gets updated: ", cookouts);
     setCookouts(updatedCookoutsArray);
   }
 
