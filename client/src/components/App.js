@@ -15,6 +15,17 @@ function App() {
   const [cookouts, setCookouts] = useState([]);
   const [locations, setLocations] = useState([]);
 
+  useEffect(() => {
+    // auto-login
+    fetch("/me").then((r) => {
+      if (r.ok) {
+        r.json().then((user) => {
+          setUser(user);
+        })
+      }
+    });
+  }, []);
+
   // TODO:
   // Fix CORS issue from this useEffect call:
   // NOTE: Fixed this issue by uncommenting the following line in the 'gemfile', and then running 'bundle install' afterwards:
@@ -33,7 +44,9 @@ function App() {
     .then((data) => {
       setCookouts(data);
     })
-  }, [cookouts]);
+    }, [cookouts]);
+
+  if (!user) return <Login onLogin={setUser} />;
 
   function handleAddFood(newFood) {
     console.log("newFood in parent App.js component: ", newFood);
@@ -79,19 +92,6 @@ function App() {
 
   console.log("foods from App parent component: ", foods);
   console.log("cookouts from App parent component: ", cookouts);
-
-  useEffect(() => {
-    // auto-login
-    fetch("/me").then((r) => {
-      if (r.ok) {
-        r.json().then((user) => {
-          setUser(user);
-        })
-      }
-    });
-  }, []);
-
-  if (!user) return <Login onLogin={setUser} />;
 
   // console.log("user variable outside of '/me route call in parent App.js that is available at all times: ", user);
   console.log("user.username available within parent App.js component: ", user.username);
