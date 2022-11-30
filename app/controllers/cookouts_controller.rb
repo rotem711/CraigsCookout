@@ -22,7 +22,7 @@ class CookoutsController < ApplicationController
     end
 
     def update
-        cookout = @current_user.cookouts.find_by(id: params[:id])
+        cookout = Cookout.cookouts.find_by(id: params[:id])
         if cookout.user_id == @current_user.id
             cookout.update(cookout_params)
             render json: cookout

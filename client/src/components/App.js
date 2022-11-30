@@ -16,39 +16,22 @@ function App() {
   const [locations, setLocations] = useState([]);
 
   // TODO:
-  // 1. Figure out how to get to the user's specific cookouts
-  // Most likely this requires a fetch() call to "http://localhost:3000/username/cookouts"
-  // 2. I maybe need to pass down the user's 'username' value from 'App.js' as props so that I can make fetch requests
-  // on their behalf as well
-  // useEffect(() => {
-  //   fetch("http://localhost:3000/cookouts", {
-  //     method: "GET",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //       "Accept": "application/json",
-  //     },
-  //   })
-  //   .then((response) => response.json())
-  //   .then((data) => {
-  //     setCookouts(data);
-  //   })
-  // }, [cookouts]);
-
-  // Example to use as a reference for how to make a fetch() request to collect the 'cookouts' we created in the context of this project:
-  // https://github.com/SamuelBanya/phase-4-rails-create-read-lab/blob/main/client/src/components/PlantPage.js
-  // useEffect(() => {
-  //     // no need to use http://localhost:3000 here
-  //     fetch("/plants")
-  //       .then((r) => r.json())
-  //       .then((plantsArray) => {
-  //         setPlants(plantsArray);
-  //       });
-  // }, []);
-
-  // function handleAddPlant(newPlant) {
-  //   const updatedPlantsArray = [...plants, newPlant];
-  //   setPlants(updatedPlantsArray);
-  // }
+  // Fix CORS issue from this useEffect call:
+  // NOTE: Fixed this issue by uncommenting the following line in the 'gemfile', and then running 'bundle install' afterwards:
+  // gem 'rack-cors'
+  useEffect(() => {
+    fetch("http://localhost:3000/cookouts", {
+      method: "GET",
+      headers: {
+        "Content-Type": "application/json",
+        "Accept": "application/json",
+      },
+    })
+    .then((response) => response.json())
+    .then((data) => {
+      setCookouts(data);
+    })
+  }, [cookouts]);
 
   function handleAddFood(newFood) {
     console.log("newFood in parent App.js component: ", newFood);
@@ -66,8 +49,8 @@ function App() {
 
   function handleAddCookout(newCookout) {
     console.log("newCookout in parent App.js component: ", newCookout);
-    // const updatedCookoutsArray = [...cookouts, newCookout];
-    // setCookouts(updatedCookoutsArray);
+    const updatedCookoutsArray = [...cookouts, newCookout];
+    setCookouts(updatedCookoutsArray);
   }
 
   function handleEditCookout(cookout) {
