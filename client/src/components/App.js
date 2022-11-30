@@ -127,7 +127,8 @@ function App() {
         />
         <Route 
           path="/foods" 
-          element={<Food foods={foods} onAddFood={handleAddFood} onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} />}
+          element={<Food foods={foods} onAddFood={handleAddFood} onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
+          cookouts={cookouts} chosenCookout={chosenCookout}/>}
         />
         <Route 
           path="/locations" 
