@@ -3,13 +3,13 @@ import CreateCookoutForm from "./CreateCookoutForm";
 import EditCookoutForm from "./EditCookoutForm";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function Cookout({ cookouts, onAddCookout, onEditCookout, onDeleteCookout }) {
+function Cookout({ cookouts, onAddCookout, onEditCookout, onDeleteCookout, onChooseCookout, chosenCookout}) {
     return (
         <div>
             <h1>Cookout</h1>
             <CreateCookoutForm onAddCookout={onAddCookout} />
-            <ChooseCookoutDropdown cookouts={cookouts} />
-            <EditCookoutForm cookouts={cookouts} onEditCookout={onEditCookout} onDeleteCookout={onDeleteCookout} />
+            <ChooseCookoutDropdown cookouts={cookouts} onChooseCookout={onChooseCookout} />
+            <EditCookoutForm cookouts={cookouts} onEditCookout={onEditCookout} onDeleteCookout={onDeleteCookout} chosenCookout={chosenCookout}/>
         </div>
     )
 }

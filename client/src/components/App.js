@@ -13,6 +13,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [foods, setFoods] = useState([]);
   const [cookouts, setCookouts] = useState([]);
+  const [chosenCookout, setChosenCookout] = useState("");
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
@@ -38,13 +39,38 @@ function App() {
     })
     .then((response) => response.json())
     .then((data) => {
-      console.log("'data' variable value from useEffect call to /cookouts: ", data);
-      console.log("cookouts within useEffect call to /cookouts: ", cookouts);
+      // console.log("'data' variable value from useEffect call to /cookouts: ", data);
+      // console.log("cookouts within useEffect call to /cookouts: ", cookouts);
       setCookouts(data);
     })
     }, []);
 
   if (!user) return <Login onLogin={setUser} />;
+
+  // TODO: Figure out why the '/cookouts' aren't pulling in the latest cookouts:
+  // This needs usage of 'rails c' with 'Cookout.all' to determine what cookouts are currently present in the backend:
+  function handleAddCookout(newCookout) {
+    // console.log("newCookout in parent App.js component: ", newCookout);
+    // console.log("cookouts before array gets updated: ", cookouts);
+    const updatedCookoutsArray = [...cookouts, newCookout];
+    // console.log("cookouts after array gets updated: ", cookouts);
+    setCookouts(updatedCookoutsArray);
+  }
+
+  function handleEditCookout(cookout) {
+    // console.log("handleEditCookout() function called in parent App.js component");
+  }
+
+  function handleDeleteCookout(cookout) {
+    // console.log("handleDeleteCookout() function called in parent App.js component");
+  }
+
+  function handleChooseCookout(cookout) {
+    // console.log("handleChooseCookout() function called in parent App.js component");
+    // console.log("cookout: ", cookout);
+    // console.log("cookout.target.value: ", cookout.target.value);
+    setChosenCookout(cookout.target.value);
+  }
 
   function handleAddFood(newFood) {
     // console.log("newFood in parent App.js component: ", newFood);
@@ -60,43 +86,29 @@ function App() {
     // console.log("handleDeleteFood() function called in parent App.js component");
   }
 
-  // TODO: Figure out why the '/cookouts' aren't pulling in the latest cookouts:
-  // This needs usage of 'rails c' with 'Cookout.all' to determine what cookouts are currently present in the backend:
-  function handleAddCookout(newCookout) {
-    console.log("newCookout in parent App.js component: ", newCookout);
-    console.log("cookouts before array gets updated: ", cookouts);
-    const updatedCookoutsArray = [...cookouts, newCookout];
-    console.log("cookouts after array gets updated: ", cookouts);
-    setCookouts(updatedCookoutsArray);
-  }
-
-  function handleEditCookout(cookout) {
-    console.log("handleEditCookout() function called in parent App.js component");
-  }
-
-  function handleDeleteCookout(cookout) {
-    console.log("handleDeleteCookout() function called in parent App.js component");
-  }
-
   function handleAddLocation(newLocation) {
-    console.log("newLocation in parent App.js component: ", newLocation);
+    // console.log("newLocation in parent App.js component: ", newLocation);
     // const updatedLocationsArray = [...locations, newLocation];
     // setLocations(updatedLocationsArray);
   }
 
   function handleEditLocation(location) {
-    console.log("handleEditFood() function called in parent App.js component");
+    // console.log("handleEditFood() function called in parent App.js component");
   }
 
   function handleDeleteLocation(location) {
-    console.log("handleDeleteLocation() function called in parent App.js component");
+    // console.log("handleDeleteLocation() function called in parent App.js component");
   }
 
-  console.log("foods from App parent component: ", foods);
-  console.log("cookouts from App parent component: ", cookouts);
-
-  // console.log("user variable outside of '/me route call in parent App.js that is available at all times: ", user);
-  console.log("user.username available within parent App.js component: ", user.username);
+  // ===========================================================================================
+  // CHECKING PARENT PROP VALUES SECTION:
+  // ===========================================================================================
+  // NOTE: These are just console.log() statements to check what's being passed up to the parent
+  // console.log("cookouts from App parent component: ", cookouts);
+  // console.log("foods from App parent component: ", foods);
+  // console.log("user.username available within parent App.js component: ", user.username);
+  // console.log("chosenCookout within parent App.js component: ", chosenCookout);
+  // ===========================================================================================
 
   return (
     <>
@@ -108,7 +120,10 @@ function App() {
         />
         <Route 
           path="/cookouts" 
-          element={<Cookout cookouts={cookouts} onAddCookout={handleAddCookout} onEditCookout={handleEditCookout} onDeleteCookout={handleDeleteCookout} />}
+          element={<Cookout 
+            cookouts={cookouts} onAddCookout={handleAddCookout} onEditCookout={handleEditCookout} onDeleteCookout={handleDeleteCookout} 
+            onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout}
+          />}
         />
         <Route 
           path="/foods" 
