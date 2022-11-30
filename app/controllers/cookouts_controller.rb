@@ -1,6 +1,7 @@
 class CookoutsController < ApplicationController
     def create 
         # byebug
+
         # Previously UNWORKING code to show the problem I fixed
         # cookout = @current_user.cookouts.create!(cookout_params)
 
@@ -17,13 +18,14 @@ class CookoutsController < ApplicationController
         # Reason being: 
         # A cookout doesn't belong to a person
         # However, foods belong to a person
+
         cookout = Cookout.create!(cookout_params)
         render json: cookout, status: :created
     end
 
     def update
         cookout = Cookout.cookouts.find_by(id: params[:id])
-        if cookout.user_id == @current_user.id
+        if cookout
             cookout.update(cookout_params)
             render json: cookout
         else
@@ -33,17 +35,21 @@ class CookoutsController < ApplicationController
 
     # Add full CRUD capability for this model
     def index 
-        cookouts = @current_user.cookouts.all
+        cookouts = Cookout.cookouts.all
 
-        if session[:user_id]
+        # if session[:user_id]
+        if @current_user
             render json: cookouts
         else
+            # TODO: 
+            # For whatever reason, I'm not able to authenticate successfully for a fetch
+            # request to the '/cookouts' route, so I need to fix this:
             render json: { errors: ["Not authorized"] }, status: :unauthorized
         end
     end
 
     def show
-        cookout = @current_user.cookouts.find_by(id: params[:id])
+        cookout = Cookout.cookouts.find_by(id: params[:id])
         if cookout 
             render json: cookout
         else
@@ -52,8 +58,8 @@ class CookoutsController < ApplicationController
     end
 
     def destroy 
-        cookout = @current_user.cookouts.find_by(id: params[:id])
-        if cookout.user_id == @current_user.id
+        cookout = Cookout.cookouts.find_by(id: params[:id])
+        if cookout
             cookout.destroy
             head :no_content
         end
