@@ -1,20 +1,26 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
 function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCookout, chosenCookout }) {
-    // let editValues = {name: "GoofTest", start_time: "5 PM", end_time: "8 PM", foods: []};
-    // if (chosenCookout.length > 0) {
-    //     console.log("chosenCookout's length is greater than 0!");
-    //     console.log("cookouts from EditCookoutForm child component: ", cookouts);
-    //     console.log("chosenCookout within EditCookoutForm child component: ", chosenCookout);
-    //     let editValues = cookouts.find(cookout => cookout.name == chosenCookout);
-    //     console.log("editValues: ", editValues);
-    // }
+    // TODO: 
+    // Two major issues I need to resolve: 
+    // 1. I need the page to refresh and re-render the values for 'editCookoutFormData' each time that 'chosenCookout' is changed in state
+    // 2. Also, I still need to be able to edit the React controlled form
+    useEffect(() => {
+        setEditCookoutFormData({
+            name: chosenCookout.name,
+            start_time: chosenCookout.start_time,
+            end_time: chosenCookout.end_time
+        })
+    }, [chosenCookout]);
 
     const [editCookoutFormData, setEditCookoutFormData] = useState({
         name: chosenCookout.name,
         start_time: chosenCookout.start_time,
         end_time: chosenCookout.end_time
+        // name: "",
+        // start_time: "",
+        // end_time: ""
     });
 
     const handleEditCookoutChange = (e) => {
@@ -36,9 +42,6 @@ function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCoo
         // NOTE: This is done to send up the edited cookout up to the parent component, 'App.js', accordingly:
         .then((editedCookout) => onEditCookout(editedCookout));
     }
-
-    // TODO: 
-    // I need this to re-render with values each time that 'chosenCookout' is changed
 
     return (
         <div>
