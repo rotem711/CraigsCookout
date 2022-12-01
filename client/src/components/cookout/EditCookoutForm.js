@@ -37,9 +37,8 @@ function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCoo
         .then((editedCookout) => onEditCookout(editedCookout));
     }
 
-    // TODO:
-    // Put the 'ChooseCookoutDropdown' on the lower child level as its own '<ChooseCookoutDropdown />
-    // This is so that I can interact with the data it produces on the 'EditCookoutForm' itself
+    // TODO: 
+    // I need this to re-render with values each time that 'chosenCookout' is changed
 
     return (
         <div>
