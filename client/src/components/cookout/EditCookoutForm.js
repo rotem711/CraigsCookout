@@ -1,29 +1,20 @@
 import React, { useState } from "react";
+import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function EditCookoutForm({ cookouts, onEditCookout, onDeleteCookout, chosenCookout }) {
+function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCookout, chosenCookout }) {
     // let editValues = {name: "GoofTest", start_time: "5 PM", end_time: "8 PM", foods: []};
-    if (chosenCookout.length > 0) {
-        console.log("chosenCookout's length is greater than 0!");
-        console.log("cookouts from EditCookoutForm child component: ", cookouts);
-        console.log("chosenCookout within EditCookoutForm child component: ", chosenCookout);
-        let editCookoutFormDataValues = cookouts[chosenCookout.name];
-        let editValues = cookouts.find(cookout => cookout.name == chosenCookout);
-        console.log("editValues: ", editValues);
-    }
-
-    // TODO: 
-    // NOTE: We can't use the 'value' tag for the input tags below because it's technically a React controlled form
-    // Hence, I might have to do so via normal vanilla JS since this won't work in React
-    // function prepopulateEditFormValues() {
-    //     document.getElementById("cookout_name").value = "MaxiTest"
-    //     document.getElementById("start_time").value = "5 AM"
-    //     document.getElementById("end_time").value = "10 AM"
+    // if (chosenCookout.length > 0) {
+    //     console.log("chosenCookout's length is greater than 0!");
+    //     console.log("cookouts from EditCookoutForm child component: ", cookouts);
+    //     console.log("chosenCookout within EditCookoutForm child component: ", chosenCookout);
+    //     let editValues = cookouts.find(cookout => cookout.name == chosenCookout);
+    //     console.log("editValues: ", editValues);
     // }
 
     const [editCookoutFormData, setEditCookoutFormData] = useState({
-        name: "",
-        start_time: "",
-        end_time: ""
+        name: chosenCookout.name,
+        start_time: chosenCookout.start_time,
+        end_time: chosenCookout.end_time
     });
 
     const handleEditCookoutChange = (e) => {
@@ -46,8 +37,13 @@ function EditCookoutForm({ cookouts, onEditCookout, onDeleteCookout, chosenCooko
         .then((editedCookout) => onEditCookout(editedCookout));
     }
 
+    // TODO:
+    // Put the 'ChooseCookoutDropdown' on the lower child level as its own '<ChooseCookoutDropdown />
+    // This is so that I can interact with the data it produces on the 'EditCookoutForm' itself
+
     return (
         <div>
+            <ChooseCookoutDropdown cookouts={cookouts} onChooseCookout={onChooseCookout} />
             <h2>Edit Cookout</h2>
             <form onSubmit={handleEditCookoutFormSubmit}>
                 <label htmlFor="cookout_name">Name of Cookout:</label>

@@ -13,7 +13,10 @@ function App() {
   const [user, setUser] = useState(null);
   const [foods, setFoods] = useState([]);
   const [cookouts, setCookouts] = useState([]);
-  const [chosenCookout, setChosenCookout] = useState("");
+  // TODO: Make this into an object, with the key value pairs that you expect
+  // Once you do that, in the child component, you can just refer to the prop itself since it will be the matching object
+  // const [chosenCookout, setChosenCookout] = useState("");
+  const [chosenCookout, setChosenCookout] = useState({});
   const [locations, setLocations] = useState([]);
 
   useEffect(() => {
@@ -65,11 +68,24 @@ function App() {
     // console.log("handleDeleteCookout() function called in parent App.js component");
   }
 
-  function handleChooseCookout(cookout) {
+  function handleChooseCookout(e) {
     // console.log("handleChooseCookout() function called in parent App.js component");
     // console.log("cookout: ", cookout);
     // console.log("cookout.target.value: ", cookout.target.value);
-    setChosenCookout(cookout.target.value);
+    // setChosenCookout(cookout.target.value);
+
+    console.log("cookouts in handleChooseCookout function: ", cookouts);
+    console.log("e.target.value: ", e.target.value);
+    const match = cookouts.find(item => item.name == e.target.value);
+
+    // let match = cookouts.find(cookout => {
+      // console.log("cookout in handleChooseCookout function: ", cookout);
+      // console.log("cookout.name in handleChooseCookout function: ", cookout.name);
+      // console.log("e.target.value in handleChooseCookout function: ", e.target.value)
+    //   return cookout.name == e.target.value
+    // });
+    console.log("match in handleChooseCookout function: ", match);
+    setChosenCookout(match);
   }
 
   function handleAddFood(newFood) {
