@@ -13,9 +13,6 @@ function App() {
   const [user, setUser] = useState(null);
   const [foods, setFoods] = useState([]);
   const [cookouts, setCookouts] = useState([]);
-  // TODO: Make this into an object, with the key value pairs that you expect
-  // Once you do that, in the child component, you can just refer to the prop itself since it will be the matching object
-  // const [chosenCookout, setChosenCookout] = useState("");
   const [chosenCookout, setChosenCookout] = useState({});
   const [locations, setLocations] = useState([]);
 
@@ -50,8 +47,6 @@ function App() {
 
   if (!user) return <Login onLogin={setUser} />;
 
-  // TODO: Figure out why the '/cookouts' aren't pulling in the latest cookouts:
-  // This needs usage of 'rails c' with 'Cookout.all' to determine what cookouts are currently present in the backend:
   function handleAddCookout(newCookout) {
     // console.log("newCookout in parent App.js component: ", newCookout);
     // console.log("cookouts before array gets updated: ", cookouts);
