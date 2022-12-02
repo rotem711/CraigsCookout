@@ -1,12 +1,14 @@
 import React from "react";
+import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function EditLocationForm({ locations, onEditLocation, onDeleteLocation }) {
+function EditLocationForm({ locations, onEditLocation, onDeleteLocation, cookouts, onChooseCookout, chosenCookout }) {
     const handleEditLocationChange = (e) => {
         console.log("e.target.value: ", e.target.value);
     }
 
     return (
         <div>
+            <ChooseCookoutDropdown cookouts={cookouts} onChooseCookout={onChooseCookout}/>
             <h2>Edit Location</h2>
             <form>
                 <label htmlFor="name">Name of Location:</label>

@@ -1,12 +1,14 @@
 import React from "react";
+import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function EditFoodForm({ foods, onEditFood, onDeleteFood }) {
+function EditFoodForm({ foods, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
     const handleEditFoodChange = (e) => {
         console.log("e.target.value: ", e.target.value);
     }
 
     return (
         <div>
+            <ChooseCookoutDropdown cookouts={cookouts} onChooseCookout={onChooseCookout} />
             <h2>Edit Food</h2>
             <form>
                 <label htmlFor="food_select">Choose a Food:</label>

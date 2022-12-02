@@ -1,6 +1,7 @@
 import React, { useState } from "react";
+import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function CreateFoodForm({ onAddFood }) {
+function CreateFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout }) {
     const [createFoodFormData, setCreateFoodFormData] = useState({
         name: "",
     });
@@ -30,6 +31,7 @@ function CreateFoodForm({ onAddFood }) {
 
     return (
         <div>
+            <ChooseCookoutDropdown cookouts={cookouts} onChooseCookout={onChooseCookout} />
             <h2>Add New Food</h2>
             <form onSubmit={handleCreateFoodFormSubmit}>
                 <label htmlFor="name">Name of Food:</label>

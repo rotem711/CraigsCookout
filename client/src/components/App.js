@@ -148,7 +148,9 @@ function App() {
         />
         <Route 
           path="/locations" 
-          element={<Location locations={locations} onAddLocation={handleAddLocation} onEditLocation={handleEditLocation} onDeleteLocation={handleDeleteLocation} />}
+          element={<Location 
+            locations={locations} onAddLocation={handleAddLocation} onEditLocation={handleEditLocation} onDeleteLocation={handleDeleteLocation} 
+            cookouts={cookouts} chosenCookout={chosenCookout}/>}
         />
         <Route 
           path="/viewcookouts" 
