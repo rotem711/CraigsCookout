@@ -885,3 +885,26 @@ References For 'Date()' Object In Vanilla JS:
 - https://daily-dev-tips.com/posts/vanilla-javascript-get-current-timestamp/
 - A blog post on how to use the 'Date()' object as well as it's built-in functions:
 - https://livecodestream.dev/post/date-manipulation-in-javascript-a-complete-guide/
+* How I Added A Default Disabled Value To The 'Select' Tags Throughout The Project
+<2022-12-02 Fri 17:04>: I referred to this StackOverflow post and found out about the 'disabled selected value' parameter value for the '<option>' tag:
+- https://stackoverflow.com/questions/8605516/default-select-option-as-blank
+
+I then used it in two separate sections of my project:
+
+Within 'src/components/cookout/ChooseCookoutDropdown.js':
+#+begin_src js
+  <select name="choose_cookout" id="choose_cookout" onChange={onChooseCookout}>
+    <option disabled selected value> -- Select a cookout -- </option>
+    { cookoutOptionsArray }
+  </select>
+#+end_src
+
+Within 'src/components/food/EditFoodForm.js':
+#+begin_src js
+  <select name="food_select" id="food_select">
+      <option disabled selected value> -- Select a food -- </option>
+      <option value="test">Test 1</option>
+      <option value="test2">Test 2</option>
+      <option value="test3">Test 3</option>
+  </select>
+#+end_src

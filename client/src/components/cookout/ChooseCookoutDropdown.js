@@ -25,6 +25,7 @@ function ChooseCookoutForm({ cookouts, onChooseCookout}) {
                 <label htmlFor="choose_cookout">Choose a Cookout:</label>
                 <br />
                 <select name="choose_cookout" id="choose_cookout" onChange={onChooseCookout}>
+                    <option disabled selected value> -- Select a cookout -- </option>
                     { cookoutOptionsArray }
                 </select>
                 <br />

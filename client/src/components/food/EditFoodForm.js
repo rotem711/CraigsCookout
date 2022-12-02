@@ -14,6 +14,7 @@ function EditFoodForm({ foods, onEditFood, onDeleteFood, cookouts, onChooseCooko
                 <label htmlFor="food_select">Choose a Food:</label>
                 <br />
                 <select name="food_select" id="food_select">
+                    <option disabled selected value> -- Select a food -- </option>
                     <option value="test">Test 1</option>
                     <option value="test2">Test 2</option>
                     <option value="test3">Test 3</option>
