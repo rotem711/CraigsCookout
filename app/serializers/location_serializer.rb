@@ -1,5 +1,5 @@
 class LocationSerializer < ActiveModel::Serializer
-  attributes :id
+  attributes :id, :name
 
   belongs_to :cookout
 end

@@ -16,7 +16,7 @@ function CreateCookoutForm({ onAddCookout }) {
         console.log("Testing");
         console.log("Testing 2");
         console.log("e: ", e);
-        console.log('createCookoutFormData["cookout_name"]: ', createCookoutFormData["cookout_name"]);
+        console.log('createCookoutFormData["name"]: ', createCookoutFormData["name"]);
         console.log('createCookoutFormData["start_time"]: ', createCookoutFormData["start_time"]);
         console.log('createCookoutFormData["end_time"]: ', createCookoutFormData["end_time"]);
         // NOTE: The 'Application Controller' will handle the '@current_user' so that it already knows the session["user_id"] to use in this scenario
@@ -27,7 +27,7 @@ function CreateCookoutForm({ onAddCookout }) {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             },
-            body: JSON.stringify({ "name": createCookoutFormData["cookout_name"], "start_time": createCookoutFormData["start_time"], "end_time": createCookoutFormData["end_time"] }),
+            body: JSON.stringify({ "name": createCookoutFormData["name"], "start_time": createCookoutFormData["start_time"], "end_time": createCookoutFormData["end_time"] }),
         })
         .then((response) => response.json())
         // NOTE: This is done to send up the new cookout up to the parent component, 'App.js', accordingly:
@@ -38,9 +38,9 @@ function CreateCookoutForm({ onAddCookout }) {
         <div>
             <h2>Add New Cookout</h2>
             <form onSubmit={handleCreateCookoutFormSubmit}>
-                <label htmlFor="cookout_name">Name of Cookout:</label>
+                <label htmlFor="name">Name of Cookout:</label>
                 <br />
-                <input onChange={handleCreateCookoutChange} type="text" id="cookout_name" name="cookout_name"/>
+                <input onChange={handleCreateCookoutChange} type="text" id="name" name="name"/>
                 <br />
                 <label htmlFor="start_time">Start Time of Cookout:</label>
                 <br />

@@ -32,7 +32,7 @@ ActiveRecord::Schema.define(version: 2022_11_25_201828) do
 
   create_table "locations", force: :cascade do |t|
     t.integer "cookout_id", null: false
-    t.string "location_name"
+    t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.index ["cookout_id"], name: "index_locations_on_cookout_id"

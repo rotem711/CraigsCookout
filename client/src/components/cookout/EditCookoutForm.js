@@ -36,7 +36,7 @@ function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCoo
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             },
-            body: JSON.stringify({ "name": editCookoutFormData["cookout_name"], "start_time": editCookoutFormData["start_time"], "end_time": editCookoutFormData["end_time"] }),
+            body: JSON.stringify({ "name": editCookoutFormData["name"], "start_time": editCookoutFormData["start_time"], "end_time": editCookoutFormData["end_time"] }),
         })
         .then((response) => response.json())
         // NOTE: This is done to send up the edited cookout up to the parent component, 'App.js', accordingly:
@@ -48,9 +48,9 @@ function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCoo
             <ChooseCookoutDropdown cookouts={cookouts} onChooseCookout={onChooseCookout} />
             <h2>Edit Cookout</h2>
             <form onSubmit={handleEditCookoutFormSubmit}>
-                <label htmlFor="cookout_name">Name of Cookout:</label>
+                <label htmlFor="name">Name of Cookout:</label>
                 <br />
-                <input onChange={handleEditCookoutChange} type="text" id="cookout_name" name="cookout_name" value={editCookoutFormData.name}/>
+                <input onChange={handleEditCookoutChange} type="text" id="name" name="name" value={editCookoutFormData.name}/>
                 <br />
                 <label htmlFor="start_time">Start Time of Cookout:</label>
                 <br />
