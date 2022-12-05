@@ -24,7 +24,9 @@ class CookoutsController < ApplicationController
     end
 
     def update
-        cookout = Cookout.cookouts.find_by(id: params[:id])
+        # Previous line of code that I had earlier:
+        # cookout = Cookout.cookouts.find_by(id: params[:id])
+        cookout = Cookout.find_by(id: params[:id])
         if cookout
             cookout.update(cookout_params)
             render json: cookout
@@ -50,7 +52,7 @@ class CookoutsController < ApplicationController
     end
 
     def show
-        cookout = Cookout.cookouts.find_by(id: params[:id])
+        cookout = Cookout.find_by(id: params[:id])
         if cookout 
             render json: cookout
         else
@@ -59,7 +61,7 @@ class CookoutsController < ApplicationController
     end
 
     def destroy 
-        cookout = Cookout.cookouts.find_by(id: params[:id])
+        cookout = Cookout.find_by(id: params[:id])
         if cookout
             cookout.destroy
             head :no_content

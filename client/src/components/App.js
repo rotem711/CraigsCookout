@@ -55,8 +55,14 @@ function App() {
     setCookouts(updatedCookoutsArray);
   }
 
-  function handleEditCookout(cookout) {
+  function handleEditCookout(editedCookout) {
     // console.log("handleEditCookout() function called in parent App.js component");
+    // console.log("cookouts after array gets updated: ", cookouts);
+    setCookouts((cookouts) => 
+      cookouts.map((cookout) => {
+        return cookout.id === editedCookout.id ? editedCookout : cookout;
+      })
+    );
   }
 
   function handleDeleteCookout(cookout) {

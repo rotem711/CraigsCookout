@@ -2,10 +2,6 @@ import React, { useEffect, useState } from "react";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
 function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCookout, chosenCookout }) {
-    // TODO: 
-    // Two major issues I need to resolve: 
-    // 1. I need the page to refresh and re-render the values for 'editCookoutFormData' each time that 'chosenCookout' is changed in state
-    // 2. Also, I still need to be able to edit the React controlled form
     useEffect(() => {
         setEditCookoutFormData({
             name: chosenCookout.name,
@@ -27,10 +23,20 @@ function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCoo
         setEditCookoutFormData({...editCookoutFormData, [e.target.name]: e.target.value})
     };
 
+    // TODO: 
+    // Fix patch request so that it actually works to change the info of the given cookout
     const handleEditCookoutFormSubmit = (e) => {
         e.preventDefault();
 
-        fetch("/cookouts", {
+        const id = chosenCookout.id;
+        console.log("id: ", chosenCookout.id);
+        console.log("typeof(id): ", typeof(id));
+        console.log("editCookoutFormData from handleEditCookoutFormSubmit function before being passed to backend: ", editCookoutFormData);
+        console.log("editCookoutFormData.name from handleEditCookoutFormSubmit function before being passed to backend: ", editCookoutFormData.name);
+        console.log("editCookoutFormData.start_time from handleEditCookoutFormSubmit function before being passed to backend: ", editCookoutFormData.start_time);
+        console.log("editCookoutFormData.end_time from handleEditCookoutFormSubmit function before being passed to backend: ", editCookoutFormData.end_time);
+
+        fetch(`/cookouts/${id}`, {
             method: "PATCH",
             headers: {
                 "Content-Type": "application/json",
@@ -41,6 +47,10 @@ function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCoo
         .then((response) => response.json())
         // NOTE: This is done to send up the edited cookout up to the parent component, 'App.js', accordingly:
         .then((editedCookout) => onEditCookout(editedCookout));
+        // .then(function (editedCookout) {
+        //     console.log("editedCookout: ", editedCookout);
+        //     onEditCookout(editedCookout);
+        // })
     }
 
     return (
