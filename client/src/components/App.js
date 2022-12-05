@@ -65,26 +65,24 @@ function App() {
     );
   }
 
-  function handleDeleteCookout(cookout) {
-    // console.log("handleDeleteCookout() function called in parent App.js component");
+  function handleDeleteCookout(deletedCookout) {
+    console.log("handleDeleteCookout() function called in parent App.js component");
+    console.log("deletedCookout: ", deletedCookout);
+    // let updatedCookoutsArray = cookouts.filter(cookout => cookout.id !== deletedCookout.id)
+    // setCookouts(updatedCookoutsArray);
+
+    // TODO:
+    // This action alone needs to re-trigger the page to be re-rendered via a useEffect hook call:
+    setCookouts((cookouts) =>
+      cookouts.filter((cookout) => cookout.id !== deletedCookout.id)
+    );
   }
 
   function handleChooseCookout(e) {
-    // console.log("handleChooseCookout() function called in parent App.js component");
-    // console.log("cookout: ", cookout);
-    // console.log("cookout.target.value: ", cookout.target.value);
-    // setChosenCookout(cookout.target.value);
-
     console.log("cookouts in handleChooseCookout function: ", cookouts);
     console.log("e.target.value: ", e.target.value);
     const match = cookouts.find(item => item.name == e.target.value);
 
-    // let match = cookouts.find(cookout => {
-      // console.log("cookout in handleChooseCookout function: ", cookout);
-      // console.log("cookout.name in handleChooseCookout function: ", cookout.name);
-      // console.log("e.target.value in handleChooseCookout function: ", e.target.value)
-    //   return cookout.name == e.target.value
-    // });
     console.log("match in handleChooseCookout function: ", match);
     setChosenCookout(match);
   }
