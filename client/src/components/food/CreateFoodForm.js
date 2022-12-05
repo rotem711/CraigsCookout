@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
 function CreateFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout }) {
+    console.log("chosenCookout in CreateFoodForm child component: ", chosenCookout);
     const [createFoodFormData, setCreateFoodFormData] = useState({
         name: "",
     });
@@ -10,13 +11,14 @@ function CreateFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout })
         setCreateFoodFormData({...createFoodFormData, [e.target.name]: e.target.value})
     };
 
-    const handleCreateFoodFormSubmit = (e) => {
+    const handleCreate = (e) => {
         e.preventDefault();
-        console.log("Testing");
-        console.log("Testing 2");
+        const id = chosenCookout.id;
+        console.log("chosenCookout: ", chosenCookout);
+        console.log("id: ", id);
         // NOTE: The 'Application Controller' will handle the '@current_user' so that it already knows the session["user_id"] to use in this scenario
         // Therefore, all you need to do is pass in a fetch request to the '/cookouts' route:
-        fetch("/foods", {
+        fetch(`/foods`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -33,12 +35,12 @@ function CreateFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout })
         <div>
             <ChooseCookoutDropdown cookouts={cookouts} onChooseCookout={onChooseCookout} />
             <h2>Add New Food</h2>
-            <form onSubmit={handleCreateFoodFormSubmit}>
+            <form>
                 <label htmlFor="name">Name of Food:</label>
                 <br />
                 <input onChange={handleCreateFoodChange} type="text" id="name" name="food_name"/>
                 <br />
-                <input type="submit"/>
+                <input onClick={handleCreate} type="submit"/>
             </form>
         </div>
     )

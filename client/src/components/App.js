@@ -136,14 +136,16 @@ function App() {
         <Route 
           path="/cookouts" 
           element={<Cookout 
-            cookouts={cookouts} onAddCookout={handleAddCookout} onEditCookout={handleEditCookout} onDeleteCookout={handleDeleteCookout} 
-            onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout}
+            cookouts={cookouts} onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout}
+            onAddCookout={handleAddCookout} onEditCookout={handleEditCookout} onDeleteCookout={handleDeleteCookout} 
           />}
         />
         <Route 
           path="/foods" 
-          element={<Food foods={foods} onAddFood={handleAddFood} onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
-          cookouts={cookouts} chosenCookout={chosenCookout}/>}
+          element={<Food 
+            cookouts={cookouts} onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout}
+            foods={foods} onAddFood={handleAddFood} onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
+          />}
         />
         <Route 
           path="/locations" 

@@ -14,9 +14,6 @@ function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCoo
         name: chosenCookout.name,
         start_time: chosenCookout.start_time,
         end_time: chosenCookout.end_time
-        // name: "",
-        // start_time: "",
-        // end_time: ""
     });
 
     const handleEditCookoutChange = (e) => {
@@ -47,10 +44,6 @@ function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCoo
         .then((response) => response.json())
         // NOTE: This is done to send up the edited cookout up to the parent component, 'App.js', accordingly:
         .then((editedCookout) => onEditCookout(editedCookout));
-        // .then(function (editedCookout) {
-        //     console.log("editedCookout: ", editedCookout);
-        //     onEditCookout(editedCookout);
-        // })
     }
 
     const handleDelete = (e) => {
@@ -69,8 +62,6 @@ function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCoo
                 onDeleteCookout(chosenCookout);
             }
         })
-        // .then((response) => response.json())
-        // .then((deletedCookout) => onDeleteCookout(deletedCookout));
     }
 
     // <form onSubmit={handleEditCookoutFormSubmit}>
