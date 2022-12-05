@@ -5,7 +5,7 @@ import EditFoodForm from "./EditFoodForm";
 function Food({ foods, onAddFood, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
     return (
         <div>
-            <h1>Food</h1>
+            <h1>Foods</h1>
             <CreateFoodForm 
                 onAddFood={onAddFood} 
                 cookouts={cookouts} onChooseCookout={onChooseCookout} chosenCookout={chosenCookout}

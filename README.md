@@ -1,3 +1,24 @@
+# Craig's Cookout
+
+## About
+This app is a Full Stack web application made with React and Ruby On Rails that allows a user to plan and schedule a cookout with friends!
+
+## Installation
+Note: You need Ruby on Rails installed locally, and have your NPM setup successfully first.
+
+Then, use the following commands:
+`
+npm install
+bundle install
+rails db:migrate
+`
+
+To run this project locally, use the following two commands in separate terminals:
+`
+rails s
+npm start --prefix client
+`
+
 # Project Template: React/Rails API
 
 ## Description

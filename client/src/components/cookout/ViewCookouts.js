@@ -2,10 +2,11 @@ import React from "react"
 
 function ViewCookouts({ cookouts }) {
     // NOTE: I need to somehow display all of the cookout information in a nice format for the user as a summary page:
+    console.log("cookouts from ViewCookout child component: ", cookouts);
 
     return (
         <>
-        <h1>Cookouts</h1>
+        <h1>View All Cookouts</h1>
         <ul>
             <li>Cookout 1</li>
             <ul>

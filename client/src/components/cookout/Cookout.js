@@ -7,7 +7,7 @@ import EditCookoutForm from "./EditCookoutForm";
 function Cookout({ cookouts, onAddCookout, onEditCookout, onDeleteCookout, onChooseCookout, chosenCookout}) {
     return (
         <div>
-            <h1>Cookout</h1>
+            <h1>Cookouts</h1>
             <CreateCookoutForm 
                 onAddCookout={onAddCookout} 
             />
