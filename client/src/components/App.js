@@ -6,7 +6,6 @@ import Login from "../pages/Login";
 import About from "./About";
 import Cookout from "./cookout/Cookout";
 import Food from "./food/Food";
-import Location from "./location/Location";
 import ViewCookouts from "./cookout/ViewCookouts";
 
 function App() {
@@ -101,20 +100,6 @@ function App() {
     // console.log("handleDeleteFood() function called in parent App.js component");
   }
 
-  function handleAddLocation(newLocation) {
-    // console.log("newLocation in parent App.js component: ", newLocation);
-    // const updatedLocationsArray = [...locations, newLocation];
-    // setLocations(updatedLocationsArray);
-  }
-
-  function handleEditLocation(location) {
-    // console.log("handleEditFood() function called in parent App.js component");
-  }
-
-  function handleDeleteLocation(location) {
-    // console.log("handleDeleteLocation() function called in parent App.js component");
-  }
-
   // ===========================================================================================
   // CHECKING PARENT PROP VALUES SECTION:
   // ===========================================================================================
@@ -146,12 +131,6 @@ function App() {
             cookouts={cookouts} onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout}
             foods={foods} onAddFood={handleAddFood} onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
           />}
-        />
-        <Route 
-          path="/locations" 
-          element={<Location 
-            locations={locations} onAddLocation={handleAddLocation} onEditLocation={handleEditLocation} onDeleteLocation={handleDeleteLocation} 
-            cookouts={cookouts} chosenCookout={chosenCookout}/>}
         />
         <Route 
           path="/viewcookouts" 

@@ -52,9 +52,6 @@ function NavBar({ user, setUser }) {
           <Button as={Link} to="/foods">
             Foods
           </Button>
-          <Button as={Link} to="/locations">
-            Locations
-          </Button>
           <Button as={Link} to="/viewcookouts">
             View All Cookouts
           </Button>
@@ -62,10 +59,7 @@ function NavBar({ user, setUser }) {
             Logout
           </Button>
         </Nav>
-        <UsernameTag>
-          <p>Welcome, {user.username}!</p>
-        </UsernameTag>
-          </Wrapper>
+      </Wrapper>
     </>
   );
 }
@@ -98,23 +92,6 @@ const Logo = styled.h1`
     text-decoration: none;
   }
 `;
-
-const UsernameTag = styled.h1`
-  font-family: "Permanent Marker", cursive;
-  font-size: 2rem;
-  color: blue;
-  margin: 0;
-  line-height: 1;
-
-  a {
-    color: inherit;
-    text-decoration: none;
-  }
-
-  display: flex;
-  position: absolute;
-  right: 20px;
-`
 
 const Nav = styled.nav`
   display: flex;
