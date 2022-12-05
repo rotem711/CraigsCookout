@@ -1,6 +1,12 @@
 class FoodsController < ApplicationController
     def create 
         # byebug
+        # Previous attempt:
+        # Food.create!(food_params)
+        # NOTE:
+        # This works within a Byebug console but is blocked by the fact that 'cookout_id' is not allowed:
+        # @current_user.foods.create!(food_params)
+
         food = @current_user.foods.create!(food_params)
         
         render json: food, status: :created
@@ -46,6 +52,8 @@ class FoodsController < ApplicationController
     private 
 
     def food_params
+        # NOTE: I added ':cookout_id' to try to prevent weird creation validation issues:
+        # params.permit(:name, :cookout_id)
         params.permit(:name)
     end
 

@@ -14,17 +14,18 @@ function CreateFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout })
     const handleCreate = (e) => {
         e.preventDefault();
         const id = chosenCookout.id;
-        console.log("chosenCookout: ", chosenCookout);
+        console.log("chosenCookout within handleCreate function of CreateFoodForm child component: ", chosenCookout);
         console.log("id: ", id);
         // NOTE: The 'Application Controller' will handle the '@current_user' so that it already knows the session["user_id"] to use in this scenario
         // Therefore, all you need to do is pass in a fetch request to the '/cookouts' route:
-        fetch(`/foods`, {
+        fetch("/foods", {
         // fetch(`/cookouts/foods`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             },
+            // body: JSON.stringify({ "name": createFoodFormData["food_name"], "cookout_id": id}),
             body: JSON.stringify({ "name": createFoodFormData["food_name"], "cookout_id": id}),
         })
         .then((response) => response.json())
