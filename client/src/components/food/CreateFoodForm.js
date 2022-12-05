@@ -19,12 +19,13 @@ function CreateFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout })
         // NOTE: The 'Application Controller' will handle the '@current_user' so that it already knows the session["user_id"] to use in this scenario
         // Therefore, all you need to do is pass in a fetch request to the '/cookouts' route:
         fetch(`/foods`, {
+        // fetch(`/cookouts/foods`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             },
-            body: JSON.stringify({ "name": createFoodFormData["food_name"]}),
+            body: JSON.stringify({ "name": createFoodFormData["food_name"], "cookout_id": id}),
         })
         .then((response) => response.json())
         // NOTE: This is done to send up the new cookout up to the parent component, 'App.js', accordingly:

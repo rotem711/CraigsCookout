@@ -2,6 +2,7 @@ class FoodsController < ApplicationController
     def create 
         # byebug
         food = @current_user.foods.create!(food_params)
+        
         render json: food, status: :created
     end
 
