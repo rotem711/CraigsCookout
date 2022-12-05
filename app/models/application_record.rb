@@ -1,4 +1,7 @@
 class ApplicationRecord < ActiveRecord::Base
+  # ERD can be found here:
+  # https://excalidraw.com/
+
   # ERD Entity Relationship Diagram For Project:
   # - User:
   # + has_many :foods
