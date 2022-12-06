@@ -6,7 +6,9 @@ Rails.application.routes.draw do
   # resources :cookouts, only: [:index, :create]
 
   # NOTE: By just using 'resources :cookouts' we can then allow for ALL CRUD methods so that I can also allow a 'show' route
-  resources :cookouts
+
+  # PREVIOUS ROUTE DECLARATION VIA 'resources' MACRO:
+  # resources :cookouts
 
   # NOTE: This is what is provided by the 'resources' macro from Rails:
   # This is the ':index' route provided by the 'resources' macro:
@@ -21,9 +23,13 @@ Rails.application.routes.draw do
   # What I had previously before I decided everything should be CRUD compatible:
   # resources :foods, only: [:index, :create]
 
-  resources :foods
+  # PREVIOUS ROUTE DECLARATION VIA 'resources' MACRO:
+  # resources :foods
 
-  resources :locations
+  # NOTE: This was modified to include 'nested routing' so I can access specific cookouts with specific foods:
+  resources :cookouts do 
+    resources :foods
+  end
 
   # Login related routes:
   post "/signup", to: "users#create"

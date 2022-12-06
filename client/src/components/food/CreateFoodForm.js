@@ -18,8 +18,9 @@ function CreateFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout })
         console.log("id: ", id);
         // NOTE: The 'Application Controller' will handle the '@current_user' so that it already knows the session["user_id"] to use in this scenario
         // Therefore, all you need to do is pass in a fetch request to the '/cookouts' route:
-        fetch("/foods", {
+        // fetch("/foods", {
         // fetch(`/cookouts/foods`, {
+        fetch(`/cookouts/${id}/foods`, {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",

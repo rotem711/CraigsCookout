@@ -1,7 +1,11 @@
 import React from "react";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function EditFoodForm({ foods, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
+function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
+    // TODO: Play around with 'GET /foods' route for getting the foods onto the page
+    // /cookouts/cookout_id/foods
+    // We can use this and find it by id
+
     const handleEditFoodChange = (e) => {
         console.log("e.target.value: ", e.target.value);
     }

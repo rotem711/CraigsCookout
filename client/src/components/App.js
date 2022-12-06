@@ -10,10 +10,9 @@ import ViewCookouts from "./cookout/ViewCookouts";
 
 function App() {
   const [user, setUser] = useState(null);
-  const [foods, setFoods] = useState([]);
+  // const [foods, setFoods] = useState([]);
   const [cookouts, setCookouts] = useState([]);
   const [chosenCookout, setChosenCookout] = useState({});
-  const [locations, setLocations] = useState([]);
 
   useEffect(() => {
     // auto-login
@@ -86,10 +85,51 @@ function App() {
     setChosenCookout(match);
   }
 
+  // TODO: You need to make sure that the results show up on the frontend as well
+  // TODO: 
+  // Grab the 'cookouts' state variable, index into it using the 'chosenCookout', and then add the new food to the 'foods' array 
+  // 'foods' is a key value pair
+  // You are adding a new food to the existing 'foods' array
+  // Make an updated cookout
+  // Map through the cookouts, use if else block
+  // cookouts.map() --> if return updated cookout else block return cookout
+  // Cookout is the default
+  // If: If the id values match, then return the updated cookout 
+  // else: where the cookout is the same as the chosen cookout id --> return the original cookout
+
+  // ALSO, just handle everything in 'cookouts' state variable, not 'foods'
+
+  // QUESTION FOR OFFICE HOUR:
+  // Should I also be storing 'user' somehow within my current data?
+  // This is asked because the 'newFood' form data contains the 'user' object with corresponding 'user_id' so I'm wondering if this is relevant
+  // when other users use this app
   function handleAddFood(newFood) {
     // console.log("newFood in parent App.js component: ", newFood);
     // const updatedFoodsArray = [...foods, newFood];
+    // console.log("updateFoodsArray in parent App.js component within 'handleAddNew' food function in parent App.js component: ", updatedFoodsArray);
     // setFoods(updatedFoodsArray);
+    // console.log("foods after adding it in state within 'handleAddNewFood' function in parent App.js component: ", foods);
+    // console.log("newFood within handleAddNewFood function: ", newFood);
+    console.log("cookouts within handleAddNewFood() function: ", cookouts);
+
+    cookouts.map((cookout) => {
+      console.log("Checking .map() function within handleAddNewFood function: ");
+    
+      console.log("cookout: ", cookout);
+        
+      if (cookout.id == chosenCookout.id) {
+        const updatedFoodsArray = [...cookout.foods, newFood];
+        console.log("_____________________________________");
+        console.log("Match found within 'handleAddNewFood!");
+        console.log("cookout.id: ", cookout.id);
+        console.log("chosenCookout.id: ", chosenCookout.id);
+        console.log("newFood: ", newFood);
+        console.log("updatedFoodsArray: ", updatedFoodsArray);
+        console.log("_____________________________________");
+      } 
+      else {
+        console.log("Match not found within 'handleAddNewFood!");
+      }});
   }
 
   function handleEditFood(food) {
@@ -129,7 +169,7 @@ function App() {
           path="/foods" 
           element={<Food 
             cookouts={cookouts} onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout}
-            foods={foods} onAddFood={handleAddFood} onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
+            onAddFood={handleAddFood} onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
           />}
         />
         <Route 
