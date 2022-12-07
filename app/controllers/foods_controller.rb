@@ -19,7 +19,13 @@ class FoodsController < ApplicationController
         # 2.7.4 :004 > f.errors.full_messages
         # => ["User must exist", "Cookout must exist", "Name can't be blank"] 
         food = @current_user.foods.create(food_params)
-        
+      
+        # Look for 'food' object that has the id and the name
+        # You need to figure out where all of the other stuff is coming from aka place a 'byebug' here and 
+        # then print out what 'food' is showing --> 
+        # Result: The 'cookout_id' and 'user_id' from the serializer were the problem here
+        # since I only need information regarding the food to be sent from the backend to the frontend
+        # byebug
         render json: food, status: :created
     end
 
