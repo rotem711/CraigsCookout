@@ -1,10 +1,39 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
 function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
+    const [foods, setFoods] = useState([]);
     // TODO: Play around with 'GET /foods' route for getting the foods onto the page
     // /cookouts/cookout_id/foods
     // We can use this and find it by id
+
+    useEffect(() => {
+        // setEditFoodFormData({
+        //     name: chosenCookout.foods.name,
+        // })
+        console.log("useEffect called due to 'foods' useState variable being changed");
+    }, [chosenCookout]);
+
+
+    if (chosenCookout) {
+        console.log("chosenCookout found!");
+        console.log("cookouts from EditFoodForm child component: ", cookouts);
+        console.log("chosenCookout.foods: ", chosenCookout.foods);
+        if (chosenCookout.foods) {
+            console.log("chosenCookout.foods: ", chosenCookout.foods);
+            let foods = chosenCookout.foods.map((food) => {
+                return (
+                    <option key={food.id} value={food.name}>{food.name}</option>
+                )
+            });
+            setFoods(foods);
+            console.log("foods: ", foods);
+        }
+    }
+
+    // const [editFoodFormData, setEditFoodFormData] = useState({
+    //     name: chosenCookout.food.name
+    // });
 
     const handleEditFoodChange = (e) => {
         console.log("e.target.value: ", e.target.value);
@@ -19,9 +48,7 @@ function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, cho
                 <br />
                 <select name="food_select" id="food_select">
                     <option disabled selected value> -- Select a food -- </option>
-                    <option value="test">Test 1</option>
-                    <option value="test2">Test 2</option>
-                    <option value="test3">Test 3</option>
+                    { foods }
                 </select>
                 <br />
                 <br />
