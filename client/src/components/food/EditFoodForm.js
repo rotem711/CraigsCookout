@@ -3,10 +3,10 @@ import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
 function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
     const [foodOptions, setFoodOptions] = useState([]);
-    const [foodMatch, setFoodMatch] = useState("");
     const [editFoodFormData, setEditFoodFormData] = useState({
-        name: foodMatch
+        food_name: ""
     });
+    const [foodId, setFoodId] = useState("");
 
     useEffect(() => {
         if (chosenCookout) {
@@ -29,9 +29,12 @@ function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, cho
             }
         }
 
-        setEditFoodFormData({
-            name: foodMatch
-        });
+        // setEditFoodFormData({
+        //     name: foodMatch
+        // });
+        // setEditFoodFormData({
+        //     name: editFoodFormData.food_name
+        // })
 
     }, [chosenCookout]);
 
@@ -50,23 +53,50 @@ function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, cho
 
         let foodMatch = mapMatch.props.value;
 
-        setFoodMatch(foodMatch);
+        setEditFoodFormData({"food_name": foodMatch});
 
-        console.log("foodMatch in handleChooseFood in EditFoodForm child component: ", foodMatch);
+        // foodId = mapMatch.props.key;
+        // setFoodId(foodId)
+        console.log("mapMatch.key: ", mapMatch.key);
+        setFoodId(mapMatch.key);
+
+        console.log("foodMatch: ", foodMatch);
+        console.log("editFoodFormData: ", editFoodFormData);
+
         console.log("_______________________________________________");
     }
 
     const handleEditFoodChange = (e) => {
         console.log("e.target.value: ", e.target.value);
+        console.log("e.target.name: ", e.target.name);
         setEditFoodFormData({...editFoodFormData, [e.target.name]: e.target.value})
     }
 
     const handleEdit = (e) => {
+        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        console.log("handleEdit function called")
         e.preventDefault();
         console.log("handleEdit() called in EditFoodForm child component");
-        const id = chosenCookout.id;
-        console.log("id: ", id);
+
+        const cookoutId = chosenCookout.id;
+
+        console.log("cookoutId: ", cookoutId);
         console.log("editFoodFormData: ", editFoodFormData);
+        console.log("foodId: ", foodId);
+        console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");
+
+        // From 'rails routes' within 'rails c' console:
+        //  PATCH  /cookouts/:cookout_id/foods/:id(.:format)                                                         foods#update  
+        fetch(`/cookouts/${cookoutId}/foods/${foodId}`, {
+            method: "PATCH",
+            headers: {
+                "Content-Type": "application/json",
+                "Accept": "application/json"
+            },
+            body: JSON.stringify({"name": editFoodFormData["food_name"], "cookout_id": cookoutId}),
+        })
+        .then((response) => response.json())
+        .then((editedFood) => onEditFood(editedFood))
     }
 
     const handleDelete = (e) => {
@@ -92,7 +122,7 @@ function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, cho
                 <br />
                 <label htmlFor="name">Name of Food:</label>
                 <br />
-                <input onChange={handleEditFoodChange} type="text" id="name" name="food_name" value={foodMatch}/>
+                <input onChange={handleEditFoodChange} type="text" id="name" name="food_name" value={editFoodFormData.food_name}/>
                 <br />
                 <br />
                 <input onClick={handleEdit} type="submit" value="Edit" />

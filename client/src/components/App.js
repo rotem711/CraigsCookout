@@ -116,7 +116,12 @@ function App() {
   }
 
   function handleEditFood(food) {
-    // console.log("handleEditFood() function called in parent App.js component");
+    console.log("handleEditFood() function called in parent App.js component");
+    // setCookouts((cookouts) => 
+    //   cookouts.map((cookout) => {
+    //     return cookout.id === editedCookout.id ? editedCookout : cookout;
+    //   })
+    // );
   }
 
   function handleDeleteFood(food) {
