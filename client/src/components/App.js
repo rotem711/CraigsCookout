@@ -110,28 +110,34 @@ function App() {
   // --> ANSWER: No, because the Rails backend already has the info for later use
 
   function handleAddFood(newFood) {
-    console.log("cookouts within handleAddNewFood() function: ", cookouts);
+    // console.log("cookouts within handleAddNewFood() function: ", cookouts);
 
     cookouts.map((cookout) => {
-      console.log("Checking .map() function within handleAddNewFood function: ");
+      // console.log("Checking .map() function within handleAddNewFood function: ");
     
-      console.log("cookout: ", cookout);
+      // console.log("cookout: ", cookout);
         
       if (cookout.id == chosenCookout.id) {
         const updatedFoodsArray = [...cookout.foods, newFood];
-        console.log("_____________________________________");
-        console.log("Match found within 'handleAddNewFood!");
-        console.log("cookout.id: ", cookout.id);
-        console.log("chosenCookout.id: ", chosenCookout.id);
-        console.log("newFood: ", newFood);
-        console.log("updatedFoodsArray: ", updatedFoodsArray);
-        console.log("chosenCookout.foods: ", chosenCookout.foods);
-        // TODO: 
-        // I need to update the 'cookouts' state variable's '.foods' property array to include this updated array
-        // cookout.foods = updatedFoodsArray;
-        // setCookouts({"foods": updatedFoodsArray})
-        console.log("cookout.foods: ", cookout.foods);
-        console.log("_____________________________________");
+        // console.log("_____________________________________");
+        // console.log("Match found within 'handleAddNewFood!");
+        // console.log("cookout.id: ", cookout.id);
+        // console.log("chosenCookout.id: ", chosenCookout.id);
+        // console.log("newFood: ", newFood);
+        // console.log("updatedFoodsArray: ", updatedFoodsArray);
+        // console.log("chosenCookout.foods: ", chosenCookout.foods);
+
+        let foodOptions = updatedFoodsArray.map((food) => {
+            return (
+                <option key={food.id} value={food.name}>{food.name}</option>
+            )
+        });
+
+        setFoodOptions(foodOptions);
+        // console.log("foodOptions: ", foodOptions);
+
+        // console.log("cookout.foods: ", cookout.foods);
+        // console.log("_____________________________________");
       } 
       else {
         console.log("Match not found within 'handleAddNewFood!");
