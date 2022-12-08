@@ -144,8 +144,8 @@ function App() {
       }});
   }
 
-  // TODO: I might have to just send 'setFoodOptions' as a callback function from the parent App.js to the 'EditFoodForm' child component
-  // TODO: I might also need to send 'setFoodId' as a callback function from the parent App component to the 'EditFoodForm' child component
+  // TODO: Make this actually update the 'foodOptions' in real time since the backend has already been updated at this point, 
+  // and the frontend needs to be updated accordingly:
   function handleEditFood(food) {
     console.log("handleEditFood() function called in parent App.js component");
     // setCookouts((cookouts) => 
@@ -155,8 +155,6 @@ function App() {
     // );
   }
 
-  // TODO: I might have to just send 'setFoodOptions' as a callback function from the parent App.js to the 'EditFoodForm' child component
-  // TODO: I might also need to send 'setFoodId' as a callback function from the parent App component to the 'EditFoodForm' child component
   function handleDeleteFood(food) {
     // console.log("handleDeleteFood() function called in parent App.js component");
   }
