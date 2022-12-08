@@ -146,13 +146,48 @@ function App() {
 
   // TODO: Make this actually update the 'foodOptions' in real time since the backend has already been updated at this point, 
   // and the frontend needs to be updated accordingly:
-  function handleEditFood(food) {
+  function handleEditFood(editedFood) {
     console.log("handleEditFood() function called in parent App.js component");
     // setCookouts((cookouts) => 
     //   cookouts.map((cookout) => {
     //     return cookout.id === editedCookout.id ? editedCookout : cookout;
     //   })
     // );
+
+    cookouts.map((cookout) => {
+      // console.log("Checking .map() function within handleAddNewFood function: ");
+    
+      // console.log("cookout: ", cookout);
+        
+      if (cookout.id == chosenCookout.id) {
+        // TODO: 
+        // I need to figure out how to find the specific food that was edited, and update it
+
+        console.log("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+        console.log("Checking handleEditFood() function in parent App component: ");
+        console.log("cookouts: ", cookouts);
+        console.log("cookout: ", cookout);
+        console.log("cookout.foods: ", cookout.foods);
+        console.log("chosenCookout: ", chosenCookout);
+        console.log("editedFood: ", editedFood);
+        console.log("foodId: ", foodId);
+        console.log("cookouts[chosenCookout.id]: ", cookouts[chosenCookout.id]);
+        console.log("cookouts[chosenCookout.id].foods: ", cookouts[chosenCookout.id].foods);
+        console.log("cookouts[chosenCookout.id].foods[foodId]: ", cookouts[chosenCookout.id].foods[foodId]);
+        // Attempt at setting the object in state:
+        // setCookouts(cookouts[cookout.id].foods[foodId]: editedFood.name );
+        console.log("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+        // const updatedFoodsArray = [...cookout.foods, newFood];
+
+        // let foodOptions = updatedFoodsArray.map((food) => {
+        //     return (
+        //         <option key={food.id} value={food.name}>{food.name}</option>
+        //     )
+        // });
+
+        // setFoodOptions(foodOptions);
+      }
+    });
   }
 
   function handleDeleteFood(food) {
