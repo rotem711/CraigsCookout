@@ -32,7 +32,7 @@ class FoodsController < ApplicationController
     def update
         food = @current_user.foods.find_by(id: params[:id])
         if food.user_id == @current_user.id
-            food.update(food)
+            food.update(food_params)
             render json: food
         else
             render json: { errors: [food.errors.full_messages] }, status: :unprocessable_entity

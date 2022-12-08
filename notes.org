@@ -908,3 +908,17 @@ Within 'src/components/food/EditFoodForm.js':
       <option value="test3">Test 3</option>
   </select>
 #+end_src
+* Issues Still Remaining
+<2022-12-08 Thu 11:07>: There are a fews issues still remaining with my application:
+- If I try to sign up a user, I am greeted with a blank page after it tries to refresh with the '/me' call via useEffect --> Doesn't go away until I refresh the page
+- I am unable to see a new cookout appear when I add a new one for the first time, though after I add the first one and refresh, I can continually add them as I please --> Most likely a 'useEffect' issue
+- I am unable to see new foods appear in Foods > Choose a Cookout > Edit Food until I refresh the page --> Most likely a 'useEffect' issue
+- If I try to edit the food name in Foods > Edit Food, nothing happens --> Most likely an issue with the conundrum of setting it in state
+- If I create another user and try to delete that user's cookout, I get a Sequelize constraint error
+- I should ideally add a notification with an alert to the user that states what action they've taken or find a React library that does this
+
+Another big thing I noticed is that cookout is not associated with a user until they add foods to it, so in reality, the 'View All Cookouts' section demonstrates the relationship well since if they don't have any foods associated with a cookout, then there is no user attached to it
+
+Hence User <--> Foods <--> Cookouts
+
+Will mention this if it comes up during the 'Phase 4' test.

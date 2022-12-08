@@ -4,6 +4,9 @@ import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
     const [foodOptions, setFoodOptions] = useState([]);
     const [foodMatch, setFoodMatch] = useState("");
+    const [editFoodFormData, setEditFoodFormData] = useState({
+        name: foodMatch
+    });
 
     useEffect(() => {
         if (chosenCookout) {
@@ -25,14 +28,13 @@ function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, cho
                 console.log("foodOptions: ", foodOptions);
             }
         }
+
         setEditFoodFormData({
             name: foodMatch
-        })
+        });
+
     }, [chosenCookout]);
 
-    const [editFoodFormData, setEditFoodFormData] = useState({
-        name: foodMatch
-    });
 
     function handleChooseFood(e) {
         console.log("_______________________________________________");
@@ -56,6 +58,23 @@ function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, cho
 
     const handleEditFoodChange = (e) => {
         console.log("e.target.value: ", e.target.value);
+        setEditFoodFormData({...editFoodFormData, [e.target.name]: e.target.value})
+    }
+
+    const handleEdit = (e) => {
+        e.preventDefault();
+        console.log("handleEdit() called in EditFoodForm child component");
+        const id = chosenCookout.id;
+        console.log("id: ", id);
+        console.log("editFoodFormData: ", editFoodFormData);
+    }
+
+    const handleDelete = (e) => {
+        e.preventDefault();
+        console.log("handleDelete() called in EditFoodForm child component");
+        const id = chosenCookout.id;
+        console.log("id: ", id);
+        console.log("editFoodFormData: ", editFoodFormData);
     }
 
     return (
@@ -76,9 +95,9 @@ function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, cho
                 <input onChange={handleEditFoodChange} type="text" id="name" name="food_name" value={foodMatch}/>
                 <br />
                 <br />
-                <input type="submit" value="Edit" />
+                <input onClick={handleEdit} type="submit" value="Edit" />
                 <br />
-                <input type="submit" value="Delete" />
+                <input onClick={handleDelete} type="submit" value="Delete" />
             </form>
         </div>
     )
