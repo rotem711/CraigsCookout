@@ -7,17 +7,6 @@ function ChooseCookoutForm({ cookouts, onChooseCookout}) {
         )
     });
 
-    // console.log("cookoutOptionsArray: ", cookoutOptionsArray);
-
-    // TODO:
-    // The form should have all the inforamtion that needs to be sent within the patch request on the form
-    // Shoot the 'cookoutOptionsArray' up to the parent, and down to the 'Edit Cookout Form'
-    // There needs to be a state variable for cookout id that gets handled on the 'Edit cookout form' so that handleCookout state is changed on the form
-
-    // function handleChooseCookout(e) {
-    //     console.log("e.target.value from handleChooseCookout function: ", e.target.value);
-    // }
-
     return (
         <>
             <h2>Choose Cookout: </h2>

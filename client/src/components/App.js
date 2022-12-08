@@ -69,8 +69,6 @@ function App() {
     // let updatedCookoutsArray = cookouts.filter(cookout => cookout.id !== deletedCookout.id)
     // setCookouts(updatedCookoutsArray);
 
-    // TODO:
-    // This action alone needs to re-trigger the page to be re-rendered via a useEffect hook call:
     setCookouts((cookouts) =>
       cookouts.filter((cookout) => cookout.id !== deletedCookout.id)
     );
@@ -85,30 +83,11 @@ function App() {
     setChosenCookout(match);
   }
 
-  // TODO: You need to make sure that the results show up on the frontend as well
-  // TODO: 
-  // Grab the 'cookouts' state variable, index into it using the 'chosenCookout', and then add the new food to the 'foods' array 
-  // 'foods' is a key value pair
-  // You are adding a new food to the existing 'foods' array
-  // Make an updated cookout
-  // Map through the cookouts, use if else block
-  // cookouts.map() --> if return updated cookout else block return cookout
-  // Cookout is the default
-  // If: If the id values match, then return the updated cookout 
-  // else: where the cookout is the same as the chosen cookout id --> return the original cookout
-
-  // ALSO, just handle everything in 'cookouts' state variable, not 'foods'
-
   // QUESTION: 
   // Should I also be storing 'user' somehow within my current data? 
   // --> ANSWER: No, because the Rails backend already has the info for later use
+
   function handleAddFood(newFood) {
-    // console.log("newFood in parent App.js component: ", newFood);
-    // const updatedFoodsArray = [...foods, newFood];
-    // console.log("updateFoodsArray in parent App.js component within 'handleAddNew' food function in parent App.js component: ", updatedFoodsArray);
-    // setFoods(updatedFoodsArray);
-    // console.log("foods after adding it in state within 'handleAddNewFood' function in parent App.js component: ", foods);
-    // console.log("newFood within handleAddNewFood function: ", newFood);
     console.log("cookouts within handleAddNewFood() function: ", cookouts);
 
     cookouts.map((cookout) => {
@@ -124,6 +103,11 @@ function App() {
         console.log("chosenCookout.id: ", chosenCookout.id);
         console.log("newFood: ", newFood);
         console.log("updatedFoodsArray: ", updatedFoodsArray);
+        console.log("chosenCookout.foods: ", chosenCookout.foods);
+        // TODO: 
+        // I need to update the 'cookouts' state variable's '.foods' property array to include this updated array
+        // cookout.foods = updatedFoodsArray;
+        console.log("cookout.foods AFTER array assignment");
         console.log("_____________________________________");
       } 
       else {
