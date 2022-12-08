@@ -7,29 +7,30 @@ function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, cho
     // /cookouts/cookout_id/foods
     // We can use this and find it by id
 
+    // useEffect(() => {
+    //     // setEditFoodFormData({
+    //     //     name: chosenCookout.foods.name,
+    //     // })
+    //     console.log("useEffect called due to 'foods' useState variable being changed");
+    // }, [chosenCookout]);
+
     useEffect(() => {
-        // setEditFoodFormData({
-        //     name: chosenCookout.foods.name,
-        // })
-        console.log("useEffect called due to 'foods' useState variable being changed");
-    }, [chosenCookout]);
-
-
-    if (chosenCookout) {
-        console.log("chosenCookout found!");
-        console.log("cookouts from EditFoodForm child component: ", cookouts);
-        console.log("chosenCookout.foods: ", chosenCookout.foods);
-        if (chosenCookout.foods) {
+        if (chosenCookout) {
+            console.log("chosenCookout found!");
+            console.log("cookouts from EditFoodForm child component: ", cookouts);
             console.log("chosenCookout.foods: ", chosenCookout.foods);
-            let foods = chosenCookout.foods.map((food) => {
-                return (
-                    <option key={food.id} value={food.name}>{food.name}</option>
-                )
-            });
-            setFoods(foods);
-            console.log("foods: ", foods);
+            if (chosenCookout.foods) {
+                console.log("chosenCookout.foods: ", chosenCookout.foods);
+                let foods = chosenCookout.foods.map((food) => {
+                    return (
+                        <option key={food.id} value={food.name}>{food.name}</option>
+                    )
+                });
+                setFoods(foods);
+                console.log("foods: ", foods);
+            }
         }
-    }
+    }, [chosenCookout]);
 
     // const [editFoodFormData, setEditFoodFormData] = useState({
     //     name: chosenCookout.food.name

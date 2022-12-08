@@ -99,10 +99,9 @@ function App() {
 
   // ALSO, just handle everything in 'cookouts' state variable, not 'foods'
 
-  // QUESTION FOR OFFICE HOUR:
-  // Should I also be storing 'user' somehow within my current data?
-  // This is asked because the 'newFood' form data contains the 'user' object with corresponding 'user_id' so I'm wondering if this is relevant
-  // when other users use this app
+  // QUESTION: 
+  // Should I also be storing 'user' somehow within my current data? 
+  // --> ANSWER: No, because the Rails backend already has the info for later use
   function handleAddFood(newFood) {
     // console.log("newFood in parent App.js component: ", newFood);
     // const updatedFoodsArray = [...foods, newFood];
