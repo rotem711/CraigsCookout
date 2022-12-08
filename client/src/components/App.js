@@ -10,9 +10,10 @@ import ViewCookouts from "./cookout/ViewCookouts";
 
 function App() {
   const [user, setUser] = useState(null);
-  // const [foods, setFoods] = useState([]);
   const [cookouts, setCookouts] = useState([]);
   const [chosenCookout, setChosenCookout] = useState({});
+  const [foodOptions, setFoodOptions] = useState([]);
+  const [foodId, setFoodId] = useState("");
 
   useEffect(() => {
     // auto-login
@@ -42,6 +43,27 @@ function App() {
       setCookouts(data);
     })
     }, []);
+
+
+  useEffect(() => {
+      if (chosenCookout) {
+          console.log("chosenCookout found!");
+          console.log("cookouts from EditFoodForm child component: ", cookouts);
+          console.log("chosenCookout.foods: ", chosenCookout.foods);
+          if (chosenCookout.foods) {
+              console.log("chosenCookout.foods: ", chosenCookout.foods);
+
+              let foodOptions = chosenCookout.foods.map((food) => {
+                  return (
+                      <option key={food.id} value={food.name}>{food.name}</option>
+                  )
+              });
+
+              setFoodOptions(foodOptions);
+              console.log("foodOptions: ", foodOptions);
+          }
+      }
+  }, [chosenCookout]);
 
   if (!user) return <Login onLogin={setUser} />;
 
@@ -107,12 +129,40 @@ function App() {
         // TODO: 
         // I need to update the 'cookouts' state variable's '.foods' property array to include this updated array
         // cookout.foods = updatedFoodsArray;
-        console.log("cookout.foods AFTER array assignment");
+        // setCookouts({"foods": updatedFoodsArray})
+        console.log("cookout.foods: ", cookout.foods);
         console.log("_____________________________________");
       } 
       else {
         console.log("Match not found within 'handleAddNewFood!");
       }});
+  }
+
+  function handleChooseFood(e) {
+      console.log("_______________________________________________");
+      console.log("foodOptions in handleChooseFood() function: ", foodOptions);
+      console.log("e in handleChooseFood() function: ", e);
+      console.log("e.target.value in handleChooseFood() function: ", e.target.value);
+
+      let mapMatch = foodOptions.find(item => {
+          console.log("item within .map(): ", item);
+          console.log("item.props.value within .map(): ", item.props.value);
+          return item.props.value === e.target.value
+      });
+
+      let foodMatch = mapMatch.props.value;
+
+      // setEditFoodFormData({"food_name": foodMatch});
+
+      // foodId = mapMatch.props.key;
+      // setFoodId(foodId)
+      console.log("mapMatch.key: ", mapMatch.key);
+      setFoodId(mapMatch.key);
+
+      console.log("foodMatch: ", foodMatch);
+      // console.log("editFoodFormData: ", editFoodFormData);
+
+      console.log("_______________________________________________");
   }
 
   function handleEditFood(food) {
@@ -157,7 +207,7 @@ function App() {
           path="/foods" 
           element={<Food 
             cookouts={cookouts} onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout}
-            onAddFood={handleAddFood} onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
+            onAddFood={handleAddFood} foodOptions={foodOptions} foodId={foodId} onChooseFood={handleChooseFood} onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
           />}
         />
         <Route 

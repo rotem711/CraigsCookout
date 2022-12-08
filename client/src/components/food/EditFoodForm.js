@@ -1,70 +1,61 @@
 import React, { useState, useEffect } from "react";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
-    const [foodOptions, setFoodOptions] = useState([]);
+function EditFoodForm({ foodOptions, foodId, onChooseFood, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
+    // const [foodOptions, setFoodOptions] = useState([]);
     const [editFoodFormData, setEditFoodFormData] = useState({
         food_name: ""
     });
-    const [foodId, setFoodId] = useState("");
 
-    useEffect(() => {
-        if (chosenCookout) {
-            console.log("chosenCookout found!");
-            console.log("cookouts from EditFoodForm child component: ", cookouts);
-            console.log("chosenCookout.foods: ", chosenCookout.foods);
-            if (chosenCookout.foods) {
-                console.log("chosenCookout.foods: ", chosenCookout.foods);
+    // const [foodId, setFoodId] = useState("");
 
-                // NOTE: 
-                // This is to create '<option>' tags to later render onto the screen hence 'foodOptions'
-                let foodOptions = chosenCookout.foods.map((food) => {
-                    return (
-                        <option key={food.id} value={food.name}>{food.name}</option>
-                    )
-                });
+    // useEffect(() => {
+    //     if (chosenCookout) {
+    //         console.log("chosenCookout found!");
+    //         console.log("cookouts from EditFoodForm child component: ", cookouts);
+    //         console.log("chosenCookout.foods: ", chosenCookout.foods);
+    //         if (chosenCookout.foods) {
+    //             console.log("chosenCookout.foods: ", chosenCookout.foods);
 
-                setFoodOptions(foodOptions);
-                console.log("foodOptions: ", foodOptions);
-            }
-        }
+    //             let foodOptions = chosenCookout.foods.map((food) => {
+    //                 return (
+    //                     <option key={food.id} value={food.name}>{food.name}</option>
+    //                 )
+    //             });
 
-        // setEditFoodFormData({
-        //     name: foodMatch
-        // });
-        // setEditFoodFormData({
-        //     name: editFoodFormData.food_name
-        // })
-
-    }, [chosenCookout]);
+    //             setFoodOptions(foodOptions);
+    //             console.log("foodOptions: ", foodOptions);
+    //         }
+    //     }
+    // }, [chosenCookout]);
 
 
-    function handleChooseFood(e) {
-        console.log("_______________________________________________");
-        console.log("foodOptions in handleChooseFood() function: ", foodOptions);
-        console.log("e in handleChooseFood() function: ", e);
-        console.log("e.target.value in handleChooseFood() function: ", e.target.value);
+    // function handleChooseFood(e) {
+    //     console.log("_______________________________________________");
+    //     console.log("foodOptions in handleChooseFood() function: ", foodOptions);
+    //     console.log("e in handleChooseFood() function: ", e);
+    //     console.log("e.target.value in handleChooseFood() function: ", e.target.value);
 
-        let mapMatch = foodOptions.find(item => {
-            console.log("item within .map(): ", item);
-            console.log("item.props.value within .map(): ", item.props.value);
-            return item.props.value === e.target.value
-        });
+    //     let mapMatch = foodOptions.find(item => {
+    //         console.log("item within .map(): ", item);
+    //         console.log("item.props.value within .map(): ", item.props.value);
+    //         return item.props.value === e.target.value
+    //     });
 
-        let foodMatch = mapMatch.props.value;
+    //     let foodMatch = mapMatch.props.value;
 
-        setEditFoodFormData({"food_name": foodMatch});
+    //     setEditFoodFormData({"food_name": foodMatch});
 
-        // foodId = mapMatch.props.key;
-        // setFoodId(foodId)
-        console.log("mapMatch.key: ", mapMatch.key);
-        setFoodId(mapMatch.key);
+    //     // foodId = mapMatch.props.key;
+    //     // setFoodId(foodId)
+    //     console.log("mapMatch.key: ", mapMatch.key);
+    //     setFoodId(mapMatch.key);
 
-        console.log("foodMatch: ", foodMatch);
-        console.log("editFoodFormData: ", editFoodFormData);
+    //     console.log("foodMatch: ", foodMatch);
+    //     console.log("editFoodFormData: ", editFoodFormData);
 
-        console.log("_______________________________________________");
-    }
+    //     console.log("_______________________________________________");
+    // }
 
     const handleEditFoodChange = (e) => {
         console.log("e.target.value: ", e.target.value);
@@ -114,7 +105,7 @@ function EditFoodForm({ onEditFood, onDeleteFood, cookouts, onChooseCookout, cho
             <form>
                 <label htmlFor="food_select">Choose a Food:</label>
                 <br />
-                <select name="food_select" id="food_select" onChange={handleChooseFood}>
+                <select name="food_select" id="food_select" onChange={onChooseFood}>
                     <option disabled selected value> -- Select a food -- </option>
                     { foodOptions }
                 </select>
