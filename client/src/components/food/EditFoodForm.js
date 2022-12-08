@@ -1,61 +1,38 @@
 import React, { useState, useEffect } from "react";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function EditFoodForm({ foodOptions, foodId, onChooseFood, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
+function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
     // const [foodOptions, setFoodOptions] = useState([]);
     const [editFoodFormData, setEditFoodFormData] = useState({
         food_name: ""
     });
 
-    // const [foodId, setFoodId] = useState("");
+    function handleChooseFood(e) {
+        console.log("_______________________________________________");
+        console.log("foodOptions in handleChooseFood() function: ", foodOptions);
+        console.log("e in handleChooseFood() function: ", e);
+        console.log("e.target.value in handleChooseFood() function: ", e.target.value);
 
-    // useEffect(() => {
-    //     if (chosenCookout) {
-    //         console.log("chosenCookout found!");
-    //         console.log("cookouts from EditFoodForm child component: ", cookouts);
-    //         console.log("chosenCookout.foods: ", chosenCookout.foods);
-    //         if (chosenCookout.foods) {
-    //             console.log("chosenCookout.foods: ", chosenCookout.foods);
+        let mapMatch = foodOptions.find(item => {
+            console.log("item within .map(): ", item);
+            console.log("item.props.value within .map(): ", item.props.value);
+            return item.props.value === e.target.value
+        });
 
-    //             let foodOptions = chosenCookout.foods.map((food) => {
-    //                 return (
-    //                     <option key={food.id} value={food.name}>{food.name}</option>
-    //                 )
-    //             });
+        let foodMatch = mapMatch.props.value;
 
-    //             setFoodOptions(foodOptions);
-    //             console.log("foodOptions: ", foodOptions);
-    //         }
-    //     }
-    // }, [chosenCookout]);
+        setEditFoodFormData({"food_name": foodMatch});
 
+        // foodId = mapMatch.props.key;
+        // setFoodId(foodId)
+        console.log("mapMatch.key: ", mapMatch.key);
+        setFoodId(mapMatch.key);
 
-    // function handleChooseFood(e) {
-    //     console.log("_______________________________________________");
-    //     console.log("foodOptions in handleChooseFood() function: ", foodOptions);
-    //     console.log("e in handleChooseFood() function: ", e);
-    //     console.log("e.target.value in handleChooseFood() function: ", e.target.value);
+        console.log("foodMatch: ", foodMatch);
+        // console.log("editFoodFormData: ", editFoodFormData);
 
-    //     let mapMatch = foodOptions.find(item => {
-    //         console.log("item within .map(): ", item);
-    //         console.log("item.props.value within .map(): ", item.props.value);
-    //         return item.props.value === e.target.value
-    //     });
-
-    //     let foodMatch = mapMatch.props.value;
-
-    //     setEditFoodFormData({"food_name": foodMatch});
-
-    //     // foodId = mapMatch.props.key;
-    //     // setFoodId(foodId)
-    //     console.log("mapMatch.key: ", mapMatch.key);
-    //     setFoodId(mapMatch.key);
-
-    //     console.log("foodMatch: ", foodMatch);
-    //     console.log("editFoodFormData: ", editFoodFormData);
-
-    //     console.log("_______________________________________________");
-    // }
+        console.log("_______________________________________________");
+    }
 
     const handleEditFoodChange = (e) => {
         console.log("e.target.value: ", e.target.value);
@@ -105,7 +82,7 @@ function EditFoodForm({ foodOptions, foodId, onChooseFood, onEditFood, onDeleteF
             <form>
                 <label htmlFor="food_select">Choose a Food:</label>
                 <br />
-                <select name="food_select" id="food_select" onChange={onChooseFood}>
+                <select name="food_select" id="food_select" onChange={handleChooseFood}>
                     <option disabled selected value> -- Select a food -- </option>
                     { foodOptions }
                 </select>

@@ -2,7 +2,7 @@ import React from "react";
 import CreateFoodForm from "./CreateFoodForm";
 import EditFoodForm from "./EditFoodForm";
 
-function Food({ onAddFood, foodOptions, foodId, onChooseFood, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
+function Food({ onAddFood, foodOptions, setFoodOptions, foodId, setFoodId, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
     return (
         <div>
             <h1>Foods</h1>
@@ -12,7 +12,8 @@ function Food({ onAddFood, foodOptions, foodId, onChooseFood, onEditFood, onDele
             />
             <hr />
             <EditFoodForm 
-                foodOptions={foodOptions} foodId={foodId} onChooseFood={onChooseFood} onEditFood={onEditFood} onDeleteFood={onDeleteFood} 
+                foodOptions={foodOptions} setFoodOptions={setFoodOptions} foodId={foodId} setFoodId={setFoodId}
+                onEditFood={onEditFood} onDeleteFood={onDeleteFood} 
                 cookouts={cookouts} onChooseCookout={onChooseCookout} chosenCookout={chosenCookout}
             />
         </div>

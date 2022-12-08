@@ -144,33 +144,8 @@ function App() {
       }});
   }
 
-  function handleChooseFood(e) {
-      console.log("_______________________________________________");
-      console.log("foodOptions in handleChooseFood() function: ", foodOptions);
-      console.log("e in handleChooseFood() function: ", e);
-      console.log("e.target.value in handleChooseFood() function: ", e.target.value);
-
-      let mapMatch = foodOptions.find(item => {
-          console.log("item within .map(): ", item);
-          console.log("item.props.value within .map(): ", item.props.value);
-          return item.props.value === e.target.value
-      });
-
-      let foodMatch = mapMatch.props.value;
-
-      // setEditFoodFormData({"food_name": foodMatch});
-
-      // foodId = mapMatch.props.key;
-      // setFoodId(foodId)
-      console.log("mapMatch.key: ", mapMatch.key);
-      setFoodId(mapMatch.key);
-
-      console.log("foodMatch: ", foodMatch);
-      // console.log("editFoodFormData: ", editFoodFormData);
-
-      console.log("_______________________________________________");
-  }
-
+  // TODO: I might have to just send 'setFoodOptions' as a callback function from the parent App.js to the 'EditFoodForm' child component
+  // TODO: I might also need to send 'setFoodId' as a callback function from the parent App component to the 'EditFoodForm' child component
   function handleEditFood(food) {
     console.log("handleEditFood() function called in parent App.js component");
     // setCookouts((cookouts) => 
@@ -180,6 +155,8 @@ function App() {
     // );
   }
 
+  // TODO: I might have to just send 'setFoodOptions' as a callback function from the parent App.js to the 'EditFoodForm' child component
+  // TODO: I might also need to send 'setFoodId' as a callback function from the parent App component to the 'EditFoodForm' child component
   function handleDeleteFood(food) {
     // console.log("handleDeleteFood() function called in parent App.js component");
   }
@@ -213,7 +190,8 @@ function App() {
           path="/foods" 
           element={<Food 
             cookouts={cookouts} onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout}
-            onAddFood={handleAddFood} foodOptions={foodOptions} foodId={foodId} onChooseFood={handleChooseFood} onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
+            onAddFood={handleAddFood} foodOptions={foodOptions} setFoodOptions={setFoodOptions} foodId={foodId} setFoodId={setFoodId}
+            onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
           />}
         />
         <Route 
