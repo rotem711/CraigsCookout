@@ -60,6 +60,10 @@ class CookoutsController < ApplicationController
         end
     end
 
+    # TODO:
+    # Fix this error that appears when I attempt to delete a cookout that has foods associated with it
+    # which is most likely because foods are tied to users, etc:
+    # ActiveRecord::InvalidForeignKey (SQLite3::ConstraintException: FOREIGN KEY constraint failed):
     def destroy 
         cookout = Cookout.find_by(id: params[:id])
         if cookout

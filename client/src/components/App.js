@@ -165,17 +165,32 @@ function App() {
 
         console.log("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
         console.log("Checking handleEditFood() function in parent App component: ");
+        // console.log("editedFood: ", editedFood);
+        // console.log("editedFood.name: ", editedFood.name);
+        // console.log("cookouts: ", cookouts);
+        // console.log("cookout: ", cookout);
+        // console.log("cookout.foods: ", cookout.foods);
+        // console.log("chosenCookout: ", chosenCookout);
+        // console.log("editedFood: ", editedFood);
+        // console.log("foodId: ", foodId);
+        // console.log("chosenCookout.id: ", chosenCookout.id);
+        // NOTE: This is because 'Rails' data's 'id' values start at '1', but I need to index into the array starting at '0' zero:
+        const fixedCookoutId = chosenCookout.id - 1
+        const fixedFoodId = foodId - 1
+        // console.log("cookouts[chosenCookout.id - 1]: ", cookouts[chosenCookout.id - 1]);
+        console.log("cookouts[fixedCookoutId]: ", cookouts[fixedCookoutId]);
+        // console.log("cookouts[chosenCookout.id - 1].foods: ", cookouts[chosenCookout.id - 1].foods);
+        console.log("cookouts[fixedCookoutId].foods: ", cookouts[fixedCookoutId].foods);
+        // console.log("cookouts[chosenCookout.id - 1].foods[foodId - 1].name: ", cookouts[chosenCookout.id - 1].foods[foodId - 1].name);
+        console.log("cookouts[fixedCookoutId].foods[fixedFoodId].name: ", cookouts[fixedCookoutId].foods[fixedFoodId].name);
+        console.log("editedFood.name: ", editedFood.name);
         console.log("cookouts: ", cookouts);
-        console.log("cookout: ", cookout);
-        console.log("cookout.foods: ", cookout.foods);
-        console.log("chosenCookout: ", chosenCookout);
-        console.log("editedFood: ", editedFood);
-        console.log("foodId: ", foodId);
-        console.log("cookouts[chosenCookout.id]: ", cookouts[chosenCookout.id]);
-        console.log("cookouts[chosenCookout.id].foods: ", cookouts[chosenCookout.id].foods);
-        console.log("cookouts[chosenCookout.id].foods[foodId]: ", cookouts[chosenCookout.id].foods[foodId]);
-        // Attempt at setting the object in state:
-        // setCookouts(cookouts[cookout.id].foods[foodId]: editedFood.name );
+
+        // TODO:
+        // I need to replace 'cookouts[chosenCookout.id - 1].foods[foodId - 1]' with the 'editedFood' value within the 'cookouts' state variable:
+        // setCookouts({
+        //   cookouts[chosenCookout.id - 1].foods[foodId - 1]: editedFood.name
+        // });
         console.log("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
         // const updatedFoodsArray = [...cookout.foods, newFood];
 
