@@ -188,9 +188,12 @@ function App() {
 
         // TODO:
         // I need to replace 'cookouts[chosenCookout.id - 1].foods[foodId - 1]' with the 'editedFood' value within the 'cookouts' state variable:
-        // setCookouts({
-        //   cookouts[chosenCookout.id - 1].foods[foodId - 1]: editedFood.name
-        // });
+        // let result = cookouts.filter((x) => x.id === chosenCookout.id ? { ...x, foods: foods.with(foodId - 1, editedFood.name) } : x)
+        // let result = cookouts.filter((cookout) => cookout.id === chosenCookout.id ? { ...cookout, foods: foods.with(foodId - 1, editedFood.name) } : cookout)
+        // let result = cookouts.filter((cookout) => cookout.id === chosenCookout.id ? { ...cookout, cookout.foods: cookout.foods.with(foodId - 1, editedFood.name) } : cookout)
+        let result = cookouts.filter((cookout) => cookout.id === chosenCookout.id ? { ...cookout, foods: cookout.foods.with(foodId - 1, editedFood.name) } : cookout)
+        console.log("result: ", result);
+        // setCookouts([cookouts[chosenCookout.id - 1].foods[foodId - 1]]: editedFood.name);
         console.log("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
         // const updatedFoodsArray = [...cookout.foods, newFood];
 
