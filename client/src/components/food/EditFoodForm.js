@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
+function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onChangeFoodId, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
     // const [foodOptions, setFoodOptions] = useState([]);
     const [editFoodFormData, setEditFoodFormData] = useState({
         food_name: ""
@@ -29,13 +29,20 @@ function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onEditFo
 
         // foodId = mapMatch.props.key;
 
-        console.log("foodId from handleChooseFood function in EditFoodForm child component: ", foodId);
-        // setFoodId(foodId)
         console.log("mapMatch.key: ", mapMatch.key);
-        // setFoodId(mapMatch.key);
 
         console.log("foodMatch: ", foodMatch);
         // console.log("editFoodFormData: ", editFoodFormData);
+
+        // Call the 'onChangeFoodId' in the parent so that the selected food's 'foodId' value is changed globally:
+        console.log("chosenCookout.foods: ", chosenCookout.foods);
+        
+        let chosenCookoutFoodsMatch = chosenCookout.foods.find(food => food.name === foodMatch);
+        console.log("chosenCookoutFoodsMatch: ", chosenCookoutFoodsMatch);
+
+        let chosenFoodId = chosenCookoutFoodsMatch.id 
+        console.log("chosenFoodId: ", chosenFoodId);
+        onChangeFoodId(chosenFoodId);
 
         console.log("_______________________________________________");
     }

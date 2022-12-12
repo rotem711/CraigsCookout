@@ -144,20 +144,28 @@ function App() {
       }});
   }
 
-  // TODO: Make this actually update the 'foodOptions' in real time since the backend has already been updated at this point, 
-  // and the frontend needs to be updated accordingly:
+  function handleChangeFoodId(chosenFoodId) {
+    console.log("handleChangeFoodId function in parent App component called");
+    console.log("chosenFoodId passed from EditFoodForm child component to parent App component: ", chosenFoodId);
+    setFoodId(chosenFoodId);
+    console.log("Global foodId after being set in parent App component in state: ", foodId);
+  }
+
   function handleEditFood(editedFood) {
     console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
     console.log("handleEditFood() function called in parent App.js component");
     const fixedCookoutId = chosenCookout.id - 1
     const fixedFoodId = foodId - 1
-
-    // Filter the 'cookouts' array for the specific match
-    console.log("editedFood: ", editedFood);
     console.log("chosenCookout.id: ", chosenCookout.id);
     console.log("foodId: ", foodId);
+    console.log("editedFood: ", editedFood);
+
+    // TODO:
+    // Go through and fix this filter because this is not working the way it should
     let match = cookouts.filter((cookout) => cookout.id === chosenCookout.id);
     // Change the match's value to the 'editedFood.name' to update the frontend's values for the foods accordingly
+    console.log("match: ", match);
+    console.log()
     match[fixedCookoutId].foods[fixedFoodId].name = editedFood.name;
 
     // Set 'foodOptions' in state again to update it on the frontend:
@@ -231,7 +239,7 @@ function App() {
           path="/foods" 
           element={<Food 
             cookouts={cookouts} onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout}
-            onAddFood={handleAddFood} foodOptions={foodOptions} setFoodOptions={setFoodOptions} foodId={foodId} setFoodId={setFoodId}
+            onAddFood={handleAddFood} foodOptions={foodOptions} setFoodOptions={setFoodOptions} foodId={foodId} setFoodId={setFoodId} onChangeFoodId={handleChangeFoodId}
             onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
           />}
         />
