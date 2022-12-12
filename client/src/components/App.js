@@ -174,13 +174,13 @@ function App() {
     // console.log("cookouts[fixedCookoutId].foods[{id: foodId}]: ", cookouts[fixedCookoutId].foods[{id: foodId}]);
     console.log("cookouts[fixedCookoutId].foods[foodIndex]: ", cookouts[fixedCookoutId].foods[foodIndex]);
 
+    let tempArray = [...cookouts];
+    tempArray[fixedCookoutId].foods[foodIndex] = editedFood;
+    console.log("tempArray: ", tempArray);
+    setCookouts(tempArray);
+
     // TODO:
     // Go through and fix this filter because this is not working the way it should
-    let match = cookouts.filter((cookout) => cookout.id === chosenCookout.id);
-    // Change the match's value to the 'editedFood.name' to update the frontend's values for the foods accordingly
-    console.log("match: ", match);
-    console.log()
-    // match[fixedCookoutId].foods[fixedFoodId].name = editedFood.name;
 
     // Set 'foodOptions' in state again to update it on the frontend:
     let foodOptions = chosenCookout.foods.map((food) => {
@@ -188,7 +188,6 @@ function App() {
           <option key={food.id} value={food.name}>{food.name}</option>
       )
     });
-
 
     setFoodOptions(foodOptions);
     console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
