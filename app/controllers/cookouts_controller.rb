@@ -69,6 +69,7 @@ class CookoutsController < ApplicationController
     # Destory the foods associated with the cookout as well
 
     def destroy 
+        # byebug
         cookout = Cookout.find_by(id: params[:id])
         if cookout
             cookout.destroy

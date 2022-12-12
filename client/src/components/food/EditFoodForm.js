@@ -45,7 +45,7 @@ function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onChange
         let chosenFoodIndex = chosenCookout.foods.map(food => food.name).indexOf(foodMatch);
         console.log("chosenFoodIndex: ", chosenFoodIndex);
 
-        let chosenFoodId = chosenCookoutFoodsMatch.id 
+        let chosenFoodId = chosenCookoutFoodsMatch.id;
         console.log("chosenFoodId: ", chosenFoodId);
         onChangeFoodId(chosenFoodId, chosenFoodIndex);
 

@@ -12,6 +12,7 @@ function App() {
   const [user, setUser] = useState(null);
   const [cookouts, setCookouts] = useState([]);
   const [chosenCookout, setChosenCookout] = useState({});
+  const [cookoutIndex, setCookoutIndex] = useState("");
   const [foodOptions, setFoodOptions] = useState([]);
   const [foodId, setFoodId] = useState("");
   const [foodIndex, setFoodIndex] = useState("");
@@ -98,12 +99,21 @@ function App() {
   }
 
   function handleChooseCookout(e) {
+    console.log("==========================================");
     console.log("cookouts in handleChooseCookout function: ", cookouts);
     console.log("e.target.value: ", e.target.value);
     const match = cookouts.find(item => item.name == e.target.value);
 
     console.log("match in handleChooseCookout function: ", match);
     setChosenCookout(match);
+
+    // TODO: 
+    // I have to fix this index issue since I need to determine the index being deleted:
+    let index = cookouts.map(cookout => cookout.name).indexOf(e.target.value)
+    console.log("index: ", index);
+
+    setCookoutIndex(index);
+    console.log("==========================================");
   }
 
   // QUESTION: 
@@ -160,22 +170,19 @@ function App() {
   function handleEditFood(editedFood) {
     console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
     console.log("handleEditFood() function called in parent App.js component");
-    const fixedCookoutId = chosenCookout.id - 1
-    // const fixedFoodId = foodId - 1
     console.log("cookouts: ", cookouts);
-    // console.log("foodId: ", foodId);
     console.log("editedFood: ", editedFood);
     console.log("editedFood.name: ", editedFood.name);
-    // console.log("chosenCookout.id: ", chosenCookout.id);
-    // console.log("cookouts[chosenCookout.id].foods: ", cookouts[chosenCookout.id].foods);
-    console.log("fixedCookoutId: ", fixedCookoutId);
+    console.log("chosenCookout.id: ", chosenCookout.id);
     console.log("foodIndex in 'handleEditFood' function: ", foodIndex);
-    console.log("cookouts[fixedCookoutId].foods: ", cookouts[fixedCookoutId].foods);
-    // console.log("cookouts[fixedCookoutId].foods[{id: foodId}]: ", cookouts[fixedCookoutId].foods[{id: foodId}]);
-    console.log("cookouts[fixedCookoutId].foods[foodIndex]: ", cookouts[fixedCookoutId].foods[foodIndex]);
+    console.log("cookoutIndex: ", cookoutIndex);
+    console.log("cookouts[cookoutIndex]: ", cookouts[cookoutIndex]);
+    console.log("cookouts[cookoutIndex].foods: ", cookouts[cookoutIndex].foods);
+
+    console.log("cookouts[cookoutIndex].foods[foodIndex]: ", cookouts[cookoutIndex].foods[foodIndex]);
 
     let tempArray = [...cookouts];
-    tempArray[fixedCookoutId].foods[foodIndex] = editedFood;
+    tempArray[cookoutIndex].foods[foodIndex] = editedFood;
     console.log("tempArray: ", tempArray);
     setCookouts(tempArray);
 
