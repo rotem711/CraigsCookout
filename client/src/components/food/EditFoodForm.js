@@ -19,14 +19,20 @@ function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onEditFo
             return item.props.value === e.target.value
         });
 
+        // TODO: I need to redo this because this is NOT working with using 'items.props.value' in this context and is messing up other parts of the application:
+
         let foodMatch = mapMatch.props.value;
+        console.log("mapMatch: ", mapMatch);
+        console.log("foodMatch: ", foodMatch);
 
         setEditFoodFormData({"food_name": foodMatch});
 
         // foodId = mapMatch.props.key;
+
+        console.log("foodId from handleChooseFood function in EditFoodForm child component: ", foodId);
         // setFoodId(foodId)
         console.log("mapMatch.key: ", mapMatch.key);
-        setFoodId(mapMatch.key);
+        // setFoodId(mapMatch.key);
 
         console.log("foodMatch: ", foodMatch);
         // console.log("editFoodFormData: ", editFoodFormData);
@@ -69,10 +75,21 @@ function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onEditFo
 
     const handleDelete = (e) => {
         e.preventDefault();
+        const cookoutId = chosenCookout.id;
         console.log("handleDelete() called in EditFoodForm child component");
         const id = chosenCookout.id;
         console.log("id: ", id);
-        console.log("editFoodFormData: ", editFoodFormData);
+        console.log("cookoutId: ", cookoutId);
+        console.log("foodId: ", foodId);
+
+        fetch(`/cookouts/${cookoutId}/foods/${foodId}`, {
+            method: "DELETE",
+        })
+        .then((response) => {
+            if (response.ok) {
+                onDeleteFood(response);
+            }
+        })
     }
 
     return (

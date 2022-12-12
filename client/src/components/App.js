@@ -149,84 +149,57 @@ function App() {
   function handleEditFood(editedFood) {
     console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
     console.log("handleEditFood() function called in parent App.js component");
-        // Thought Process:
-        // DONE: You have the ideas of exactly how to drill down into what you want in terms of the information provided
-        // TODO: You need to figure out a workflow in terms of how to get that specific nested cookout's foods to drill down into the specific food
-        // TODO: Then, you need to take this result and swap it out with the 'editedFood' result in state somehow, which is complicated since its so nested
-        // Ideas:
-        // You use .filter() to filter to the specific array object, and change that
-        // The only problem is how do I add this changed result back into the existing 'cookouts' array set in state?
-        // console.log("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-
-        // let foodOptions = updatedFoodsArray.map((food) => {
-        //     return (
-        //         <option key={food.id} value={food.name}>{food.name}</option>
-        //     )
-        // });
-
-        // setFoodOptions(foodOptions);
-      // }
-    // });
-
-    // REDO:
     const fixedCookoutId = chosenCookout.id - 1
     const fixedFoodId = foodId - 1
 
+    // Filter the 'cookouts' array for the specific match
+    console.log("editedFood: ", editedFood);
+    console.log("chosenCookout.id: ", chosenCookout.id);
+    console.log("foodId: ", foodId);
     let match = cookouts.filter((cookout) => cookout.id === chosenCookout.id);
-    console.log("match: ", match);
-    console.log("fixedCookoutId: ", fixedCookoutId);
-    console.log("fixedFoodId: ", fixedFoodId);
-    console.log("match[fixedCookoutId]: ", match[fixedCookoutId]);
-    console.log("match[fixedCookoutId].foods[fixedFoodId].name: ", match[fixedCookoutId].foods[fixedFoodId].name);
+    // Change the match's value to the 'editedFood.name' to update the frontend's values for the foods accordingly
     match[fixedCookoutId].foods[fixedFoodId].name = editedFood.name;
-    console.log("match after assignment: ", match);
-    const updatedCookoutsArray = [...cookouts];
-    console.log("updatedCookoutsArray: ", updatedCookoutsArray);
-    console.log("updatedCookoutsArray[fixedCookoutId]: ", updatedCookoutsArray[fixedCookoutId]);
-    // setCookouts(updatedCookoutsArray);
-    setCookouts(updatedCookoutsArray);
-    // TODO:
-    // What's interesting is that the 'cookouts' array in state is ALREADY being updated anyway, so I have to figure out how to refresh this on the frontend
+
+    // Set 'foodOptions' in state again to update it on the frontend:
+    let foodOptions = chosenCookout.foods.map((food) => {
+      return (
+          <option key={food.id} value={food.name}>{food.name}</option>
+      )
+    });
+
+    console.log("cookouts: ", cookouts);
+
+    setFoodOptions(foodOptions);
     console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-
-    // TODO: 
-    // NOTE: What is happening is that since this is all affecting 'cookouts', this is already being updated in state already by the 'useEffect' call which is looking
-    // out for those changes
-
-    // What already works:
-    // When a food is created via the 'AddFoodForm', the food options are already updated accordingly
-
-    // Similar spots in the code that would update a list accordingly:
-    // 'ChooseCookoutDrop': This is also a dropdown list that updates in real time and can be used as a reference
-
-    // What needs to happen:
-    // The 'updatedFoodOptions' needs to be updated as soon as the handleEditFunction is called aka:
-    // You need to make this code work within the context of the handleEditFood function:
-    //   useEffect(() => {
-    //   if (chosenCookout) {
-    //       console.log("chosenCookout found!");
-    //       console.log("cookouts from EditFoodForm child component: ", cookouts);
-    //       console.log("chosenCookout.foods: ", chosenCookout.foods);
-    //       if (chosenCookout.foods) {
-    //           console.log("chosenCookout.foods: ", chosenCookout.foods);
-
-    //           let foodOptions = chosenCookout.foods.map((food) => {
-    //               return (
-    //                   <option key={food.id} value={food.name}>{food.name}</option>
-    //               )
-    //           });
-
-    //           setFoodOptions(foodOptions);
-    //           console.log("foodOptions: ", foodOptions);
-    //       }
-    //   }
-    // }, [chosenCookout]);
-
-
   }
 
   function handleDeleteFood(food) {
-    // console.log("handleDeleteFood() function called in parent App.js component");
+    console.log("***********************************************************");
+    console.log("handleDeleteFood() function called in parent App.js component");
+
+    // Thoughts:
+    // What needs to happen is that the frontend needs to update the 'cookouts' state array 
+    // so that the embedded 'foods' property for that given cookout is updated so that specific food no longer exists
+    // Also, the 'foodOptions' choices has to be updated accordingly as well
+
+    // Potential Workflow
+    // use .filter() to filter for the specific affected cookout whose specific 'food' needs to be deleted
+    // Then, just remove that specific 'food' accordingly
+    // Then, overwrite the existing 'cookouts' accordingly so that state gets updated automatically
+    // Then, update the 'foodOptions' accordingly
+
+    // Previously SLIGHTLY related code I can maybe 
+    // setCookouts((cookouts) =>
+    //   cookouts.filter((cookout) => cookout.id !== deletedCookout.id)
+    // );
+    let foodOptions = chosenCookout.foods.map((food) => {
+        return (
+            <option key={food.id} value={food.name}>{food.name}</option>
+        )
+    });
+
+    setFoodOptions(foodOptions);
+    console.log("***********************************************************");
   }
 
   // ===========================================================================================
