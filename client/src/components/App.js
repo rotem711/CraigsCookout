@@ -98,6 +98,8 @@ function App() {
     );
   }
 
+  // TODO:
+  // I need to fix the fact that it isn't including the most up-to-date list of 'foods' for the 'chosenCookout' for some reason
   function handleChooseCookout(e) {
     console.log("==========================================");
     console.log("cookouts in handleChooseCookout function: ", cookouts);
