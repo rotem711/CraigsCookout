@@ -1,12 +1,12 @@
 import React from "react";
-import CreateFoodForm from "./CreateFoodForm";
+import AddFoodForm from "./AddFoodForm";
 import EditFoodForm from "./EditFoodForm";
 
 function Food({ onAddFood, foodOptions, setFoodOptions, foodId, setFoodId, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
     return (
         <div>
             <h1>Foods</h1>
-            <CreateFoodForm 
+            <AddFoodForm 
                 onAddFood={onAddFood} 
                 cookouts={cookouts} onChooseCookout={onChooseCookout} chosenCookout={chosenCookout}
             />

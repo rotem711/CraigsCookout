@@ -1,5 +1,5 @@
 import React from "react";
-import CreateCookoutForm from "./CreateCookoutForm";
+import AddCookoutForm from "./AddCookoutForm";
 import EditCookoutForm from "./EditCookoutForm";
 // import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 // <ChooseCookoutDropdown cookouts={cookouts} onChooseCookout={onChooseCookout} />
@@ -8,7 +8,7 @@ function Cookout({ cookouts, onAddCookout, onEditCookout, onDeleteCookout, onCho
     return (
         <div>
             <h1>Cookouts</h1>
-            <CreateCookoutForm 
+            <AddCookoutForm 
                 onAddCookout={onAddCookout} 
             />
             <hr />

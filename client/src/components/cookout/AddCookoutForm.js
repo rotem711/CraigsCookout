@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-function CreateCookoutForm({ onAddCookout }) {
+function AddCookoutForm({ onAddCookout }) {
     const [createCookoutFormData, setCreateCookoutFormData] = useState({
         name: "",
         start_time: "",
@@ -57,4 +57,4 @@ function CreateCookoutForm({ onAddCookout }) {
 
 }
 
-export default CreateCookoutForm;
+export default AddCookoutForm;

@@ -147,6 +147,7 @@ function App() {
   // TODO: Make this actually update the 'foodOptions' in real time since the backend has already been updated at this point, 
   // and the frontend needs to be updated accordingly:
   function handleEditFood(editedFood) {
+    console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
     console.log("handleEditFood() function called in parent App.js component");
         // Thought Process:
         // DONE: You have the ideas of exactly how to drill down into what you want in terms of the information provided
@@ -172,6 +173,10 @@ function App() {
     const fixedFoodId = foodId - 1
 
     let match = cookouts.filter((cookout) => cookout.id === chosenCookout.id);
+    console.log("match: ", match);
+    console.log("fixedCookoutId: ", fixedCookoutId);
+    console.log("fixedFoodId: ", fixedFoodId);
+    console.log("match[fixedCookoutId]: ", match[fixedCookoutId]);
     console.log("match[fixedCookoutId].foods[fixedFoodId].name: ", match[fixedCookoutId].foods[fixedFoodId].name);
     match[fixedCookoutId].foods[fixedFoodId].name = editedFood.name;
     console.log("match after assignment: ", match);
@@ -180,6 +185,38 @@ function App() {
     console.log("updatedCookoutsArray[fixedCookoutId]: ", updatedCookoutsArray[fixedCookoutId]);
     // setCookouts(updatedCookoutsArray);
     setCookouts(updatedCookoutsArray);
+    // TODO:
+    // What's interesting is that the 'cookouts' array in state is ALREADY being updated anyway, so I have to figure out how to refresh this on the frontend
+    console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+
+    // TODO: 
+    // NOTE: What is happening is that since this is all affecting 'cookouts', this is already being updated in state already by the 'useEffect' call which is looking
+    // out for those changes
+
+    // What needs to happen:
+    // The 'updatedFoodOptions' needs to be updated as soon as the handleEditFunction is called aka:
+    // You need to make this code work within the context of the handleEditFood function:
+    //   useEffect(() => {
+    //   if (chosenCookout) {
+    //       console.log("chosenCookout found!");
+    //       console.log("cookouts from EditFoodForm child component: ", cookouts);
+    //       console.log("chosenCookout.foods: ", chosenCookout.foods);
+    //       if (chosenCookout.foods) {
+    //           console.log("chosenCookout.foods: ", chosenCookout.foods);
+
+    //           let foodOptions = chosenCookout.foods.map((food) => {
+    //               return (
+    //                   <option key={food.id} value={food.name}>{food.name}</option>
+    //               )
+    //           });
+
+    //           setFoodOptions(foodOptions);
+    //           console.log("foodOptions: ", foodOptions);
+    //       }
+    //   }
+    // }, [chosenCookout]);
+
+
   }
 
   function handleDeleteFood(food) {

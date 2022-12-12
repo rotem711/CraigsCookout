@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function CreateFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout }) {
+function AddFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout }) {
     console.log("chosenCookout in CreateFoodForm child component: ", chosenCookout);
     const [createFoodFormData, setCreateFoodFormData] = useState({
         name: "",
@@ -50,4 +50,4 @@ function CreateFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout })
 
 }
 
-export default CreateFoodForm;
+export default AddFoodForm;
