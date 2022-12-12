@@ -40,9 +40,14 @@ function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onChange
         let chosenCookoutFoodsMatch = chosenCookout.foods.find(food => food.name === foodMatch);
         console.log("chosenCookoutFoodsMatch: ", chosenCookoutFoodsMatch);
 
+        // From this StackOverflow example:
+        // https://stackoverflow.com/questions/8668174/indexof-method-in-an-object-array
+        let chosenFoodIndex = chosenCookout.foods.map(food => food.name).indexOf(foodMatch);
+        console.log("chosenFoodIndex: ", chosenFoodIndex);
+
         let chosenFoodId = chosenCookoutFoodsMatch.id 
         console.log("chosenFoodId: ", chosenFoodId);
-        onChangeFoodId(chosenFoodId);
+        onChangeFoodId(chosenFoodId, chosenFoodIndex);
 
         console.log("_______________________________________________");
     }

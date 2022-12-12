@@ -14,6 +14,7 @@ function App() {
   const [chosenCookout, setChosenCookout] = useState({});
   const [foodOptions, setFoodOptions] = useState([]);
   const [foodId, setFoodId] = useState("");
+  const [foodIndex, setFoodIndex] = useState("");
 
   useEffect(() => {
     // auto-login
@@ -144,11 +145,16 @@ function App() {
       }});
   }
 
-  function handleChangeFoodId(chosenFoodId) {
+  function handleChangeFoodId(chosenFoodId, chosenFoodIndex) {
     console.log("handleChangeFoodId function in parent App component called");
     console.log("chosenFoodId passed from EditFoodForm child component to parent App component: ", chosenFoodId);
+    console.log("chosenFoodIndex passed from EditFoodForm child component to parent App component: ", chosenFoodIndex);
     setFoodId(chosenFoodId);
-    console.log("Global foodId after being set in parent App component in state: ", foodId);
+    setFoodIndex(chosenFoodIndex);
+    // NOTE: Using console.log() here results in a weird 'before' state known issue since it needs to be re-rendered to screen
+    // so its better to use these console.log statements in 'handleEditFood' function instead:
+    // console.log("Global foodId after being set in parent App component in state: ", foodId);
+    // console.log("Global foodIndex after being set in parent App component in state: ", foodIndex);
   }
 
   function handleEditFood(editedFood) {
@@ -157,13 +163,16 @@ function App() {
     const fixedCookoutId = chosenCookout.id - 1
     // const fixedFoodId = foodId - 1
     console.log("cookouts: ", cookouts);
+    // console.log("foodId: ", foodId);
+    console.log("editedFood: ", editedFood);
+    console.log("editedFood.name: ", editedFood.name);
     // console.log("chosenCookout.id: ", chosenCookout.id);
     // console.log("cookouts[chosenCookout.id].foods: ", cookouts[chosenCookout.id].foods);
     console.log("fixedCookoutId: ", fixedCookoutId);
+    console.log("foodIndex in 'handleEditFood' function: ", foodIndex);
     console.log("cookouts[fixedCookoutId].foods: ", cookouts[fixedCookoutId].foods);
-    console.log("cookouts[fixedCookoutId].foods[{id: foodId}]: ", cookouts[fixedCookoutId].foods[{id: foodId}]);
-    console.log("foodId: ", foodId);
-    console.log("editedFood: ", editedFood);
+    // console.log("cookouts[fixedCookoutId].foods[{id: foodId}]: ", cookouts[fixedCookoutId].foods[{id: foodId}]);
+    console.log("cookouts[fixedCookoutId].foods[foodIndex]: ", cookouts[fixedCookoutId].foods[foodIndex]);
 
     // TODO:
     // Go through and fix this filter because this is not working the way it should
