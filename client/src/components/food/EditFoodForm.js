@@ -99,7 +99,7 @@ function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onChange
         })
         .then((response) => {
             if (response.ok) {
-                onDeleteFood(response);
+                onDeleteFood(response, foodId);
             }
         })
     }

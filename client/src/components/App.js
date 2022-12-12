@@ -179,9 +179,6 @@ function App() {
     console.log("tempArray: ", tempArray);
     setCookouts(tempArray);
 
-    // TODO:
-    // Go through and fix this filter because this is not working the way it should
-
     // Set 'foodOptions' in state again to update it on the frontend:
     let foodOptions = chosenCookout.foods.map((food) => {
       return (
@@ -193,7 +190,7 @@ function App() {
     console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
   }
 
-  function handleDeleteFood(food) {
+  function handleDeleteFood(response, deletedFoodId) {
     console.log("***********************************************************");
     console.log("handleDeleteFood() function called in parent App.js component");
 
@@ -212,13 +209,27 @@ function App() {
     // setCookouts((cookouts) =>
     //   cookouts.filter((cookout) => cookout.id !== deletedCookout.id)
     // );
-    let foodOptions = chosenCookout.foods.map((food) => {
+    // let foodOptions = chosenCookout.foods.map((food) => {
+    //     return (
+    //         <option key={food.id} value={food.name}>{food.name}</option>
+    //     )
+    // });
+
+    console.log("response: ", response);
+    console.log("deletedFoodId: ", deletedFoodId);
+
+    let filteredArray = chosenCookout.foods.filter(food => food.id !== deletedFoodId);
+    console.log("filteredArray: ", filteredArray);
+
+
+    let filteredFoodOptions = filteredArray.map((food) => {
         return (
             <option key={food.id} value={food.name}>{food.name}</option>
         )
     });
 
-    setFoodOptions(foodOptions);
+    console.log("filteredFoodOptions: ", filteredFoodOptions);
+    setFoodOptions(filteredFoodOptions);
     console.log("***********************************************************");
   }
 
