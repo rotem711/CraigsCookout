@@ -193,6 +193,12 @@ function App() {
     // NOTE: What is happening is that since this is all affecting 'cookouts', this is already being updated in state already by the 'useEffect' call which is looking
     // out for those changes
 
+    // What already works:
+    // When a food is created via the 'AddFoodForm', the food options are already updated accordingly
+
+    // Similar spots in the code that would update a list accordingly:
+    // 'ChooseCookoutDrop': This is also a dropdown list that updates in real time and can be used as a reference
+
     // What needs to happen:
     // The 'updatedFoodOptions' needs to be updated as soon as the handleEditFunction is called aka:
     // You need to make this code work within the context of the handleEditFood function:
