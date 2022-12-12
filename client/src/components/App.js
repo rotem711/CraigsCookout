@@ -154,48 +154,53 @@ function App() {
     //   })
     // );
 
-    cookouts.map((cookout) => {
-      // console.log("Checking .map() function within handleAddNewFood function: ");
-    
-      // console.log("cookout: ", cookout);
+    // cookouts.map((cookout) => {
+    //   console.log("Checking .map() function within handleAddNewFood function: ");
+    //   console.log("cookout: ", cookout);
         
-      if (cookout.id == chosenCookout.id) {
+      // if (cookout.id == chosenCookout.id) {
         // TODO: 
         // I need to figure out how to find the specific food that was edited, and update it
 
-        console.log("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-        console.log("Checking handleEditFood() function in parent App component: ");
-        // console.log("editedFood: ", editedFood);
-        // console.log("editedFood.name: ", editedFood.name);
-        // console.log("cookouts: ", cookouts);
-        // console.log("cookout: ", cookout);
-        // console.log("cookout.foods: ", cookout.foods);
-        // console.log("chosenCookout: ", chosenCookout);
-        // console.log("editedFood: ", editedFood);
-        // console.log("foodId: ", foodId);
-        // console.log("chosenCookout.id: ", chosenCookout.id);
+        // console.log("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
+        // console.log("Checking handleEditFood() function in parent App component: ");
         // NOTE: This is because 'Rails' data's 'id' values start at '1', but I need to index into the array starting at '0' zero:
-        const fixedCookoutId = chosenCookout.id - 1
-        const fixedFoodId = foodId - 1
-        // console.log("cookouts[chosenCookout.id - 1]: ", cookouts[chosenCookout.id - 1]);
-        console.log("cookouts[fixedCookoutId]: ", cookouts[fixedCookoutId]);
-        // console.log("cookouts[chosenCookout.id - 1].foods: ", cookouts[chosenCookout.id - 1].foods);
-        console.log("cookouts[fixedCookoutId].foods: ", cookouts[fixedCookoutId].foods);
-        // console.log("cookouts[chosenCookout.id - 1].foods[foodId - 1].name: ", cookouts[chosenCookout.id - 1].foods[foodId - 1].name);
-        console.log("cookouts[fixedCookoutId].foods[fixedFoodId].name: ", cookouts[fixedCookoutId].foods[fixedFoodId].name);
-        console.log("editedFood.name: ", editedFood.name);
-        console.log("cookouts: ", cookouts);
+        // const fixedCookoutId = chosenCookout.id - 1
+        // const fixedFoodId = foodId - 1
 
         // TODO:
         // I need to replace 'cookouts[chosenCookout.id - 1].foods[foodId - 1]' with the 'editedFood' value within the 'cookouts' state variable:
         // let result = cookouts.filter((x) => x.id === chosenCookout.id ? { ...x, foods: foods.with(foodId - 1, editedFood.name) } : x)
         // let result = cookouts.filter((cookout) => cookout.id === chosenCookout.id ? { ...cookout, foods: foods.with(foodId - 1, editedFood.name) } : cookout)
         // let result = cookouts.filter((cookout) => cookout.id === chosenCookout.id ? { ...cookout, cookout.foods: cookout.foods.with(foodId - 1, editedFood.name) } : cookout)
-        let result = cookouts.filter((cookout) => cookout.id === chosenCookout.id ? { ...cookout, foods: cookout.foods.with(foodId - 1, editedFood.name) } : cookout)
-        console.log("result: ", result);
-        // setCookouts([cookouts[chosenCookout.id - 1].foods[foodId - 1]]: editedFood.name);
-        console.log("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
-        // const updatedFoodsArray = [...cookout.foods, newFood];
+
+        // console.log("cookouts: ", cookouts);
+        // console.log("fixedCookoutId: ", fixedCookoutId);
+        // console.log("fixedFoodId: ", fixedFoodId);
+        // console.log("cookouts[fixedCookoutId]: ", cookouts[fixedCookoutId]);
+        // console.log("cookouts[fixedCookoutId].foods: ", cookouts[fixedCookoutId].foods);
+        // console.log("cookouts[fixedCookoutId].foods[fixedFoodId].name: ", cookouts[fixedCookoutId].foods[fixedFoodId].name);
+        // console.log("editedFood: ", editedFood);
+        // console.log("editedFood.name: ", editedFood.name);
+        // setCookouts(cookouts[fixedCookoutId].foods[fixedFoodId].name) = editedFood.name);
+        // let match = cookouts.filter((cookout) => cookout.id === chosenCookout.id ? blah : x);
+        // let match = cookouts.filter((cookout) => cookout.id === chosenCookout.id);
+        // console.log("match[fixedCookoutId].foods[fixedFoodId].name: ", match[fixedCookoutId].foods[fixedFoodId].name);
+        // match[fixedCookoutId].foods[fixedFoodId].name = editedFood.name;
+        // console.log("match after assignment: ", match);
+        // const updatedCookoutsArray = [...cookouts];
+        // console.log("updatedCookoutsArray: ", updatedCookoutsArray);
+        // console.log("updatedCookoutsArray[fixedCookoutId]: ", updatedCookoutsArray[fixedCookoutId]);
+        // setCookouts(updatedCookoutsArray);
+
+        // Thought Process:
+        // DONE: You have the ideas of exactly how to drill down into what you want in terms of the information provided
+        // TODO: You need to figure out a workflow in terms of how to get that specific nested cookout's foods to drill down into the specific food
+        // TODO: Then, you need to take this result and swap it out with the 'editedFood' result in state somehow, which is complicated since its so nested
+        // Ideas:
+        // You use .filter() to filter to the specific array object, and change that
+        // The only problem is how do I add this changed result back into the existing 'cookouts' array set in state?
+        // console.log("||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
 
         // let foodOptions = updatedFoodsArray.map((food) => {
         //     return (
@@ -204,8 +209,22 @@ function App() {
         // });
 
         // setFoodOptions(foodOptions);
-      }
-    });
+      // }
+    // });
+
+    // REDO:
+    const fixedCookoutId = chosenCookout.id - 1
+    const fixedFoodId = foodId - 1
+
+    let match = cookouts.filter((cookout) => cookout.id === chosenCookout.id);
+    console.log("match[fixedCookoutId].foods[fixedFoodId].name: ", match[fixedCookoutId].foods[fixedFoodId].name);
+    match[fixedCookoutId].foods[fixedFoodId].name = editedFood.name;
+    console.log("match after assignment: ", match);
+    const updatedCookoutsArray = [...cookouts];
+    console.log("updatedCookoutsArray: ", updatedCookoutsArray);
+    console.log("updatedCookoutsArray[fixedCookoutId]: ", updatedCookoutsArray[fixedCookoutId]);
+    // setCookouts(updatedCookoutsArray);
+    setCookouts(updatedCookoutsArray);
   }
 
   function handleDeleteFood(food) {
