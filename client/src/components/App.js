@@ -155,8 +155,13 @@ function App() {
     console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
     console.log("handleEditFood() function called in parent App.js component");
     const fixedCookoutId = chosenCookout.id - 1
-    const fixedFoodId = foodId - 1
-    console.log("chosenCookout.id: ", chosenCookout.id);
+    // const fixedFoodId = foodId - 1
+    console.log("cookouts: ", cookouts);
+    // console.log("chosenCookout.id: ", chosenCookout.id);
+    // console.log("cookouts[chosenCookout.id].foods: ", cookouts[chosenCookout.id].foods);
+    console.log("fixedCookoutId: ", fixedCookoutId);
+    console.log("cookouts[fixedCookoutId].foods: ", cookouts[fixedCookoutId].foods);
+    console.log("cookouts[fixedCookoutId].foods[{id: foodId}]: ", cookouts[fixedCookoutId].foods[{id: foodId}]);
     console.log("foodId: ", foodId);
     console.log("editedFood: ", editedFood);
 
@@ -166,7 +171,7 @@ function App() {
     // Change the match's value to the 'editedFood.name' to update the frontend's values for the foods accordingly
     console.log("match: ", match);
     console.log()
-    match[fixedCookoutId].foods[fixedFoodId].name = editedFood.name;
+    // match[fixedCookoutId].foods[fixedFoodId].name = editedFood.name;
 
     // Set 'foodOptions' in state again to update it on the frontend:
     let foodOptions = chosenCookout.foods.map((food) => {
@@ -175,7 +180,6 @@ function App() {
       )
     });
 
-    console.log("cookouts: ", cookouts);
 
     setFoodOptions(foodOptions);
     console.log("|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||");
