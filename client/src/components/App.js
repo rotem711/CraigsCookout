@@ -17,54 +17,74 @@ function App() {
   const [foodId, setFoodId] = useState("");
   const [foodIndex, setFoodIndex] = useState("");
 
+  // TODO: 
+  // You might have to use 'useEffect' within a function to make this happen to model this StackOverflow post:
+  // https://stackoverflow.com/questions/63190449/how-to-force-useeffect-to-wait-until-data-is-received-in-other-components
   useEffect(() => {
     // auto-login
     fetch("/me").then((r) => {
       if (r.ok) {
         r.json().then((user) => {
           setUser(user);
+          console.log("---TESTING: 1---");
+          console.log("---TESTING: 2---");
+          fetch("/cookouts", {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              "Accept": "application/json",
+            },
+          })
+          .then((response) => response.json())
+          .then((data) => {
+            setCookouts(data);
+          })
         })
       }
     });
   }, []);
 
-  useEffect(() => {
+  // useEffect(() => {
     // NOTE: This line is what was causing authorization issues, since we only need the '/cookouts' route:
-    // fetch("http://localhost:3000/cookouts", {
-    fetch("/cookouts", {
-      method: "GET",
-      headers: {
-        "Content-Type": "application/json",
-        "Accept": "application/json",
-      },
-    })
-    .then((response) => response.json())
-    .then((data) => {
-      // console.log("'data' variable value from useEffect call to /cookouts: ", data);
-      // console.log("cookouts within useEffect call to /cookouts: ", cookouts);
-      setCookouts(data);
-    })
-    }, []);
+    // console.log("--TESTING: 2--");
+    // fetch("/cookouts", {
+    //   method: "GET",
+    //   headers: {
+    //     "Content-Type": "application/json",
+    //     "Accept": "application/json",
+    //   },
+    // })
+    // .then((response) => response.json())
+    // .then((data) => {
+    //   setCookouts(data);
+    // })
+    // }, []);
 
 
+  // TODO:
+  // Another idea would be to just place this into the 'ChooseCookoutDropdown' child component
+  // Then, use a callback function from the 'ChooseCookoutDropdown' child component and send the 'foodOptions' back up to the parent
+  // Then, once the parent App component uses the related callback function, use the 'setFoodOptions' state function
+  // in the parent App component
   useEffect(() => {
-      if (chosenCookout) {
-          console.log("chosenCookout found!");
-          console.log("cookouts from EditFoodForm child component: ", cookouts);
-          console.log("chosenCookout.foods: ", chosenCookout.foods);
-          if (chosenCookout.foods) {
-              console.log("chosenCookout.foods: ", chosenCookout.foods);
+    console.log("---TESTING: 3---");
+    if (chosenCookout) {
+        console.log("chosenCookout found!");
+        console.log("cookouts from EditFoodForm child component: ", cookouts);
+        console.log("chosenCookout.foods: ", chosenCookout.foods);
+        if (chosenCookout.foods) {
+            console.log("chosenCookout.foods: ", chosenCookout.foods);
 
-              let foodOptions = chosenCookout.foods.map((food) => {
-                  return (
-                      <option key={food.id} value={food.name}>{food.name}</option>
-                  )
-              });
+            let foodOptions = chosenCookout.foods.map((food) => {
+                return (
+                    <option key={food.id} value={food.name}>{food.name}</option>
+                )
+            });
 
-              setFoodOptions(foodOptions);
-              console.log("foodOptions: ", foodOptions);
-          }
-      }
+            setFoodOptions(foodOptions);
+            console.log("foodOptions: ", foodOptions);
+        }
+    }
   }, [chosenCookout]);
 
   if (!user) return <Login onLogin={setUser} />;

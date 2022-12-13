@@ -65,7 +65,7 @@ class CookoutsController < ApplicationController
     # ActiveRecord::InvalidForeignKey (SQLite3::ConstraintException: FOREIGN KEY constraint failed):
     # Likely Reason: This is because each cookout has 'foods' associated with it that are tied to a specific 'cookout_id'
     def destroy 
-        byebug
+        # byebug
         # TODO: I need to somehow brute force the rollback to allow the associated foods to be dropped from the database
         cookout = Cookout.find_by(id: params[:id])
         # Idea: 
@@ -75,7 +75,18 @@ class CookoutsController < ApplicationController
         # NOTE:
         # I tried checking 'puts JSON.pretty_generate(cookout.foods.methods)' output but I can't see anything relevant in this scenario
         # I also tried checking 'rails routes' but can't find a more specific method for deleting other than 'cookout.foods.destroy'
-        foods = cookout.foods
+
+        # Workflow Idea:
+        # We have to loop through the 'cookout.foods'
+        # Then, grab all of the 'id' values for each food
+        # Then, we need to call the 'destroy' method for each 'food'
+        # Then, we can just destroy the 'cookout' since there would be no 'foods' left that are associated with it
+
+        # NOTE: 
+        # We can use 'dependent' in the 'cookout.rb' model to allow a cookout to be destroyed along with its associated 'foods'
+        # NOTE: We want to use the 'dependent: ' parameter since we want 'foods' to be destroyed if a cookout is destroyed:
+        # Look for 'dependent':
+        # https://guides.rubyonrails.org/association_basics.html
         if cookout
             cookout.destroy
             head :no_content

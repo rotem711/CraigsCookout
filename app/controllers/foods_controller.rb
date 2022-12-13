@@ -58,7 +58,7 @@ class FoodsController < ApplicationController
         end
     end
 
-    def destroy 
+    def destroy
         food = @current_user.foods.find_by(id: params[:id])
         if food.user_id == @current_user.id
             food.destroy
