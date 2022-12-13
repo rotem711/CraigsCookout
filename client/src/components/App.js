@@ -62,6 +62,8 @@ function App() {
 
 
   // TODO:
+  // One idea is to maybe use this 'useEffect' call within another function like this StackOverflow example:
+  // https://stackoverflow.com/questions/63190449/how-to-force-useeffect-to-wait-until-data-is-received-in-other-components
   // Another idea would be to just place this into the 'ChooseCookoutDropdown' child component
   // Then, use a callback function from the 'ChooseCookoutDropdown' child component and send the 'foodOptions' back up to the parent
   // Then, once the parent App component uses the related callback function, use the 'setFoodOptions' state function
