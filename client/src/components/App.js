@@ -151,14 +151,34 @@ function App() {
 
         // console.log("cookout.foods: ", cookout.foods);
         // console.log("_____________________________________");
+
+        // BIGGEST TODO RIGHT NOW:
+        // The bigger problem is that you are not updating the 'cookouts' to include the brand new food
+        // You are instead ONLY updating 'foodOptions' here and didn't actually update the 'cookouts' array successfully
+
+        console.log("=/=========================================================/-");
+        console.log("--------------------FOCUS HERE-------------------------------");
+        console.log("cookouts: ", cookouts);
+        console.log("cookoutIndex: ", cookoutIndex);
+        console.log("foodIndex: ", foodIndex);
+        console.log("cookouts[cookoutIndex]: ", cookouts[cookoutIndex]);
+        console.log("cookouts[cookoutIndex].foods: ", cookouts[cookoutIndex].foods);
+        console.log("newFood: ", newFood);
+        let tempArray = [...cookouts];
+        tempArray[cookoutIndex].foods.push(newFood);
+        console.log("tempArray: ", tempArray);
+        setCookouts(tempArray) ;
+        console.log("--------------------FOCUS HERE-------------------------------");
+        console.log("=/=========================================================/-");
       } 
       else {
         console.log("Match not found within 'handleAddNewFood!");
       }});
   }
 
-  function handleChangeFoodId(chosenFoodId, chosenFoodIndex) {
-    console.log("handleChangeFoodId function in parent App component called");
+  function handleChangeFoodInfo(chosenFoodId, chosenFoodIndex) {
+    console.log("************************************************************");
+    console.log("handleChangeFoodInfo function in parent App component called");
     console.log("chosenFoodId passed from EditFoodForm child component to parent App component: ", chosenFoodId);
     console.log("chosenFoodIndex passed from EditFoodForm child component to parent App component: ", chosenFoodIndex);
     setFoodId(chosenFoodId);
@@ -167,6 +187,7 @@ function App() {
     // so its better to use these console.log statements in 'handleEditFood' function instead:
     // console.log("Global foodId after being set in parent App component in state: ", foodId);
     // console.log("Global foodIndex after being set in parent App component in state: ", foodIndex);
+    console.log("************************************************************");
   }
 
   function handleEditFood(editedFood) {
@@ -271,7 +292,7 @@ function App() {
           path="/foods" 
           element={<Food 
             cookouts={cookouts} onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout}
-            onAddFood={handleAddFood} foodOptions={foodOptions} setFoodOptions={setFoodOptions} foodId={foodId} setFoodId={setFoodId} onChangeFoodId={handleChangeFoodId}
+            onAddFood={handleAddFood} foodOptions={foodOptions} setFoodOptions={setFoodOptions} foodId={foodId} setFoodId={setFoodId} onChangeFoodInfo={handleChangeFoodInfo}
             onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
           />}
         />

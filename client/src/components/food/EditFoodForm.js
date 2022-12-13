@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
-function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onChangeFoodId, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
+function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onChangeFoodInfo, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
     // const [foodOptions, setFoodOptions] = useState([]);
     const [editFoodFormData, setEditFoodFormData] = useState({
         food_name: ""
@@ -34,7 +34,12 @@ function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onChange
         console.log("foodMatch: ", foodMatch);
         // console.log("editFoodFormData: ", editFoodFormData);
 
+        // TODO:
+        // I need to fix why this is not updating to the correct cookout's foods that were just created -->
+        // This maybe means when I created the new food via 'Add new food', it updated the 'foodOptions' 
+        // but it maybe didn't actually update the 'chosenCookout' successfully to include the new option
         // Call the 'onChangeFoodId' in the parent so that the selected food's 'foodId' value is changed globally:
+        console.log("chosenCookout: ", chosenCookout);
         console.log("chosenCookout.foods: ", chosenCookout.foods);
         
         let chosenCookoutFoodsMatch = chosenCookout.foods.find(food => food.name === foodMatch);
@@ -47,7 +52,7 @@ function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onChange
 
         let chosenFoodId = chosenCookoutFoodsMatch.id;
         console.log("chosenFoodId: ", chosenFoodId);
-        onChangeFoodId(chosenFoodId, chosenFoodIndex);
+        onChangeFoodInfo(chosenFoodId, chosenFoodIndex);
 
         console.log("_______________________________________________");
     }
