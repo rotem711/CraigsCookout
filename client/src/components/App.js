@@ -87,7 +87,10 @@ function App() {
     );
   }
 
+  // TODO:
+  // Fix why this isn't deleting cookouts properly:
   function handleDeleteCookout(deletedCookout) {
+    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
     console.log("handleDeleteCookout() function called in parent App.js component");
     console.log("deletedCookout: ", deletedCookout);
     // let updatedCookoutsArray = cookouts.filter(cookout => cookout.id !== deletedCookout.id)
@@ -96,10 +99,9 @@ function App() {
     setCookouts((cookouts) =>
       cookouts.filter((cookout) => cookout.id !== deletedCookout.id)
     );
+    console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
   }
 
-  // TODO:
-  // I need to fix the fact that it isn't including the most up-to-date list of 'foods' for the 'chosenCookout' for some reason
   function handleChooseCookout(e) {
     console.log("==========================================");
     console.log("cookouts in handleChooseCookout function: ", cookouts);
@@ -151,10 +153,6 @@ function App() {
 
         // console.log("cookout.foods: ", cookout.foods);
         // console.log("_____________________________________");
-
-        // BIGGEST TODO RIGHT NOW:
-        // The bigger problem is that you are not updating the 'cookouts' to include the brand new food
-        // You are instead ONLY updating 'foodOptions' here and didn't actually update the 'cookouts' array successfully
 
         console.log("=/=========================================================/-");
         console.log("--------------------FOCUS HERE-------------------------------");
@@ -224,35 +222,20 @@ function App() {
     console.log("***********************************************************");
     console.log("handleDeleteFood() function called in parent App.js component");
 
-    // Thoughts:
-    // What needs to happen is that the frontend needs to update the 'cookouts' state array 
-    // so that the embedded 'foods' property for that given cookout is updated so that specific food no longer exists
-    // Also, the 'foodOptions' choices has to be updated accordingly as well
-
-    // Potential Workflow
-    // use .filter() to filter for the specific affected cookout whose specific 'food' needs to be deleted
-    // Then, just remove that specific 'food' accordingly
-    // Then, overwrite the existing 'cookouts' accordingly so that state gets updated automatically
-    // Then, update the 'foodOptions' accordingly
-
-    // Previously SLIGHTLY related code I can maybe 
-    // setCookouts((cookouts) =>
-    //   cookouts.filter((cookout) => cookout.id !== deletedCookout.id)
-    // );
-    // let foodOptions = chosenCookout.foods.map((food) => {
-    //     return (
-    //         <option key={food.id} value={food.name}>{food.name}</option>
-    //     )
-    // });
-
     console.log("response: ", response);
     console.log("deletedFoodId: ", deletedFoodId);
+    console.log("cookoutIndex: ", cookoutIndex);
+    console.log("foodIndex: ", foodIndex);
+    console.log("cookouts: ", cookouts);
+    console.log("cookouts[cookoutIndex]: ", cookouts[cookoutIndex]);
+    console.log("cookouts[cookoutIndex].foods: ", cookouts[cookoutIndex].foods);
 
-    let filteredArray = chosenCookout.foods.filter(food => food.id !== deletedFoodId);
-    console.log("filteredArray: ", filteredArray);
+    let tempArray = [...cookouts];
+    tempArray[cookoutIndex].foods.splice(foodIndex, 1)
+    console.log("tempArray after .splice(): ", tempArray);
+    setCookouts(tempArray);
 
-
-    let filteredFoodOptions = filteredArray.map((food) => {
+    let filteredFoodOptions = chosenCookout.foods.map((food) => {
         return (
             <option key={food.id} value={food.name}>{food.name}</option>
         )

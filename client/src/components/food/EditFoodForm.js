@@ -94,8 +94,8 @@ function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onChange
         e.preventDefault();
         const cookoutId = chosenCookout.id;
         console.log("handleDelete() called in EditFoodForm child component");
-        const id = chosenCookout.id;
-        console.log("id: ", id);
+        // const id = chosenCookout.id;
+        // console.log("id: ", id);
         console.log("cookoutId: ", cookoutId);
         console.log("foodId: ", foodId);
 
