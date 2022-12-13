@@ -63,14 +63,19 @@ class CookoutsController < ApplicationController
     # TODO:
     # Fix this error that appears when I attempt to delete a cookout that has foods associated with it
     # ActiveRecord::InvalidForeignKey (SQLite3::ConstraintException: FOREIGN KEY constraint failed):
-    # Likely Reason: 
-    # because foods are tied to users, etc:
-    # Likely Fix:
-    # Destory the foods associated with the cookout as well
-
+    # Likely Reason: This is because each cookout has 'foods' associated with it that are tied to a specific 'cookout_id'
     def destroy 
-        # byebug
+        byebug
+        # TODO: I need to somehow brute force the rollback to allow the associated foods to be dropped from the database
         cookout = Cookout.find_by(id: params[:id])
+        # Idea: 
+        # Maybe I can just find all of the foods via 'cookout.foods', destroy them, and THEN destroy the cookout
+        # That way, Rails doesn't complain of my scorched earth kind of method of removing everything associated with the cookout
+
+        # NOTE:
+        # I tried checking 'puts JSON.pretty_generate(cookout.foods.methods)' output but I can't see anything relevant in this scenario
+        # I also tried checking 'rails routes' but can't find a more specific method for deleting other than 'cookout.foods.destroy'
+        foods = cookout.foods
         if cookout
             cookout.destroy
             head :no_content
