@@ -6,7 +6,7 @@ This app is a Full Stack web application made with React and Ruby On Rails that 
 ## Installation
 Note: You need Ruby on Rails installed locally, and have your NPM setup successfully first.
 
-Then, use the following commands:
+Then, use the following commands:  
 `
 npm install
 `
