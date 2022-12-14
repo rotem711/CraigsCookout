@@ -30,6 +30,8 @@ class FoodsController < ApplicationController
     end
 
     def update
+        # Using 'byebug' to debug 'user' display issue on 'View All Cookouts' page:
+        # byebug
         food = @current_user.foods.find_by(id: params[:id])
         if food.user_id == @current_user.id
             food.update(food_params)

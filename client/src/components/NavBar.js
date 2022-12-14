@@ -36,6 +36,10 @@ function NavBar({ user, setUser }) {
   //   context.updateContext({color1: "black"});
   // }
 
+  // Used these pages as references for the '/viewcookouts' route:
+  // https://stackoverflow.com/questions/38839510/forcing-a-react-router-link-to-load-a-page-even-if-were-already-on-that-page
+  // https://stackoverflow.com/questions/38809989/react-router-link-not-causing-component-to-update-within-nested-routes
+
   return (
     <>
       <Wrapper>
@@ -52,7 +56,7 @@ function NavBar({ user, setUser }) {
           <Button as={Link} to="/foods">
             Foods
           </Button>
-          <Button as={Link} to="/viewcookouts">
+          <Button as={Link} onClick={() => this.forceUpdate} to="/viewcookouts">
             View All Cookouts
           </Button>
           <Button variant="outline" onClick={handleLogoutClick}>

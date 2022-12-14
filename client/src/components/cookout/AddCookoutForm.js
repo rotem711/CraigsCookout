@@ -13,12 +13,12 @@ function AddCookoutForm({ onAddCookout }) {
 
     const handleCreateCookoutFormSubmit = (e) => {
         e.preventDefault();
-        console.log("Testing");
-        console.log("Testing 2");
-        console.log("e: ", e);
-        console.log('createCookoutFormData["name"]: ', createCookoutFormData["name"]);
-        console.log('createCookoutFormData["start_time"]: ', createCookoutFormData["start_time"]);
-        console.log('createCookoutFormData["end_time"]: ', createCookoutFormData["end_time"]);
+        // console.log("Testing");
+        // console.log("Testing 2");
+        // console.log("e: ", e);
+        // console.log('createCookoutFormData["name"]: ', createCookoutFormData["name"]);
+        // console.log('createCookoutFormData["start_time"]: ', createCookoutFormData["start_time"]);
+        // console.log('createCookoutFormData["end_time"]: ', createCookoutFormData["end_time"]);
         // NOTE: The 'Application Controller' will handle the '@current_user' so that it already knows the session["user_id"] to use in this scenario
         // Therefore, all you need to do is pass in a fetch request to the '/cookouts' route:
         fetch("/cookouts", {
