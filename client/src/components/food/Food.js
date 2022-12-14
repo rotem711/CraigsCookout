@@ -1,24 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AddFoodForm from "./AddFoodForm";
 import EditFoodForm from "./EditFoodForm";
 
-function Food({ onAddFood, foodOptions, setFoodOptions, foodId, setFoodId, onChangeFoodInfo, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout }) {
+function Food({ onAddFood, foodOptions, setFoodOptions, foodId, setFoodId, onChangeFoodInfo, onEditFood, onDeleteFood, cookouts, onChooseCookout, chosenCookout, onFetchCookouts }) {
+    // NOTE:
+    // Make another fetch request just in case the the user decides to click on 'Foods' first before entering anything
+    // to avoid a weird workflow issue
+    useEffect(() => {
+        fetch("/cookouts", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+            "Accept": "application/json",
+        },
+        })
+        .then((response) => response.json())
+        .then((data) => {
+            onFetchCookouts(data);
+        });
+    }, []);
 
     const [showAdd, setShowAdd] = useState(false);
     const [showEdit, setShowEdit] = useState(false);
 
     function toggleAddFoods() {
-        console.log("toggleAddFoods function called");
-        console.log("Value of 'showAdd' before state change: ", showAdd);
         setShowAdd(!showAdd);
-        console.log("Value of 'showAdd' after state change: ", showAdd);
     }
 
     function toggleEditFoods() {
-        console.log("toggleEditFoods function called");
-        console.log("Value of 'showEdit' before state change: ", showEdit);
         setShowEdit(!showEdit);
-        console.log("Value of 'showEdit' after state change: ", showEdit);
     }
     return (
         <div>

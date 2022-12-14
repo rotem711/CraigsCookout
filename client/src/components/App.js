@@ -60,7 +60,6 @@ function App() {
   if (!user) return <Login onLogin={setUser} />;
 
   function handleFetchCookouts(fetchedCookouts) {
-    console.log("handleFetchCookouts function called in parent App component");
     setCookouts(fetchedCookouts)
   }
 
@@ -169,7 +168,7 @@ function App() {
         <Route 
           path="/foods" 
           element={<Food 
-            cookouts={cookouts} onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout}
+            cookouts={cookouts} onChooseCookout={handleChooseCookout} chosenCookout={chosenCookout} onFetchCookouts={handleFetchCookouts}
             onAddFood={handleAddFood} foodOptions={foodOptions} setFoodOptions={setFoodOptions} foodId={foodId} setFoodId={setFoodId} onChangeFoodInfo={handleChangeFoodInfo}
             onEditFood={handleEditFood} onDeleteFood={handleDeleteFood} 
           />}

@@ -5,7 +5,6 @@ function ViewCookouts({ cookouts, onFetchCookouts }) {
     // Make another fetch request just in case the the user decides to click on 'ViewCookouts' first before entering anything
     // to avoid a weird workflow issue
     useEffect(() => {
-        console.log("useEffect inside ViewCookouts child component called: ");
         fetch("/cookouts", {
         method: "GET",
         headers: {
@@ -21,7 +20,6 @@ function ViewCookouts({ cookouts, onFetchCookouts }) {
     console.log("cookouts from ViewCookouts child component: ", cookouts);
     let cookoutResults = cookouts.map((cookout) => {
         let cookoutFoods = cookout.foods.map((food) => {
-            // console.log("food: ", food);
             return (
                 <li key={food.id}>{food.name}</li>
             )

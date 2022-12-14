@@ -6,7 +6,6 @@ function Cookout({ cookouts, onFetchCookouts, onAddCookout, onEditCookout, onDel
     // NOTE:
     // I placed the fetch for '/cookouts' on the 'Cookout' level as it was causing too many issues in the parent App component because of authentication:
     useEffect(() => {
-        console.log("useEffect inside Cookout child component called: ");
         fetch("/cookouts", {
         method: "GET",
         headers: {
@@ -24,17 +23,11 @@ function Cookout({ cookouts, onFetchCookouts, onAddCookout, onEditCookout, onDel
     const [showEdit, setShowEdit] = useState(false);
 
     function toggleAddCookouts() {
-        console.log("toggleAddCookouts function called");
-        console.log("Value of 'showAdd' before state change: ", showAdd);
         setShowAdd(!showAdd);
-        console.log("Value of 'showAdd' after state change: ", showAdd);
     }
 
     function toggleEditCookouts() {
-        console.log("toggleEditCookouts function called");
-        console.log("Value of 'showEdit' before state change: ", showEdit);
         setShowEdit(!showEdit);
-        console.log("Value of 'showEdit' after state change: ", showEdit);
     }
 
     return (
