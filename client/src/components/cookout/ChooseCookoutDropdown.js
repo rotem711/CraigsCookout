@@ -1,11 +1,23 @@
 import React from "react";
 
 function ChooseCookoutForm({ cookouts, onChooseCookout}) {
+    console.log("cookouts in ChooseCookoutForm: ", cookouts);
+    // let cookoutOptionsArray = [];
+
+    // if (cookouts) {
+    //     let cookoutOptionsArray = cookouts.map(cookout => {
+    //         return (
+    //             <option key={cookout.id} value={cookout.name}>{cookout.name}</option>
+    //         )
+    //     });
+    // }
+
     let cookoutOptionsArray = cookouts.map(cookout => {
         return (
             <option key={cookout.id} value={cookout.name}>{cookout.name}</option>
         )
     });
+
 
     return (
         <>

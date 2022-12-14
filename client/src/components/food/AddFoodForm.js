@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import ChooseCookoutDropdown from "../cookout/ChooseCookoutDropdown";
 
 function AddFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout }) {
-    // console.log("chosenCookout in AddFoodForm child component: ", chosenCookout);
     const [createFoodFormData, setCreateFoodFormData] = useState({
         name: "",
     });
@@ -14,8 +13,6 @@ function AddFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout }) {
     const handleCreate = (e) => {
         e.preventDefault();
         const id = chosenCookout.id;
-        // console.log("chosenCookout within handleCreate function of AddFoodForm child component: ", chosenCookout);
-        // console.log("id: ", id);
         // NOTE: The 'Application Controller' will handle the '@current_user' so that it already knows the session["user_id"] to use in this scenario
         // Therefore, all you need to do is pass in a fetch request to the '/cookouts' route:
         fetch(`/cookouts/${id}/foods`, {
@@ -24,7 +21,6 @@ function AddFoodForm({ onAddFood, cookouts, onChooseCookout, chosenCookout }) {
                 "Content-Type": "application/json",
                 "Accept": "application/json",
             },
-            // body: JSON.stringify({ "name": createFoodFormData["food_name"], "cookout_id": id}),
             body: JSON.stringify({ "name": createFoodFormData["food_name"], "cookout_id": id}),
         })
         .then((response) => response.json())

@@ -7,64 +7,32 @@ function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onChange
     });
 
     function handleChooseFood(e) {
-        // console.log("_______________________________________________");
-        // console.log("foodOptions in handleChooseFood() function: ", foodOptions);
-        // console.log("e in handleChooseFood() function: ", e);
-        // console.log("e.target.value in handleChooseFood() function: ", e.target.value);
-
         let mapMatch = foodOptions.find(item => {
-            // console.log("item within .map(): ", item);
-            // console.log("item.props.value within .map(): ", item.props.value);
             return item.props.value === e.target.value
         });
 
         let foodMatch = mapMatch.props.value;
-        // console.log("mapMatch: ", mapMatch);
-        // console.log("foodMatch: ", foodMatch);
 
         setEditFoodFormData({"food_name": foodMatch});
 
-        // foodId = mapMatch.props.key;
-
-        // console.log("mapMatch.key: ", mapMatch.key);
-        // console.log("foodMatch: ", foodMatch);
-        // console.log("editFoodFormData: ", editFoodFormData);
-
-        // console.log("chosenCookout: ", chosenCookout);
-        // console.log("chosenCookout.foods: ", chosenCookout.foods);
-        
         let chosenCookoutFoodsMatch = chosenCookout.foods.find(food => food.name === foodMatch);
-        // console.log("chosenCookoutFoodsMatch: ", chosenCookoutFoodsMatch);
 
         // From this StackOverflow example:
         // https://stackoverflow.com/questions/8668174/indexof-method-in-an-object-array
         let chosenFoodIndex = chosenCookout.foods.map(food => food.name).indexOf(foodMatch);
-        // console.log("chosenFoodIndex: ", chosenFoodIndex);
 
         let chosenFoodId = chosenCookoutFoodsMatch.id;
-        // console.log("chosenFoodId: ", chosenFoodId);
         onChangeFoodInfo(chosenFoodId, chosenFoodIndex);
-        // console.log("_______________________________________________");
     }
 
     const handleEditFoodChange = (e) => {
-        // console.log("e.target.value: ", e.target.value);
-        // console.log("e.target.name: ", e.target.name);
         setEditFoodFormData({...editFoodFormData, [e.target.name]: e.target.value})
     }
 
     const handleEdit = (e) => {
-        // console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        // console.log("handleEdit function called")
         e.preventDefault();
-        // console.log("handleEdit() called in EditFoodForm child component");
 
         const cookoutId = chosenCookout.id;
-
-        // console.log("cookoutId: ", cookoutId);
-        // console.log("editFoodFormData: ", editFoodFormData);
-        // console.log("foodId: ", foodId);
-        // console.log("++++++++++++++++++++++++++++++++++++++++++++++++++++");
 
         // From 'rails routes' within 'rails c' console:
         //  PATCH  /cookouts/:cookout_id/foods/:id(.:format)                                                         foods#update  
@@ -83,9 +51,6 @@ function EditFoodForm({ foodOptions, setFoodOptions, foodId, setFoodId, onChange
     const handleDelete = (e) => {
         e.preventDefault();
         const cookoutId = chosenCookout.id;
-        // console.log("handleDelete() called in EditFoodForm child component");
-        // console.log("cookoutId: ", cookoutId);
-        // console.log("foodId: ", foodId);
 
         fetch(`/cookouts/${cookoutId}/foods/${foodId}`, {
             method: "DELETE",
