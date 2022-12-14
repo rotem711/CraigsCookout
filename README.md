@@ -20,6 +20,7 @@ bundle install
 rails db:migrate
 `
 
+## Deploying Project
 To run this project locally, use the following two commands in separate terminals:
 
 Run the backend Rails server:  
