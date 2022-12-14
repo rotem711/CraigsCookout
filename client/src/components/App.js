@@ -54,26 +54,26 @@ function App() {
   // Then, use a callback function from the 'ChooseCookoutDropdown' child component and send the 'foodOptions' back up to the parent
   // Then, once the parent App component uses the related callback function, use the 'setFoodOptions' state function
   // in the parent App component
-  // useEffect(() => {
-  //   console.log("---TESTING: 3---");
-  //   if (chosenCookout) {
-  //       console.log("chosenCookout found!");
-  //       console.log("cookouts from EditFoodForm child component: ", cookouts);
-  //       console.log("chosenCookout.foods: ", chosenCookout.foods);
-  //       if (chosenCookout.foods) {
-  //           console.log("chosenCookout.foods: ", chosenCookout.foods);
+  useEffect(() => {
+    console.log("---TESTING: 3---");
+    if (chosenCookout) {
+        console.log("chosenCookout found!");
+        console.log("cookouts from EditFoodForm child component: ", cookouts);
+        console.log("chosenCookout.foods: ", chosenCookout.foods);
+        if (chosenCookout.foods) {
+            console.log("chosenCookout.foods: ", chosenCookout.foods);
 
-  //           let foodOptions = chosenCookout.foods.map((food) => {
-  //               return (
-  //                   <option key={food.id} value={food.name}>{food.name}</option>
-  //               )
-  //           });
+            let foodOptions = chosenCookout.foods.map((food) => {
+                return (
+                    <option key={food.id} value={food.name}>{food.name}</option>
+                )
+            });
 
-  //           setFoodOptions(foodOptions);
-  //           console.log("foodOptions: ", foodOptions);
-  //       }
-  //   }
-  // }, [chosenCookout]);
+            setFoodOptions(foodOptions);
+            console.log("foodOptions: ", foodOptions);
+        }
+    }
+  }, [chosenCookout]);
 
   if (!user) return <Login onLogin={setUser} />;
 
