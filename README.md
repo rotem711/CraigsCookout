@@ -30,6 +30,7 @@ rails s
 `
 
 Run the frontend React client:  
+  
 `
 npm start --prefix client
 `
