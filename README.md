@@ -9,7 +9,13 @@ Note: You need Ruby on Rails installed locally, and have your NPM setup successf
 Then, use the following commands:
 `
 npm install
+`
+
+`
 bundle install
+`
+
+`
 rails db:migrate
 `
 
