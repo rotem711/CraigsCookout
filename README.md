@@ -22,12 +22,13 @@ rails db:migrate
 
 To run this project locally, use the following two commands in separate terminals:
 
-Run the backend Rails server:
+Run the backend Rails server:  
+  
 `
 rails s
 `
 
-Run the frontend React client:
+Run the frontend React client:  
 `
 npm start --prefix client
 `
