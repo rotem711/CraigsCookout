@@ -87,11 +87,7 @@ class CookoutsController < ApplicationController
         # NOTE: We want to use the 'dependent: ' parameter since we want 'foods' to be destroyed if a cookout is destroyed:
         # Look for 'dependent':
         # https://guides.rubyonrails.org/association_basics.html
-
-        # Commented out to prevent non-users from deleting cookouts:
-        # if cookout
-        user_id = @current_user.id
-        if cookout.users.ids.include? user_id 
+        if cookout
             cookout.destroy
             head :no_content
         end
