@@ -26,10 +26,17 @@ class CookoutsController < ApplicationController
     def update
         # Previous line of code that I had earlier:
         # cookout = Cookout.cookouts.find_by(id: params[:id])
+        # byebug
+
         cookout = Cookout.find_by(id: params[:id])
-        if cookout
-            cookout.update(cookout_params)
+        user_id = @current_user.id
+
+        if cookout.users.find_by(id: user_id) 
+            cookout.update(cookout_params) 
             render json: cookout
+        # if cookout
+        #     cookout.update(cookout_params)
+        #     render json: cookout
         else
             render json: { errors: [cookout.errors.full_messages] }, status: :unprocessable_entity
         end
@@ -68,6 +75,9 @@ class CookoutsController < ApplicationController
         # byebug
         # TODO: I need to somehow brute force the rollback to allow the associated foods to be dropped from the database
         cookout = Cookout.find_by(id: params[:id])
+        user_id = @current_user.id
+
+        # cookout = Cookout.find_by(id: params[:id])
         # Idea: 
         # Maybe I can just find all of the foods via 'cookout.foods', destroy them, and THEN destroy the cookout
         # That way, Rails doesn't complain of my scorched earth kind of method of removing everything associated with the cookout
@@ -87,7 +97,8 @@ class CookoutsController < ApplicationController
         # NOTE: We want to use the 'dependent: ' parameter since we want 'foods' to be destroyed if a cookout is destroyed:
         # Look for 'dependent':
         # https://guides.rubyonrails.org/association_basics.html
-        if cookout
+        if cookout.users.find_by(id: user_id) 
+        # if cookout
             cookout.destroy
             head :no_content
         end
