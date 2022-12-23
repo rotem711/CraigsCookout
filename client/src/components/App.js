@@ -77,6 +77,8 @@ function App() {
   }
 
   function handleDeleteCookout(deletedCookout) {
+    console.log("handleDeleteCookout function called");
+    console.log("deletedCookout: ", deletedCookout);
     setCookouts((cookouts) =>
       cookouts.filter((cookout) => cookout.id !== deletedCookout.id)
     );

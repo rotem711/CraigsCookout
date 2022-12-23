@@ -42,11 +42,16 @@ function EditCookoutForm({ cookouts, onChooseCookout, onEditCookout, onDeleteCoo
         e.preventDefault();
         const id = chosenCookout.id;
 
+        console.log("handleDelete function called in EditCookoutForm child component");
+        console.log("id: ", id);
+
         fetch(`/cookouts/${id}`, {
             method: "DELETE",
         })
         .then((response) => {
             // NOTE: This checks the response, and then sends back the chosenCookout up to the parent to be deleted by the handler function:
+            console.log("response from deletion action: ", response);
+            console.log("response.ok: ", response.ok);
             if (response.ok) {
                 onDeleteCookout(chosenCookout);
             }

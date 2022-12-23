@@ -51,19 +51,24 @@ class CookoutsController < ApplicationController
         end
     end
 
+    # This is a bug with Rails as per this Rails issue that was already acknowledged by their team, but will never be fixed:
+    # https://github.com/rails/rails/issues/32376
+
+    # What this means: 'destroy' literally has no way of adding validations, Rails will do it no matter what when it is called
+    # even in scenarios where two models are dependent on each other, see this reply:
+    # https://github.com/rails/rails/issues/32376#issuecomment-787461818
+
+    # However, I can still add an 'else' section to provide a 'status' 400 in this scenario
+
     def destroy 
         cookout = Cookout.find_by(id: params[:id])
         user_id = @current_user.id
-
-        # NOTE: 
-        # We can use 'dependent' in the 'cookout.rb' model to allow a cookout to be destroyed along with its associated 'foods'
-        # NOTE: We want to use the 'dependent: ' parameter since we want 'foods' to be destroyed if a cookout is destroyed:
-        # Look for 'dependent':
-        # https://guides.rubyonrails.org/association_basics.html
-        # if cookout
+        
         if cookout.users.find_by(id: user_id) 
             cookout.destroy
             head :no_content
+        else
+            render json: { error: "Bad request, cannot be deleted" }, status: 400
         end
     end
 
