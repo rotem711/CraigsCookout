@@ -72,11 +72,11 @@ class CookoutsController < ApplicationController
         end
     end
 
+    # Custom
     private 
 
     def cookout_params
         # byebug
         params.permit(:name, :start_time, :end_time)
     end
-
 end
