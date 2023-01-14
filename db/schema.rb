@@ -12,6 +12,9 @@
 
 ActiveRecord::Schema.define(version: 2022_11_10_024427) do
 
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
+
   create_table "cookouts", force: :cascade do |t|
     t.string "name"
     t.string "start_time"
@@ -21,8 +24,8 @@ ActiveRecord::Schema.define(version: 2022_11_10_024427) do
   end
 
   create_table "foods", force: :cascade do |t|
-    t.integer "user_id", null: false
-    t.integer "cookout_id", null: false
+    t.bigint "user_id", null: false
+    t.bigint "cookout_id", null: false
     t.string "name"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
